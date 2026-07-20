@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Neervighna Ayurveda</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            teal: '#2c7873',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+        }
+
+        /* Mandala Background Design */
+        .bg-mandala {
+            background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+            background-attachment: fixed;
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-pill {
+            background: linear-gradient(to right, #2e7d32, #27ae60);
+            box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3);
+        }
+
+        .btn-pill:hover {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+            box-shadow: 0 6px 20px rgba(46, 125, 50, 0.4);
+        }
+
+        /* --- PARALLAX BACKGROUND ELEMENTS --- */
+        .parallax-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.5;
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('../header.html')
+            .then(res => res.text())
+            .then(data => {
+                // 1. Inject the HTML
+                document.body.insertAdjacentHTML('afterbegin', data);
+
+                // 2. Extract and run the <script> from header.html
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data, 'text/html');
+                const scriptContent = doc.querySelector('script').textContent;
+                const scriptElement = document.createElement('script');
+                scriptElement.textContent = scriptContent;
+                document.head.appendChild(scriptElement);
+
+                // 3. Start the navbar logic
+                if (window.initHeader) window.initHeader();
+            });
+
+        fetch('../footer.html')
+            .then(res => res.text())
+            .then(data => document.body.insertAdjacentHTML('beforeend', data));
+    });
+    </script>
+<style>
+        body, p, h1, h2, h3, h4, h5, h6, a, span, div, li, button, input { font-family: 'Playfair Display', serif !important; }
+        .hero-section h1, #hero h1, .gsap-hero h1, h1.gsap-hero, .hero-title { font-size: 72px !important; line-height: 1.1 !important; }
+        .hero-section p, #hero p, .gsap-hero p, p.gsap-hero, .hero-subtitle { font-size: 20px !important; }
+    </style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+
+<body class="font-body overflow-x-hidden selection:bg-ayur-green selection:text-white">
+
+    <!-- GLOBAL PARALLAX BACKGROUND -->
+    <div class="parallax-bg-container" id="parallaxBg">
+        <div class="floating-orb w-96 h-96 bg-ayur-green/30 top-0 -left-20" data-speed="0.25"></div>
+        <div class="floating-orb w-64 h-64 bg-ayur-orange/20 bottom-1/2 right-0" data-speed="0.18"></div>
+        <div class="floating-orb w-80 h-80 bg-ayur-gold/20 bottom-0 left-1/3" data-speed="0.12"></div>
+    </div>
+
+    <!-- HERO SECTION - CONTACT PAGE -->
+    <section class="relative min-h-screen flex items-center pt-20 bg-transparent">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="font-heading text-5xl md:text-7xl font-bold text-ayur-darkGreen mb-6">
+                Get in Touch
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                We're here to guide you on your journey to natural wellness. Reach out for consultations, appointments,
+                or any questions.
+            </p>
+        </div>
+    </section>
+
+    <!-- VISIT OUR CLINIC SECTION -->
+    <section class="py-24 bg-ayur-cream/80 backdrop-blur-sm relative">
+        <div class="container mx-auto px-6">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-7xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden">
+                <!-- Left: Clinic Details -->
+                <div class="p-12 text-center lg:text-left">
+                    <h2 class="font-heading text-4xl md:text-5xl font-bold text-ayur-darkGreen mb-10">
+                        VISIT OUR CLINIC
+                    </h2>
+
+                    <div class="space-y-6 text-lg text-gray-800">
+                        <p class="font-medium">
+                            Sector 21, Gandhinagar, Gujarat<br>
+                            +91 98765 43210<br>
+                            info@neervighna.com<br>
+                            Mon–Sat: 9AM – 6PM
+                        </p>
+                    </div>
+
+                    <div class="w-32 h-px bg-gray-300 mx-auto lg:mx-0 mt-10"></div>
+                </div>
+
+                <!-- Right: Google Map Embed -->
+                <div class="h-96 lg:h-full min-h-[400px]">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.482166592399!2d72.638576!3d23.224156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395c2b4e1b6b3a1d%3A0xexample!2sSector%2021%2C%20Gandhinagar%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1700000000000"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CONTACT CARDS SECTION - EXACTLY MATCHING YOUR IMAGE -->
+    <section class="py-20 bg-gradient-to-b from-ayur-beige/80 to-ayur-cream/80 backdrop-blur-sm">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Email Support Card -->
+                <div class="contact-card rounded-3xl p-10 text-center transition-all duration-500 flex flex-col items-center h-full">
+                    <div class="w-20 h-20 bg-ayur-green/10 rounded-full flex items-center justify-center mx-auto mb-6 shrink-0">
+                        <i class="fa-solid fa-envelope text-3xl text-ayur-green"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-ayur-darkGreen mb-4">Email Support</h3>
+                    <p class="text-gray-700 mb-8 flex-grow">theroastedroots@gmail.com</p>
+                    <a href="mailto:theroastedroots@gmail.com"
+                        class="btn-pill text-white px-8 py-4 rounded-full inline-flex items-center gap-2 font-bold mt-auto shrink-0">
+                        Send Email <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Visit Our Center Card -->
+                <div class="contact-card rounded-3xl p-10 text-center transition-all duration-500 flex flex-col items-center h-full">
+                    <div class="w-20 h-20 bg-ayur-green/10 rounded-full flex items-center justify-center mx-auto mb-6 shrink-0">
+                        <i class="fa-solid fa-location-dot text-3xl text-ayur-green"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-ayur-darkGreen mb-4">Visit Our Center</h3>
+                    <p class="text-gray-700 mb-8 flex-grow">82 – "ASHISH", Sadhna Society, Surat – 395006</p>
+                    <a href="https://maps.google.com/?q=82+ASHISH+Sadhna+Society+Surat+395006" target="_blank"
+                        class="btn-pill text-white px-8 py-4 rounded-full inline-flex items-center gap-2 font-bold mt-auto shrink-0">
+                        View on Map <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <!-- Business Hours Card -->
+                <div class="contact-card rounded-3xl p-10 text-center transition-all duration-500 flex flex-col items-center h-full">
+                    <div class="w-20 h-20 bg-ayur-green/10 rounded-full flex items-center justify-center mx-auto mb-6 shrink-0">
+                        <i class="fa-solid fa-clock text-3xl text-ayur-green"></i>
+                    </div>
+                    <h3 class="font-heading text-2xl font-bold text-ayur-darkGreen mb-4">Business Hours</h3>
+                    <p class="text-gray-700 mb-8 flex-grow">Mon–Sat: 9 AM – 6 PM</p>
+                    <button onclick="openConsultModal()"
+                        class="btn-pill text-white px-8 py-4 rounded-full inline-flex items-center gap-2 font-bold mt-auto shrink-0">
+                        Book Consultation <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="py-24 bg-[#FFF8F0]/80 backdrop-blur-sm relative overflow-hidden" id="faq">
+        <div class="container max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-ayur-orange font-bold tracking-widest uppercase text-sm block mb-4">Got
+                    Questions?</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-800 tracking-wide">Frequently
+                    Asked Questions</h2>
+                <div class="w-24 h-1 bg-[#8cb369] mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div>
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>Do I need an appointment?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Yes, prior booking ensures dedicated time with Dr. Zankat.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div>
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>What should I bring?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Medical reports, current medications list, and comfortable clothing.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div>
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>Are Ayurvedic and allopathic treatments compatible?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Yes — when planned safely. Inform us about your medications.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div>
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>Do you offer online consultations?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Yes — mainly for follow-ups.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Parallax Scroll Effect
+        const orbs = document.querySelectorAll('.floating-orb');
+        document.addEventListener('scroll', () => {
+             const scrollY = window.scrollY;
+             orbs.forEach(orb => {
+                 const speed = parseFloat(orb.dataset.speed) || 0;
+                 orb.style.transform = `translateY(${scrollY * speed * -1}px)`;
+             });
+        });
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-sm', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-sm', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neervighna Ayurveda | Wellness Journal</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            teal: '#2c7873',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37',
+                            pitta: '#e74c3c',
+                            vata: '#3498db',
+                            kapha: '#27ae60',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Lato"', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 0.8s ease-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Mandala Background Design */
+        .bg-mandala {
+            background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+            background-attachment: fixed;
+        }
+
+        /* Ensure all content is visible */
+        * {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Reset any GSAP opacity changes */
+        .gsap-initialized {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Patterns */
+        .bg-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232e7d32' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .bg-mandala {
+            background-image: url("https://www.transparenttextures.com/patterns/arabesque.png");
+            background-attachment: fixed;
+        }
+
+        /* Blog Card Hover */
+        .blog-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(30, 60, 30, 0.25);
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-image {
+            transition: transform 0.8s ease-out;
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Ensure all images are visible */
+        img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+
+        /* Fix image loading issues */
+        .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1 !important;
+        }
+
+        /* Category Tags */
+        .category-tag {
+            transition: all 0.3s ease;
+        }
+
+        .category-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.2);
+        }
+
+        /* Author Card */
+        .author-card {
+            transition: all 0.4s ease;
+        }
+
+        .author-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(30, 60, 30, 0.1);
+        }
+
+        /* Reading Progress */
+        .reading-progress {
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #e67e22);
+            width: 0%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            transition: width 0.2s ease;
+        }
+
+        /* Sidebar Links */
+        .sidebar-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background-color: #e67e22;
+            transform: translateX(-10px);
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-link:hover::before {
+            transform: translateX(0);
+        }
+
+        /* Pagination */
+        .pagination-btn {
+            transition: all 0.3s ease;
+        }
+
+        .pagination-btn:hover:not(.disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 30, 0.15);
+        }
+
+        /* Fix GSAP initial states */
+        .gsap-target {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+    </style>
+
+
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span,
+        div,
+        li,
+        button,
+        input {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        .hero-section h1,
+        #hero h1,
+        .gsap-hero h1,
+        h1.gsap-hero,
+        .hero-title {
+            font-size: 72px !important;
+            line-height: 1.1 !important;
+        }
+
+        .hero-section p,
+        #hero p,
+        .gsap-hero p,
+        p.gsap-hero,
+        .hero-subtitle {
+            font-size: 20px !important;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-body overflow-x-hidden selection:bg-ayur-green selection:text-white flex flex-col min-h-screen"
+    style="opacity: 1 !important; visibility: visible !important;">
+
+    <!-- Reading Progress Bar -->
+    <div id="readingProgress" class="reading-progress"></div>
+
+
+    <!-- BLOG HERO SECTION -->
+    <section
+        class="relative min-h-[70vh] flex items-center pt-24 overflow-hidden bg-gradient-to-br from-ayur-cream via-white to-ayur-beige"
+        style="opacity: 1 !important;">
+        <div class="absolute top-0 right-0 w-1/3 h-full hidden lg:block pointer-events-none">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-ayur-green/10 rounded-full animate-spin-slow">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] border border-ayur-gold/20 rounded-full animate-[spin_25s_linear_infinite_reverse]">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full overflow-hidden shadow-2xl animate-float opacity-70">
+                <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
+                    alt="Meditation" class="w-full h-full object-cover rounded-full" style="opacity: 1 !important;">
+                <div class="absolute inset-0 bg-gradient-to-t from-ayur-darkGreen/40 to-transparent rounded-full"></div>
+            </div>
+        </div>
+        <div class="container mx-auto px-8 md:px-12 lg:px-24 relative z-10">
+            <div class="max-w-3xl animate-slide-up">
+                <div
+                    class="inline-flex items-center gap-2 bg-ayur-green/10 text-ayur-darkGreen px-4 py-1.5 rounded-full mb-6 border border-ayur-green/20">
+                    <i class="fa-solid fa-feather-pointed text-ayur-orange"></i>
+                    <span class="text-sm font-bold tracking-wider uppercase">Wellness Wisdom</span>
+                </div>
+                <h1 class="font-heading text-5xl md:text-7xl font-bold text-gray-800 leading-[1.1] mb-6">
+                    Ayurvedic <br><span class="text-ayur-green relative">Journal<span
+                            class="text-ayur-orange">.</span></span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl">Ancient wisdom for modern
+                    living. Explore articles on holistic health, Ayurvedic practices, nutrition, and mindful living from
+                    our expert Vaidyas.</p>
+                <div class="flex flex-wrap gap-3">
+                    <span
+                        class="category-tag bg-ayur-green/10 text-ayur-darkGreen px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-ayur-green/20">Nutrition</span>
+                    <span
+                        class="category-tag bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-blue-200">Yoga</span>
+                    <span
+                        class="category-tag bg-red-100 text-red-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-red-200">Herbs</span>
+                    <span
+                        class="category-tag bg-amber-100 text-amber-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-amber-200">Lifestyle</span>
+                    <span
+                        class="category-tag bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium cursor-pointer hover:bg-purple-200">Meditation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="py-16 bg-white" style="opacity: 1 !important;">
+        <div class="container mx-auto px-8 md:px-12 lg:px-24">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <!-- Blog Posts Column -->
+                <div class="lg:w-2/3">
+                    <!-- Featured Post -->
+                    <div
+                        class="blog-card bg-white rounded-2xl overflow-hidden shadow-xl mb-12 border border-gray-100 animate-fade-in">
+                        <div class="relative h-64 md:h-96 overflow-hidden image-container">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80"
+                                alt="Ayurvedic Lifestyle" class="blog-image w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute top-4 left-4">
+                                <span
+                                    class="bg-ayur-orange text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Featured</span>
+                            </div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <div class="flex items-center gap-2 text-sm mb-3">
+                                    <span class="bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">Lifestyle</span>
+                                    <span class="text-white/80">•</span>
+                                    <span>March 15, 2025</span>
+                                    <span class="text-white/80">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>8 min read</span>
+                                </div>
+                                <h2 class="font-heading text-2xl md:text-4xl font-bold leading-tight">Dinacharya: The
+                                    Ayurvedic Daily Routine for Optimal Health</h2>
+                                <div class="flex items-center gap-3 mt-4">
+                                    <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white">
+                                        <img src="https://images.unsplash.com/photo-1494790108755-2616c113a1c0?auto=format&fit=crop&w=100&q=80"
+                                            alt="Author" class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm">Dr. Lakshmi Nair</p>
+                                        <p class="text-white/80 text-xs">Ayurvedic Physician</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-8">
+                            <p class="text-gray-600 leading-relaxed mb-6">Discover how aligning your daily activities
+                                with nature's circadian rhythms can transform your energy, digestion, and mental
+                                clarity. Dinacharya isn't just a routine—it's a sacred practice of living in harmony
+                                with the natural world.</p>
+                            <div class="flex justify-between items-center">
+                                <a href="#"
+                                    class="text-ayur-darkGreen font-bold hover:text-ayur-orange transition-colors flex items-center gap-2 group">
+                                    Read Full Article
+                                    <i
+                                        class="fa-solid fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-2"></i>
+                                </a>
+                                <div class="flex items-center gap-4 text-gray-400">
+                                    <button class="hover:text-ayur-orange transition-colors">
+                                        <i class="fa-regular fa-heart"></i> 42
+                                    </button>
+                                    <button class="hover:text-ayur-green transition-colors">
+                                        <i class="fa-regular fa-comment"></i> 12
+                                    </button>
+                                    <button class="hover:text-ayur-gold transition-colors">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Posts Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Post 1 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1615486511484-92e172cc4111?auto=format&fit=crop&w=800&q=80"
+                                    alt="Ayurvedic Nutrition" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-ayur-green text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Nutrition</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>March 10, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>6 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">Eating for
+                                    Your Dosha: A Guide to Ayurvedic Nutrition</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">Learn which foods balance Vata,
+                                    Pitta, and Kapha doshas to improve digestion, energy levels, and prevent disease
+                                    through personalized nutrition.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80"
+                                    alt="Meditation" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-purple-600 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Mind</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>March 5, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>10 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">Pranayama:
+                                    Ayurvedic Breathing Techniques for Stress Relief</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">Discover five powerful breathing
+                                    techniques from the Ayurvedic tradition that can calm your nervous system and
+                                    enhance mental clarity in minutes.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80"
+                                    alt="Yoga" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Yoga</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>February 28, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>7 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">Yoga Asanas
+                                    for Balancing Your Dominant Dosha</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">Specific yoga postures tailored for
+                                    Vata, Pitta, and Kapha constitutions to restore balance and promote holistic
+                                    wellbeing through movement.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 4 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80"
+                                    alt="Herbs" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Herbs</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>February 22, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>9 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">The Power of
+                                    Triphala: Ayurveda's Most Versatile Herbal Formula</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">Explore the benefits of this classic
+                                    Ayurvedic combination for digestion, detoxification, and overall rejuvenation of the
+                                    body's systems.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616c113a1c0?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 5 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=800&q=80"
+                                    alt="Seasonal" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-amber-600 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Seasonal</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>February 15, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>5 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">Ritucharya:
+                                    Ayurvedic Seasonal Routines for Spring</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">How to adapt your diet, lifestyle,
+                                    and self-care practices as winter transitions to spring to maintain doshic balance
+                                    and vibrant health.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <!-- Post 6 -->
+                        <article
+                            class="blog-card bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                            <div class="relative h-56 overflow-hidden image-container">
+                                <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=800&q=80"
+                                    alt="Self-care" class="blog-image w-full h-full object-cover">
+                                <div class="absolute top-3 left-3">
+                                    <span
+                                        class="bg-teal-600 text-white px-2 py-1 rounded text-xs font-bold uppercase tracking-wider">Self-care</span>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex items-center text-gray-500 text-sm mb-3">
+                                    <span>February 8, 2025</span>
+                                    <span class="mx-2">•</span>
+                                    <span><i class="fa-regular fa-clock mr-1"></i>8 min read</span>
+                                </div>
+                                <h3 class="font-heading text-xl font-bold text-gray-800 mb-3 leading-snug">Abhyanga: The
+                                    Art of Ayurvedic Self-Massage for Rejuvenation</h3>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">Step-by-step guide to this nourishing
+                                    daily practice that lubricates joints, improves circulation, and calms the nervous
+                                    system.</p>
+                                <div class="flex justify-between items-center">
+                                    <a href="#"
+                                        class="text-ayur-darkGreen font-bold text-sm hover:text-ayur-orange transition-colors">Read
+                                        More →</a>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-8 h-8 rounded-full overflow-hidden">
+                                            <img src="https://images.unsplash.com/photo-1494790108755-2616c113a1c0?auto=format&fit=crop&w=100&q=80"
+                                                alt="Author" class="w-full h-full object-cover">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex justify-center items-center gap-4 mt-12">
+                        <button
+                            class="pagination-btn bg-ayur-green text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-ayur-darkGreen disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            disabled>
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button
+                            class="pagination-btn bg-ayur-green text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-ayur-darkGreen">1</button>
+                        <button
+                            class="pagination-btn bg-gray-100 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200">2</button>
+                        <button
+                            class="pagination-btn bg-gray-100 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200">3</button>
+                        <span class="text-gray-400">...</span>
+                        <button
+                            class="pagination-btn bg-gray-100 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200">8</button>
+                        <button
+                            class="pagination-btn bg-gray-100 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="lg:w-1/3">
+                    <!-- Search Box -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 mb-8">
+                        <h3 class="font-heading text-xl font-bold text-ayur-darkGreen mb-4">Search Articles</h3>
+                        <div class="relative">
+                            <input type="text" placeholder="What are you looking for?"
+                                class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-full focus:ring-2 focus:ring-ayur-green focus:border-ayur-green outline-none transition-all">
+                            <i
+                                class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 mb-8">
+                        <h3 class="font-heading text-xl font-bold text-ayur-darkGreen mb-4">Categories</h3>
+                        <ul class="space-y-3">
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Nutrition & Diet</span>
+                                    <span
+                                        class="bg-ayur-green/10 text-ayur-darkGreen text-xs font-bold px-2 py-1 rounded-full">12</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Yoga & Movement</span>
+                                    <span
+                                        class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded-full">8</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Herbs & Remedies</span>
+                                    <span
+                                        class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full">15</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Mind & Meditation</span>
+                                    <span
+                                        class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-1 rounded-full">7</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Lifestyle</span>
+                                    <span
+                                        class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full">10</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                    class="sidebar-link flex justify-between items-center py-2 px-3 rounded-lg hover:bg-ayur-beige transition-colors">
+                                    <span class="font-medium text-gray-700">Seasonal Guides</span>
+                                    <span
+                                        class="bg-teal-100 text-teal-700 text-xs font-bold px-2 py-1 rounded-full">6</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Popular Articles -->
+                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 mb-8">
+                        <h3 class="font-heading text-xl font-bold text-ayur-darkGreen mb-4">Popular Reads</h3>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden image-container">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=200&q=80"
+                                        alt="Popular" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 leading-tight">10 Ayurvedic Herbs
+                                        for Better Sleep</h4>
+                                    <p class="text-gray-500 text-xs">Feb 28 • 5 min read</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden image-container">
+                                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=200&q=80"
+                                        alt="Popular" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 leading-tight">Morning Rituals for
+                                        Vata Types</h4>
+                                    <p class="text-gray-500 text-xs">Feb 20 • 7 min read</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-4">
+                                <div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden image-container">
+                                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&w=200&q=80"
+                                        alt="Popular" class="w-full h-full object-cover">
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-800 text-sm mb-1 leading-tight">The Benefits of Oil
+                                        Pulling</h4>
+                                    <p class="text-gray-500 text-xs">Feb 12 • 4 min read</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter Signup -->
+                    <div
+                        class="bg-gradient-to-br from-ayur-green to-ayur-darkGreen rounded-2xl p-6 shadow-lg border border-ayur-green/20">
+                        <div class="text-center">
+                            <i class="fa-solid fa-envelope-open-text text-3xl text-white mb-4"></i>
+                            <h3 class="font-heading text-xl font-bold text-white mb-2">Join Our Community</h3>
+                            <p class="text-white/80 text-sm mb-6">Get weekly Ayurvedic wisdom, recipes, and wellness
+                                tips delivered to your inbox.</p>
+                            <form class="space-y-3">
+                                <input type="email" placeholder="Your email address"
+                                    class="w-full px-4 py-3 rounded-full border-0 focus:ring-2 focus:ring-ayur-gold outline-none">
+                                <button
+                                    class="w-full bg-ayur-orange text-white py-3 rounded-full font-bold hover:bg-orange-600 transition-colors shadow-lg">Subscribe</button>
+                            </form>
+                            <p class="text-white/60 text-xs mt-4">No spam. Unsubscribe anytime.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+    <!-- SCRIPTS -->
+    <script>
+        // Force content to be visible
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set all elements to visible
+            document.querySelectorAll('*').forEach(el => {
+                el.style.opacity = '1';
+                el.style.visibility = 'visible';
+            });
+
+            // Preload images to prevent flickering
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                // Force image display
+                img.style.display = 'block';
+                img.style.opacity = '1';
+                img.style.visibility = 'visible';
+
+                // Add error handling for broken images
+                img.onerror = function () {
+                    this.style.display = 'none';
+                    this.parentElement.style.backgroundColor = '#f5f0e6';
+                    this.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400"><i class="fas fa-image text-3xl"></i></div>';
+                };
+            });
+        });
+
+
+
+        function submitForm() {
+            alert("Thank you! Your consultation request has been received. We will contact you shortly.");
+            closeConsultModal();
+        }
+
+        // GSAP Animations for Blog - Fixed version
+        document.addEventListener("DOMContentLoaded", (event) => {
+            // Force visibility before any animations
+            document.body.style.opacity = '1';
+            document.body.style.visibility = 'visible';
+
+            // Initialize GSAP only after content is loaded
+            setTimeout(() => {
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+
+                    // Staggered blog card animations - Start from visible state
+                    gsap.from(".blog-card", {
+                        scrollTrigger: {
+                            trigger: ".blog-card",
+                            start: "top 90%",
+                            toggleActions: "play none none reverse"
+                        },
+                        y: 30,
+                        opacity: 0.8, // Start from slightly visible instead of 0
+                        duration: 0.8,
+                        stagger: 0.1,
+                        ease: "power2.out"
+                    });
+
+                    // Sidebar animations
+                    gsap.from(".sidebar-link", {
+                        scrollTrigger: {
+                            trigger: ".sidebar-link",
+                            start: "top 95%",
+                            toggleActions: "play none none reverse"
+                        },
+                        x: -10,
+                        opacity: 0.8,
+                        duration: 0.5,
+                        stagger: 0.05,
+                        ease: "power2.out"
+                    });
+
+                    // Category tags animation
+                    gsap.from(".category-tag", {
+                        duration: 0.6,
+                        scale: 0.9,
+                        opacity: 0.8,
+                        stagger: 0.08,
+                        ease: "back.out(1.2)"
+                    });
+
+                    // Hero text animation
+                    gsap.from(".animate-slide-up", {
+                        duration: 1,
+                        y: 20,
+                        opacity: 0.9,
+                        ease: "power3.out"
+                    });
+                }
+            }, 100); // Small delay to ensure DOM is ready
+        });
+
+        // Category filter functionality
+        document.querySelectorAll('.category-tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                const category = this.textContent;
+
+                // Remove active class from all tags
+                document.querySelectorAll('.category-tag').forEach(t => {
+                    t.classList.remove('bg-ayur-green', 'text-white');
+                    if (!t.classList.contains('bg-ayur-green')) {
+                        t.classList.add('bg-ayur-green/10', 'text-ayur-darkGreen');
+                    }
+                });
+
+                // Add active class to clicked tag
+                this.classList.remove('bg-ayur-green/10', 'text-ayur-darkGreen');
+                this.classList.add('bg-ayur-green', 'text-white');
+
+                // Show filter message
+                const message = document.createElement('div');
+                message.className = 'fixed top-20 left-1/2 transform -translate-x-1/2 bg-ayur-green text-white px-4 py-2 rounded-full shadow-lg z-50';
+                message.textContent = `Showing articles in: ${category}`;
+                document.body.appendChild(message);
+
+                setTimeout(() => {
+                    message.remove();
+                }, 2000);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const query = this.value;
+                    if (query.trim() !== '') {
+                        alert(`Searching for: ${query}`);
+                    }
+                }
+            });
+        }
+
+        // Image loading fallback
+        window.addEventListener('load', function () {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                // Check if image loaded successfully
+                if (!img.complete || img.naturalHeight === 0) {
+                    // Replace with fallback
+                    img.style.display = 'none';
+                    const parent = img.parentElement;
+                    if (parent.classList.contains('image-container')) {
+                        parent.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-ayur-beige"><i class="fas fa-leaf text-ayur-green text-3xl"></i></div>';
+                    }
+                }
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('../header.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const scriptTag = doc.querySelector('script');
+                    if (scriptTag) {
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = scriptTag.textContent;
+                        document.head.appendChild(scriptElement);
+                    }
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('../footer.html')
+                .then(res => res.text())
+                .then(data => {
+                    const existingFooter = document.querySelector('footer');
+                    if (existingFooter) {
+                        existingFooter.outerHTML = data;
+                    } else {
+                        document.body.insertAdjacentHTML('beforeend', data);
+                    }
+                });
+        });
+    </script>
+</body>
+
+</html>

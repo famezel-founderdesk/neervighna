@@ -1,0 +1,472 @@
+<header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 bg-transparent">
+    <div class="container mx-auto px-6">
+        <div class="flex justify-between items-center">
+            <a href="index.html" class="flex items-center group">
+                <img src="../images/logo1.png" alt="Neervighna Ayurveda Logo"
+                    class="h-16 md:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10">
+                <!-- <img src="../images/name.png" alt="नीર્વિઘ્ન"
+                    class="h-10 md:h-14 w-auto object-contain -ml-4 md:-ml-18 relative z-10"> -->
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 ml-auto mr-12">
+                <a href="index.html"
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Home</a>
+                <a href="about.html"
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">About</a>
+                <a href="service.html"
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Services</a>
+                <a href="blog.html"
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Blog</a>
+                <a href="contact.html"
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Contact</a>
+            </nav>
+
+            <div class="hidden md:block">
+                <button onclick="openConsultModal()"
+                    class="bg-ayur-green hover:bg-ayur-darkGreen text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl flex items-center gap-2 group">
+                    <span>Book Consultation</span>
+                    <i
+                        class="fa-solid fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
+                </button>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-ayur-darkGreen text-3xl focus:outline-none">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="mobile-menu"
+        class="fixed inset-0 bg-ayur-cream z-40 transform translate-x-full transition-transform duration-500 md:hidden flex flex-col justify-center items-center gap-10">
+        <button id="close-menu-btn"
+            class="absolute top-8 right-8 text-4xl text-ayur-darkGreen hover:text-ayur-orange transition-colors">
+            <i class="fa-solid fa-times"></i>
+        </button>
+        <a href="index.html"
+            class="text-3xl font-heading text-ayur-darkGreen hover:text-ayur-orange transition-colors">Home</a>
+        <a href="about.html"
+            class="text-3xl font-heading text-ayur-darkGreen hover:text-ayur-orange transition-colors">About</a>
+        <a href="service.html"
+            class="text-3xl font-heading text-ayur-darkGreen hover:text-ayur-orange transition-colors">Services</a>
+        <a href="blog.html"
+            class="text-3xl font-heading text-ayur-darkGreen hover:text-ayur-orange transition-colors">Blog</a>
+        <a href="contact.html"
+            class="text-3xl font-heading text-ayur-darkGreen hover:text-ayur-orange transition-colors">Contact</a>
+    </div>
+</header>
+
+<!-- CONSULTATION MODAL - FULL FORM CODE WITH CORRECT GOOGLE ENTRY IDs -->
+<div id="consultModal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeConsultModal()"></div>
+    <div class="relative bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto mx-4"
+        data-lenis-prevent>
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-heading text-2xl text-ayur-darkGreen font-bold">Ayurveda Consultation Form</h3>
+            <button onclick="closeConsultModal()" class="text-gray-400 hover:text-red-500 transition-colors">
+                <i class="fa-solid fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <form id="ayurvedaForm" class="space-y-6">
+            <!-- Basic Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
+                    <input type="text" id="name" name="entry.832832779" placeholder="Enter your full name"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
+                        required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Age *</label>
+                    <input type="number" id="age" name="entry.226398011" min="1" max="120" placeholder="Your age"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
+                        required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Gender *</label>
+                    <select id="gender" name="entry.1363959530"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
+                        required>
+                        <option value="">Select Gender</option>
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Mobile Number *</label>
+                    <input type="tel" id="phone" name="entry.1227453399" placeholder="+91 11111 22222"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
+                        required>
+                </div>
+            </div>
+
+            <!-- Main Concern -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Main Health Concern *</label>
+                <select id="concern" name="entry.1615038726"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
+                    required>
+                    <option value="">Select your primary concern</option>
+                    <option>Digestive Issues</option>
+                    <option>Skin Problems</option>
+                    <option>Joint / Muscle Pain</option>
+                    <option>Stress / Anxiety</option>
+                    <option>Sleep Issues / Insomnia</option>
+                    <option>Weight Management</option>
+                    <option>Chronic Fatigue</option>
+                    <option>Diabetes Management</option>
+                    <option>Immunity Boost</option>
+                    <option>Women's Health</option>
+                    <option>Men's Health</option>
+                    <option>General Wellness</option>
+                    <option>Other</option>
+                </select>
+            </div>
+
+            <!-- Problem Duration -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">How long have you been experiencing
+                    this?</label>
+                <select id="duration" name="entry.891956186"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                    <option>Less than 1 month</option>
+                    <option>1 – 6 months</option>
+                    <option>6 – 12 months</option>
+                    <option>More than 1 year</option>
+                    <option>Chronic (many years)</option>
+                </select>
+            </div>
+
+            <!-- Lifestyle -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Sleep Quality</label>
+                    <select id="sleep" name="entry.720085140"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                        <option>Good (7–8 hours, refreshing)</option>
+                        <option>Average (6–7 hours)</option>
+                        <option>Disturbed</option>
+                        <option>Insomnia (difficulty falling/staying asleep)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Stress Level</label>
+                    <select id="stress" name="entry.230376100"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                        <option>Low</option>
+                        <option>Moderate</option>
+                        <option>High</option>
+                        <option>Very High</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Preferred Service -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Preferred Service</label>
+                <select id="service" name="entry.818883737" onchange="togglePanchakarma()"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                    <option value="">Select preferred service</option>
+                    <option>Dosha Analysis & Consultation</option>
+                    <option>Panchakarma Detox</option>
+                    <option>Herbal Prescription</option>
+                    <option>Diet & Lifestyle Plan</option>
+                    <option>Stress & Sleep Therapy</option>
+                    <option>Skin & Beauty Treatment</option>
+                    <option>Joint Pain Relief</option>
+                </select>
+            </div>
+
+            <!-- Conditional Panchakarma Fields -->
+            <div id="panchakarmaBox" class="hidden space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Have you done Panchakarma
+                        before?</label>
+                    <select id="pkBefore" name="entry.1986535574"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                        <option>No</option>
+                        <option>Yes</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Known Chronic Conditions (if
+                        any)</label>
+                    <input type="text" id="chronic" name="entry.341045372"
+                        placeholder="e.g., Diabetes, Hypertension, Thyroid, Asthma"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all">
+                </div>
+            </div>
+
+            <!-- Detailed Description -->
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Describe Your Problem in Detail *</label>
+                <textarea id="message" name="entry.1547699826" rows="5"
+                    placeholder="Please explain your symptoms, daily routine, diet, and any medications you are taking..."
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all resize-none"
+                    required></textarea>
+            </div>
+
+            <!-- Privacy Checkbox & Submit Buttons -->
+            <div class="pt-6">
+                <div class="text-center mb-6">
+                    <label class="inline-flex items-center text-sm text-gray-600 cursor-pointer">
+                        <input type="checkbox" id="privacy-checkbox" class="mr-3 h-4 w-4 border-gray-300 rounded"
+                            required>
+                        <span>BY SUBMITTING, YOU AGREE TO OUR <a href="terms.html" target="_blank"
+                                class="underline font-semibold text-gray-800">PRIVACY POLICY</a></span>
+                    </label>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <button type="button" onclick="submitToGoogle()" id="googleBtn"
+                        class="bg-ayur-darkGreen text-white px-6 py-4 rounded-xl font-bold shadow-lg hover:bg-black transition-all flex items-center justify-center gap-3 group">
+                        <i class="fa-solid fa-paper-plane transition-transform group-hover:translate-x-1"></i>
+                        <span>Submit Form</span>
+                    </button>
+
+                    <button type="button" onclick="submitToWhatsApp()"
+                        class="bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>WhatsApp Chat</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<style>
+    /* Glass Effect Styling */
+    .glass-nav {
+        background: rgba(255, 255, 255, 0.92) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border-bottom: 1px solid rgba(46, 125, 50, 0.15);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -4px;
+        left: 0;
+        background-color: #e67e22;
+        transition: width 0.4s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
+    /* Dark Section Overrides */
+    body.is-dark-section .glass-nav {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        box-shadow: none !important;
+    }
+    body.is-dark-section .nav-link {
+        color: #1b5e20 !important; /* ayur-darkGreen */
+        font-weight: 600; /* slightly bolder for readability on transparent bg */
+    }
+    body.is-dark-section .nav-link:hover {
+        color: #2e7d32 !important; /* ayur-green */
+    }
+    body.is-dark-section .nav-link::after {
+        background-color: #2e7d32 !important; 
+    }
+    body.is-dark-section #mobile-menu-btn {
+        color: #1b5e20 !important; 
+    }
+</style>
+
+<script>
+    // This function initializes all header interactions
+    window.initHeader = function () {
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Scroll Logic for Glass Effect
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.remove('bg-transparent', 'py-6');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-lg', 'py-3');
+                navbar.classList.add('bg-transparent', 'py-6');
+            }
+
+            // Dark section detection for navbar inversion
+            const philSection = document.getElementById('philosophy');
+            if (philSection) {
+                const rect = philSection.getBoundingClientRect();
+                // When section spans beneath the navbar (0 to ~90px from top)
+                if (rect.top <= 90 && rect.bottom >= 90) {
+                    document.body.classList.add('is-dark-section');
+                } else {
+                    document.body.classList.remove('is-dark-section');
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll(); // Run immediately in case page is already scrolled
+
+        // Mobile Menu Logic
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.onclick = () => mobileMenu.classList.remove('translate-x-full');
+            closeMenuBtn.onclick = () => mobileMenu.classList.add('translate-x-full');
+
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.onclick = () => mobileMenu.classList.add('translate-x-full');
+            });
+        }
+    };
+
+    // Modal Functions (Global Scope)
+    window.openConsultModal = function () {
+        const modal = document.getElementById('consultModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            if (window.lenis) window.lenis.stop();
+        }
+    };
+
+    window.closeConsultModal = function () {
+        const modal = document.getElementById('consultModal');
+        if (modal) {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            if (window.lenis) window.lenis.start();
+        }
+    };
+
+    // Toggle Panchakarma additional fields visibility
+    function togglePanchakarma() {
+        const serviceSelect = document.getElementById('service');
+        const panchakarmaBox = document.getElementById('panchakarmaBox');
+
+        // Safety check (in case elements are not loaded yet)
+        if (!serviceSelect || !panchakarmaBox) return;
+
+        const selectedService = serviceSelect.value;
+
+        // Show box only if "Panchakarma Detox" is selected
+        if (selectedService === 'Panchakarma Detox') {
+            panchakarmaBox.classList.remove('hidden');
+        } else {
+            panchakarmaBox.classList.add('hidden');
+        }
+    }
+
+    // Initialize toggle state
+    document.addEventListener('DOMContentLoaded', () => {
+        const serviceSelect = document.getElementById('service');
+        if (serviceSelect) {
+            serviceSelect.addEventListener('change', togglePanchakarma);
+            togglePanchakarma();
+        }
+    });
+
+
+    // 1. SUBMIT TO GOOGLE FORM
+    async function submitToGoogle() {
+        const form = document.getElementById('ayurvedaForm');
+        const btn = document.getElementById('googleBtn');
+
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i> Submitting...`;
+
+        const formData = new FormData(form);
+        const googleFormUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeneHZI9Pu8dHCQojFAVKkanMbknxa0JzluN-8zlyvCflF5Ew/formResponse";
+
+        try {
+            await fetch(googleFormUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: formData
+            });
+            closeConsultModal();
+            form.reset();
+        } catch (error) {
+            alert("Submission error. Please use WhatsApp.");
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Submit Form</span>`;
+        }
+        alert("✅ Data has been sent successfully!");
+    }
+
+    // 2. WHATSAPP FORMATTED CHAT
+    function submitToWhatsApp() {
+        const data = {
+            name: document.getElementById('name').value,
+            age: document.getElementById('age').value,
+            gender: document.getElementById('gender').value,
+            phone: document.getElementById('phone').value,
+            concern: document.getElementById('concern').value,
+            duration: document.getElementById('duration').value,
+            sleep: document.getElementById('sleep').value,
+            stress: document.getElementById('stress').value,
+            service: document.getElementById('service').value,
+            pkBefore: document.getElementById('pkBefore').value,
+            chronic: document.getElementById('chronic').value,
+            msg: document.getElementById('message').value
+        };
+
+        if (!data.name || !data.phone || !data.concern) {
+            alert("Please fill in Name, Phone and Health Concern.");
+            return;
+        }
+
+        const wpNumber = "918160909801";
+
+        let wpMessage = `*🌿 NEERVIGHNA AYURVEDA – CONSULTATION REQUEST*%0A`;
+        wpMessage += `━━━━━━━━━━━━━━━━━━━━━━%0A%0A`;
+        wpMessage += `👤 *Patient Details*%0A`;
+        wpMessage += `• *Name:* ${data.name}%0A`;
+        wpMessage += `• *Age / Gender:* ${data.age} / ${data.gender}%0A`;
+        wpMessage += `• *Mobile:* ${data.phone}%0A%0A`;
+        wpMessage += `🩺 *Health Information*%0A`;
+        wpMessage += `• *Primary Concern:* ${data.concern}%0A`;
+        wpMessage += `• *Problem Duration:* ${data.duration}%0A`;
+        wpMessage += `• *Sleep Quality:* ${data.sleep}%0A`;
+        wpMessage += `• *Stress Level:* ${data.stress}%0A%0A`;
+        wpMessage += `🌿 *Preferred Ayurvedic Service*%0A`;
+        wpMessage += `• ${data.service}%0A`;
+
+        if (data.service === 'Panchakarma Detox') {
+            wpMessage += `• *Panchakarma History:* ${data.pkBefore}%0A`;
+            wpMessage += `• *Known Chronic Conditions:* ${data.chronic}%0A`;
+        }
+
+        wpMessage += `%0A📝 *Patient Message*%0A`;
+        wpMessage += `${data.msg}%0A%0A`;
+        wpMessage += `━━━━━━━━━━━━━━━━━━━━━━%0A`;
+        wpMessage += `_Submitted via Neervighna Ayurveda Website_`;
+
+        window.open(
+            `https://wa.me/${wpNumber}?text=${encodeURIComponent(wpMessage)}`,
+            '_blank'
+        );
+    }
+</script>
