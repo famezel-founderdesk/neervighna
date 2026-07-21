@@ -1,18 +1,4 @@
 <!DOCTYPE html>
-<title>Neervighna Ayurveda | Authentic Ayurvedic Healing & Wellness</title>
-
-<meta name="description"
-content="Neervighna Ayurveda offers authentic Ayurvedic consultation, Panchakarma, women's health, digestive care, skin care, arthritis treatment and holistic wellness.">
-
-<meta name="keywords"
-content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurveda, Natural Treatment">
-
-<meta name="robots" content="index,follow">
-
-<link rel="canonical" href="https://neervighna.com/">
-
-
-
 <html lang="en">
 
 <head>
@@ -51,6 +37,23 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
                     fontFamily: {
                         heading: ['"Playfair Display"', 'serif'],
                         body: ['"Lato"', 'sans-serif'],
+                    },
+                    animation: {
+                        'spin-slow': 'spin 20s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        blob: {
+                            "0%": { transform: "translate(0px, 0px) scale(1)" },
+                            "33%": { transform: "translate(30px, -50px) scale(1.1)" },
+                            "66%": { transform: "translate(-20px, 20px) scale(0.9)" },
+                            "100%": { transform: "translate(0px, 0px) scale(1)" },
+                        }
                     }
                 }
             }
@@ -136,7 +139,7 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('../header.html')
+        fetch('header.html')
             .then(res => res.text())
             .then(data => {
                 // 1. Inject the HTML
@@ -154,7 +157,7 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
                 if (window.initHeader) window.initHeader();
             });
 
-        fetch('../footer.html')
+        fetch('footer.html')
             .then(res => res.text())
             .then(data => document.body.insertAdjacentHTML('beforeend', data));
     });
@@ -176,16 +179,70 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
         <div class="floating-orb w-80 h-80 bg-ayur-gold/20 bottom-0 left-1/3" data-speed="0.12"></div>
     </div>
 
-    <!-- HERO SECTION - CONTACT PAGE -->
-    <section class="relative min-h-screen flex items-center pt-20 bg-transparent">
-        <div class="container mx-auto px-6 text-center">
-            <h1 class="font-heading text-5xl md:text-7xl font-bold text-ayur-darkGreen mb-6">
-                Get in Touch
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-                We're here to guide you on your journey to natural wellness. Reach out for consultations, appointments,
-                or any questions.
-            </p>
+    <!-- HERO SECTION - CONTACT PAGE (Matching About.html Design) -->
+    <section class="relative pt-32 pb-24 lg:pt-32 lg:pb-56 min-h-[90vh] flex items-center overflow-hidden bg-[#faf8f4]">
+        <!-- Animated Background Blobs -->
+        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#df7e29] rounded-full mix-blend-multiply filter blur-[150px] opacity-10 animate-blob"></div>
+        <div class="absolute top-[20%] left-[-10%] w-[700px] h-[700px] bg-[#8cb369] rounded-full mix-blend-multiply filter blur-[150px] opacity-10 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-20 relative z-10 w-full">
+            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-20">
+
+                <!-- Hero Text Content -->
+                <div class="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white shadow-sm mb-10">
+                        <i class="fa-solid fa-leaf text-[#8cb369] text-xs"></i>
+                        <span class="text-[#df7e29] font-bold tracking-widest uppercase text-[11px] md:text-xs">We Are Here To Help</span>
+                    </div>
+
+                    <h1 class="font-heading text-4xl md:text-5xl lg:text-[70px] font-bold text-[#1a202c] leading-[1.15] mb-8">
+                        Get in <br>
+                        <span class="text-[#9bb97a] italic font-medium">Touch</span> <br>
+                        <span class="text-[#df7e29]">With Us</span>
+                    </h1>
+
+                    <p class="text-gray-500 text-base md:text-[17px] md:max-w-[480px] font-medium leading-[1.8] mb-10 text-justify">
+                        We're here to guide you on your journey to natural wellness. Reach out for consultations, appointments, or any questions about our Ayurvedic treatments.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center sm:items-stretch gap-6 w-full sm:w-auto">
+                        <button onclick="openConsultModal()" class="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-[#8cb369] text-white text-[15px] font-bold rounded-full hover:bg-[#7a9d5a] transition-colors duration-300 shadow-md">
+                            Book Consultation
+                            <i class="fa-solid fa-arrow-right text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Image Showcase -->
+                <div class="w-full lg:w-1/2 relative flex items-center justify-center lg:justify-end mt-12 lg:mt-0">
+                    <div class="relative w-full max-w-[600px] aspect-[4/3] rounded-[32px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] group z-10 ml-0 lg:ml-10">
+                        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=2000&auto=format&fit=crop"
+                            alt="Contact Ayurvedic Center"
+                            class="w-full h-full object-cover rounded-[32px] transform transition-transform duration-1000 group-hover:scale-105">
+                    </div>
+
+                    <div class="absolute top-[-5%] left-[-5%] md:left-[5%] bg-white px-5 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex items-center gap-3 animate-float z-20 border border-gray-50/50">
+                        <div class="w-10 h-10 rounded-full bg-[#fdf3e9] text-[#df7e29] flex items-center justify-center text-[15px]">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#1a202c] text-sm leading-tight">24/7 Support</p>
+                            <p class="text-[10px] text-gray-500 font-medium leading-tight">+91 98765 43210</p>
+                        </div>
+                    </div>
+
+                    <div class="absolute bottom-[-5%] right-[-5%] md:right-[5%] bg-white px-5 py-3 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex items-center gap-3 animate-float animation-delay-2000 z-20 border border-gray-50/50">
+                        <div class="w-10 h-10 rounded-full bg-[#f1f5eb] text-[#8cb369] flex items-center justify-center text-[15px]">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[#1a202c] text-sm leading-tight">Gandhinagar</p>
+                            <p class="text-[10px] text-gray-500 font-medium leading-tight">Visit Gujarat Clinic</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 

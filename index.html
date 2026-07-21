@@ -1,35 +1,4 @@
 <!DOCTYPE html>
-
-<title>Neervighna Ayurveda | Authentic Ayurvedic Healing & Wellness</title>
-
-<meta name="description"
-content="Neervighna Ayurveda offers authentic Ayurvedic consultation, Panchakarma, women's health, digestive care, skin care, arthritis treatment and holistic wellness.">
-
-<meta name="keywords"
-content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurveda, Natural Treatment">
-
-<meta name="robots" content="index,follow">
-
-<link rel="canonical" href="https://neervighna.com/">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Neervighna Ayurveda">
-
-<meta property="og:description"
-content="Experience authentic Ayurveda with personalized treatments.">
-
-<meta property="og:image"
-content="https://neervighna.com/images/og-image.jpg">
-
-<meta property="og:url"
-content="https://neervighna.com">
-
-<meta property="og:type"
-content="website">
-
-<meta name="twitter:card" content="summary_large_image">
-
-
 <html lang="en">
 
 <head>
@@ -148,31 +117,7 @@ content="website">
         }
     </style>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('../header.html')
-                .then(res => res.text())
-                .then(data => {
-                    document.body.insertAdjacentHTML('afterbegin', data);
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(data, 'text/html');
-                    const scriptTag = doc.querySelector('script');
-                    if (scriptTag) {
-                        const scriptElement = document.createElement('script');
-                        scriptElement.textContent = scriptTag.textContent;
-                        document.head.appendChild(scriptElement);
-                    }
-                    if (window.initHeader) window.initHeader();
-                });
 
-            fetch('../footer.html')
-                .then(res => res.text())
-                .then(data => {
-                    const inlineFooter = document.querySelector('footer');
-                    if (inlineFooter) inlineFooter.outerHTML = data;
-                });
-        });
-    </script>
     <style>
         body,
         p,
@@ -228,6 +173,11 @@ content="website">
         /* ============================
            ELEMENTAL CARD ANIMATIONS
         ============================ */
+
+        #philosophy,
+        #philosophy * {
+            font-family: 'Playfair Display', serif !important;
+        }
 
         /* Vata - Wind: sweeps in from far left with slight rotation */
         @keyframes vata-wind {
@@ -509,6 +459,30 @@ content="website">
 </head>
 
 <body class="font-body overflow-hidden">
+    <script>
+        // Use exact logic to dynamically load header & footer
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('header.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const scriptTag = doc.querySelector('script');
+                    if (scriptTag) {
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = scriptTag.textContent;
+                        document.head.appendChild(scriptElement);
+                    }
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('footer.html')
+                .then(res => res.text())
+                .then(data => document.body.insertAdjacentHTML('beforeend', data));
+        });
+    </script>
+
 
 
     <!-- Progress Bar -->
@@ -533,7 +507,7 @@ content="website">
             <!-- Using a serene, nature/spa related stock video. You can replace the src with your local video file path later (e.g. src="assets/videos/ayurveda.mp4") -->
             <source src="Flow_delpmaspu_.mp4" type="video/mp4">
         </video>
-        <div class="section-overlay bg-gradient-to-b from-white/30 to-white/70 backdrop-blur-[1px] z-10"></div>
+        <div class="section-overlay bg-gradient-to-b from-white/30 to-white/70 "></div>
         <div class="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-20 mt-10">
             <h1 class="font-heading font-extrabold mb-4 drop-shadow-sm text-ayur-darkGreen gsap-hero hero-title">
                 Restoring Balance,
@@ -606,12 +580,83 @@ content="website">
                 transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
                 position: absolute;
                 z-index: 2;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                animation: markerPulse 2s infinite;
+            }
+
+            @keyframes markerPulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+                }
+            }
+
+            /* Animated Energy Flares for Background Elements */
+            @keyframes elementBreathe {
+                0% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                    filter: blur(20px);
+                }
+
+                50% {
+                    opacity: 0.65;
+                    transform: scale(1.05);
+                    filter: blur(30px);
+                }
+
+                100% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                    filter: blur(20px);
+                }
+            }
+
+            .energy-flare {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                border-radius: 50%;
+                pointer-events: none;
+                mix-blend-mode: screen;
+                z-index: 5;
+                animation: elementBreathe 5s infinite ease-in-out;
+                margin-top: -200px;
+                margin-left: -200px;
+            }
+
+            .flare-vata {
+                background: radial-gradient(circle, rgba(160, 210, 250, 0.4) 0%, transparent 60%);
+                top: 45%;
+                left: 16%;
+                animation-delay: 0s;
+            }
+
+            .flare-pitta {
+                background: radial-gradient(circle, rgba(255, 100, 50, 0.45) 0%, transparent 60%);
+                top: 50%;
+                left: 50%;
+                animation-delay: -1.6s;
+            }
+
+            .flare-kapha {
+                background: radial-gradient(circle, rgba(100, 200, 150, 0.35) 0%, transparent 60%);
+                top: 50%;
+                left: 84%;
+                animation-delay: -3.3s;
             }
 
             .hotspot-wrapper:hover .hotspot-marker {
-                opacity: 0;
-                transform: scale(0);
+                transform: scale(1.15);
+                background: rgba(223, 126, 41, 0.6);
+                border-color: rgba(223, 126, 41, 0.8);
             }
 
             /* Thin CSS Plus */
@@ -619,7 +664,7 @@ content="website">
             .hotspot-marker::after {
                 content: '';
                 position: absolute;
-                background-color: rgba(255,255,255,0.85);
+                background-color: rgba(255, 255, 255, 0.85);
                 transition: transform 0.4s ease;
             }
 
@@ -635,66 +680,40 @@ content="website">
 
             .hotspot-wrapper:hover .hotspot-marker::before,
             .hotspot-wrapper:hover .hotspot-marker::after {
-                transform: rotate(90deg) scale(0);
-                opacity: 0;
-            }
-
-            /* The expanding detail circle (Solid Black Lens) */
-            .hotspot-panel {
-                width: 0;
-                height: 0;
-                border-radius: 50%;
-                background: #000000;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                opacity: 0;
-                transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-                position: absolute;
-                z-index: 1;
-                pointer-events: none;
-            }
-
-            /* Thin outer ring matching Audemars Piguet */
-            .hotspot-panel::after {
-                content: '';
-                position: absolute;
-                inset: -6px;
-                border-radius: 50%;
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                opacity: 0;
-                transition: opacity 0.5s ease 0.2s;
-            }
-
-            .hotspot-wrapper:hover .hotspot-panel::after {
+                transform: rotate(180deg);
                 opacity: 1;
             }
 
-            .hotspot-wrapper:hover .hotspot-panel {
-                width: 190px;
-                height: 190px;
-                opacity: 1;
-                pointer-events: auto;
+            /* Hotspot Modal Styles */
+            #element-modal {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
             }
 
-            .hotspot-content-inner {
-                opacity: 0;
-                transform: scale(0.9);
-                transition: all 0.3s ease 0.15s;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 190px;
-                height: 190px;
-                position: absolute;
+            .modal-active {
+                opacity: 1 !important;
+                pointer-events: auto !important;
             }
 
-            .hotspot-wrapper:hover .hotspot-content-inner {
-                opacity: 1;
-                transform: scale(1);
+            .modal-active-inner {
+                transform: scale(1) !important;
+            }
+
+            .benefit-list {
+                margin-top: 15px;
+                color: #4b5563;
+                font-size: 1.15rem;
+                padding-left: 24px;
+                list-style-type: disc;
+            }
+
+            .benefit-list li {
+                margin-bottom: 8px;
+                line-height: 1.6;
+            }
+
+            .benefit-list li::marker {
+                color: #df7e29;
             }
 
             /* Removed connecting lines and active DOSHA specific coloring for minimalist AP look */
@@ -717,48 +736,125 @@ content="website">
 
             <!-- Section Title -->
             <div class="harmony-title-overlay">
-                <span
-                    class="text-ayur-darkGreen font-bold tracking-[0.3em] uppercase text-sm md:text-base mb-2 block">Our
-                    Philosophy</span>
-                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl text-gray-900 font-bold tracking-wide">Harmony
-                    of Elements</h2>
+                <span class="text-white font-bold tracking-[0.3em] uppercase text-sm md:text-base mb-2 block">
+                    Our Philosophy
+                </span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide text-[#df7e29]">
+                    Harmony of Elements
+                </h2>
             </div>
+
+            <!-- Animated Overlays for Background Elements -->
+            <div class="energy-flare flare-vata"></div>
+            <div class="energy-flare flare-pitta"></div>
+            <div class="energy-flare flare-kapha"></div>
 
             <!-- VATA (AIR / SPACE) -->
             <!-- Positioned freely in top left quadrant -->
-            <a href="element.html?element=vata" class="hotspot-wrapper map-vata" style="top: 45%; left: 22%;">
+            <a href="javascript:void(0)" class="hotspot-wrapper map-vata" style="top: 45%; left: 22%;"
+                onclick="openElementModal('vata')">
                 <div class="hotspot-marker"></div>
-                <div class="hotspot-panel">
-                    <div class="hotspot-content-inner">
-                        <h3 class="font-heading text-xl lg:text-2xl text-white font-light tracking-wide">VATA</h3>
-                        <span class="text-white/70 text-[10px] sm:text-xs font-light tracking-[0.2em] uppercase mt-1">Air &amp; Space</span>
-                    </div>
-                </div>
             </a>
 
             <!-- PITTA (FIRE / WATER) -->
             <!-- Positioned centrally but lower -->
-            <a href="element.html?element=pitta" class="hotspot-wrapper map-pitta" style="top: 75%; left: 50%;">
+            <a href="javascript:void(0)" class="hotspot-wrapper map-pitta" style="top: 75%; left: 50%;"
+                onclick="openElementModal('pitta')">
                 <div class="hotspot-marker"></div>
-                <div class="hotspot-panel">
-                    <div class="hotspot-content-inner">
-                        <h3 class="font-heading text-xl lg:text-2xl text-white font-light tracking-wide">PITTA</h3>
-                        <span class="text-white/70 text-[10px] sm:text-xs font-light tracking-[0.2em] uppercase mt-1">Fire &amp; Water</span>
-                    </div>
-                </div>
             </a>
 
             <!-- KAPHA (EARTH / WATER) -->
             <!-- Positioned freely in top right quadrant -->
-            <a href="element.html?element=kapha" class="hotspot-wrapper map-kapha" style="top: 50%; left: 75%;">
+            <a href="javascript:void(0)" class="hotspot-wrapper map-kapha" style="top: 50%; left: 75%;"
+                onclick="openElementModal('kapha')">
                 <div class="hotspot-marker"></div>
-                <div class="hotspot-panel">
-                    <div class="hotspot-content-inner">
-                        <h3 class="font-heading text-xl lg:text-2xl text-white font-light tracking-wide">KAPHA</h3>
-                        <span class="text-white/70 text-[10px] sm:text-xs font-light tracking-[0.2em] uppercase mt-1">Earth &amp; Water</span>
+            </a>
+
+            <!-- Element Modal -->
+            <div id="element-modal"
+                class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 bg-black/80">
+                <div id="element-modal-inner"
+                    class="bg-[#fdfbf7] border border-gray-200 rounded-2xl w-[95%] max-w-6xl h-auto md:h-[650px] flex flex-col md:flex-row shadow-[0_40px_80px_rgba(0,0,0,0.4)] transform scale-95 transition-transform duration-500 overflow-hidden relative">
+                    <!-- Close Button -->
+                    <button onclick="closeElementModal()"
+                        class="absolute top-6 right-6 text-gray-500 hover:text-[#111] z-50 transition-colors bg-white/60 hover:bg-white/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <!-- Left: Image -->
+                    <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden">
+                        <img id="modal-img" src="" alt="Element Image" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Right: Content -->
+                    <div
+                        class="w-full md:w-1/2 p-10 md:p-14 lg:p-16 flex flex-col justify-center relative bg-[#fdfbf7]">
+                        <h3 id="modal-title"
+                            class="font-heading text-5xl md:text-7xl lg:text-8xl text-[#df7e29] font-bold tracking-wide uppercase">
+                        </h3>
+                        <span id="modal-subtitle"
+                            class="text-gray-500 text-lg md:text-xl font-medium tracking-[0.25em] uppercase mt-4"></span>
+                        <p id="modal-desc" class="text-gray-700 mt-8 leading-[1.8] text-lg md:text-xl"></p>
+                        <span
+                            class="text-gray-900 font-bold text-lg md:text-xl mt-10 uppercase tracking-widest block">Benefits:</span>
+                        <ul id="modal-benefits" class="benefit-list font-body mt-5">
+                        </ul>
                     </div>
                 </div>
-            </a>
+            </div>
+
+            <script>
+                const elementsData = {
+                    vata: {
+                        img: 'Gemini_Generated_Image_6tmevs6tmevs6tme.png',
+                        title: 'VATA',
+                        subtitle: 'Air & Space',
+                        desc: 'Vata governs movement, breathing, and the nervous system. Balanced, it brings creativity and vitality.',
+                        benefits: ['Mental clarity and alertness', 'Healthy digestion', 'Strong immunity']
+                    },
+                    pitta: {
+                        img: 'Gemini_Generated_Image_sr0byusr0byusr0b.png',
+                        title: 'PITTA',
+                        subtitle: 'Fire & Water',
+                        desc: 'Pitta controls metabolism and energy production. It drives intellect, digestion, and ambition.',
+                        benefits: ['Optimized metabolism', 'Sharp focus and intellect', 'Healthy internal heat']
+                    },
+                    kapha: {
+                        img: 'Gemini_Generated_Image_utvfsqutvfsqutvf.png',
+                        title: 'KAPHA',
+                        subtitle: 'Earth & Water',
+                        desc: 'Kapha provides structure, strength, and immunity. It forms the body\'s tissues and lubrication.',
+                        benefits: ['Steady endurance', 'Strong, healthy joints', 'Emotional calmness']
+                    }
+                };
+
+                function openElementModal(el) {
+                    const data = elementsData[el];
+                    document.getElementById('modal-img').src = data.img;
+                    document.getElementById('modal-title').textContent = data.title;
+                    document.getElementById('modal-subtitle').textContent = data.subtitle;
+                    document.getElementById('modal-desc').textContent = data.desc;
+
+                    const benefitsList = document.getElementById('modal-benefits');
+                    benefitsList.innerHTML = '';
+                    data.benefits.forEach(b => {
+                        const li = document.createElement('li');
+                        li.textContent = b;
+                        benefitsList.appendChild(li);
+                    });
+
+                    document.getElementById('element-modal').classList.add('modal-active');
+                    document.getElementById('element-modal-inner').classList.add('modal-active-inner');
+                }
+
+                function closeElementModal() {
+                    document.getElementById('element-modal').classList.remove('modal-active');
+                    document.getElementById('element-modal-inner').classList.remove('modal-active-inner');
+                }
+            </script>
 
         </div>
     </section>
@@ -833,145 +929,366 @@ content="website">
     </div>
     </section>
     <!-- 3. SIGNATURE SERVICES PREVIEW -->
-    <section id="services"
-        class="bg-[url('https://images.unsplash.com/photo-1543881518-a6bc2bd0716c?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center relative flex flex-col justify-center py-24 lg:py-32 overflow-hidden">
-        <div class="absolute inset-0 bg-ayur-beige/90 backdrop-blur-[2px] z-0 gsap-services-bg"></div>
-        <div class="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-10">
-            <div class="text-center mb-16">
-                <span class="text-[#8cb369] font-bold tracking-widest uppercase text-sm">Healing Pathways</span>
-                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-800 mt-4">Signature Services</h2>
-            </div>
+    <!DOCTYPE html>
+    <html lang="en">
 
-            <style>
-                .service-card-static {
-                    background: #fdfbf7;
-                    padding: 2.5rem 2rem;
-                    border-radius: 1.5rem;
-                    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-                    border: 1px solid rgba(140, 179, 105, 0.1);
-                    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    text-align: center;
-                    height: 100%;
-                    position: relative;
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signature Services</title>
+
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+            }
+
+            #services {
+                background: url('https://images.unsplash.com/photo-1543881518-a6bc2bd0716c?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+                position: relative;
+                padding: 120px 0 100px;
+                overflow: hidden;
+            }
+
+            #services::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(253, 251, 247, 0.92);
+                backdrop-filter: blur(4px);
+                z-index: 1;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                position: relative;
+                z-index: 2;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .badge {
+                color: #8cb369;
+                font-weight: 700;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 3.2rem;
+                font-weight: 700;
+                color: #1a202c;
+                margin-top: 12px;
+            }
+
+            .service-card {
+                background: #fdfbf7;
+                padding: 2.8rem 2rem;
+                border-radius: 1.75rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(140, 179, 105, 0.12);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                height: 100%;
+                text-align: center;
+            }
+
+            .service-card:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 25px 60px rgba(140, 179, 105, 0.22);
+                border-color: rgba(140, 179, 105, 0.4);
+            }
+
+            .flip-container {
+                perspective: 1200px;
+                height: 165px;
+                margin-bottom: 1.8rem;
+            }
+
+            .flip-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
+                transform-style: preserve-3d;
+            }
+
+            .service-card:hover .flip-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-front,
+            .flip-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 1.25rem;
+                overflow: hidden;
+            }
+
+            .flip-front {
+                background: #f8f4eb;
+                font-size: 5.2rem;
+                color: #8cb369;
+            }
+
+            @keyframes iconFloat {
+                0% {
+                    transform: translateY(0px);
                 }
 
-                .service-card-static:hover {
+                50% {
                     transform: translateY(-10px);
-                    box-shadow: 0 20px 40px rgba(140, 179, 105, 0.15);
-                    border-color: rgba(140, 179, 105, 0.3);
                 }
 
-                .service-icon-static {
-                    font-size: 3.5rem;
-                    color: #8cb369;
-                    margin-bottom: 1.5rem;
-                    transition: all 0.4s ease;
+                100% {
+                    transform: translateY(0px);
+                }
+            }
+
+            .flip-front i {
+                animation: iconFloat 4s ease-in-out infinite;
+                display: inline-block;
+            }
+
+            .flip-back {
+                transform: rotateY(180deg);
+            }
+
+            .service-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+
+            .service-card:hover .service-image {
+                transform: scale(1.08);
+            }
+
+            .service-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.65rem;
+                font-weight: 700;
+                color: #1a202c;
+                margin-bottom: 1rem;
+            }
+
+            .service-desc {
+                color: #64748b;
+                line-height: 1.7;
+                font-size: 1.02rem;
+            }
+
+            .cta-button {
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                background: #8cb369;
+                color: white;
+                padding: 16px 32px;
+                border-radius: 9999px;
+                font-weight: 700;
+                font-size: 1.15rem;
+                text-decoration: none;
+                transition: all 0.4s ease;
+                box-shadow: 0 10px 25px rgba(140, 179, 105, 0.3);
+                margin-top: 3rem;
+            }
+
+            .cta-button:hover {
+                background: #729454;
+                transform: translateY(-4px);
+                box-shadow: 0 15px 35px rgba(140, 179, 105, 0.4);
+            }
+
+            @media (max-width: 768px) {
+                .section-title {
+                    font-size: 2.6rem;
                 }
 
-                .service-card-static:hover .service-icon-static {
-                    transform: scale(1.1);
-                    color: #df7e29;
+                .flip-container {
+                    height: 145px;
                 }
 
-                .service-title-static {
-                    font-size: 1.5rem;
-                    font-weight: 700;
-                    color: #1a202c;
-                    margin-bottom: 1rem;
-                    font-family: 'Playfair Display', serif;
+                .flip-front {
+                    font-size: 4.5rem;
                 }
+            }
+        </style>
+    </head>
 
-                .service-desc-static {
-                    color: #718096;
-                    font-size: 0.95rem;
-                    line-height: 1.6;
-                    font-weight: 500;
-                }
-            </style>
+    <body>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Card 1 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-stethoscope"></i>
-                    </div>
-                    <h3 class="service-title-static">Dosha Analysis</h3>
-                    <p class="service-desc-static">
-                        Detailed mind-body constitution assessment. Discover your unique nature and find the perfect
-                        path to balance.
-                    </p>
+        <section id="services">
+            <div class="container">
+
+                <div class="text-center mb-16">
+                    <span class="badge">Healing Pathways</span>
+                    <h2 class="section-title">Signature Services</h2>
                 </div>
 
-                <!-- Card 2 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-droplet"></i>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Card 1: Dosha Analysis -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop"
+                                        alt="Dosha Analysis" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Dosha Analysis</h3>
+                        <p class="service-desc">
+                            Detailed mind-body constitution assessment. Discover your unique nature and find the perfect
+                            path to balance.
+                        </p>
                     </div>
-                    <h3 class="service-title-static">Panchakarma Detox</h3>
-                    <p class="service-desc-static">
-                        Traditional five-fold purification process to eliminate toxins and deeply rejuvenate your entire
-                        system.
-                    </p>
+
+                    <!-- Card 2: Panchakarma Detox -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-droplet"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop"
+                                        alt="Panchakarma Detox" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Panchakarma Detox</h3>
+                        <p class="service-desc">
+                            Traditional five-fold purification process to eliminate toxins and deeply rejuvenate your
+                            entire system.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Herbal Prescriptions -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-mortar-pestle"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=800&auto=format&fit=crop"
+                                        alt="Herbal Prescriptions" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Herbal Prescriptions</h3>
+                        <p class="service-desc">
+                            Custom-formulated classical Ayurvedic medicines to target specific health concerns
+                            naturally.
+                        </p>
+                    </div>
+
+                    <!-- Card 4: Diet & Lifestyle -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-apple-whole"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop"
+                                        alt="Diet & Lifestyle" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Diet & Lifestyle</h3>
+                        <p class="service-desc">
+                            Personalized nutritional guidance and daily routines tailored specifically for your body
+                            type.
+                        </p>
+                    </div>
+
+                    <!-- Card 5: Stress Management -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop"
+                                        alt="Stress Management" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Stress Management</h3>
+                        <p class="service-desc">
+                            Calming therapies and natural supplements designed to restore peace and mental clarity.
+                        </p>
+                    </div>
+
+                    <!-- Card 6: Shirodhara Flow -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-oil-can"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop"
+                                        alt="Shirodhara Flow" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Shirodhara Flow</h3>
+                        <p class="service-desc">
+                            Soothing continuous warm oil flow on the forehead to calm the mind and soothe the nervous
+                            system.
+                        </p>
+                    </div>
+
                 </div>
 
-                <!-- Card 3 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-mortar-pestle"></i>
-                    </div>
-                    <h3 class="service-title-static">Herbal Prescriptions</h3>
-                    <p class="service-desc-static">
-                        Custom-formulated classical Ayurvedic medicines to target specific health concerns naturally.
-                    </p>
+                <div class="text-center">
+                    <a href="service.html" class="cta-button">
+                        View More Services
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <!-- Card 4 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-apple-whole"></i>
-                    </div>
-                    <h3 class="service-title-static">Diet & Lifestyle</h3>
-                    <p class="service-desc-static">
-                        Personalized nutritional guidance and daily routines tailored specifically for your body type.
-                    </p>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <h3 class="service-title-static">Stress Management</h3>
-                    <p class="service-desc-static">
-                        Calming therapies and natural supplements designed to restore peace and mental clarity.
-                    </p>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="service-card-static">
-                    <div class="service-icon-static">
-                        <i class="fa-solid fa-oil-can"></i>
-                    </div>
-                    <h3 class="service-title-static">Shirodhara Flow</h3>
-                    <p class="service-desc-static">
-                        Soothing continuous warm oil flow on the forehead to calm the mind and soothe the nervous
-                        system.
-                    </p>
-                </div>
             </div>
+        </section>
 
-            <!-- View More Services CTA -->
-            <div class="mt-16 text-center">
-                <a href="service.html"
-                    class="inline-flex items-center gap-2 bg-[#8cb369] text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-[#729454] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                    View More Services <i class="fa-solid fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+
+        <!-- Fixed WhatsApp Icon -->
+        <a href="https://wa.me/918780417797" target="_blank"
+            class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-[32px] shadow-lg hover:scale-110 transition-transform duration-300">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </body>
+
+    </html>
 
     <!-- 4. WHY CHOOSE NEERVIGHNA? -->
     <section id="why-choose" class="bg-[#FFF8F0] relative flex flex-col justify-center py-24 lg:py-32">
@@ -1261,7 +1578,8 @@ content="website">
                             <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
                             <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
                                 Sorted accommodation in Scotland for me and were very timely and professional. Excellent
-                                rates and more discounted than anywhere else :)
+                                rates and more discounted than anywhere else :.
+                                <b></b>
                             </p>
                         </div>
                         <div>
@@ -1510,7 +1828,7 @@ content="website">
     </section>
 
     <!-- Footer / Final CTA -->
-    <footer></footer>
+
     <script id="spotlight-js">
         const section = document.getElementById("philosophy");
 
@@ -1800,6 +2118,13 @@ content="website">
         }
     </script>
 
+
+
+    <!-- Fixed WhatsApp Icon -->
+    <a href="https://wa.me/918780417797" target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-[32px] shadow-lg hover:scale-110 transition-transform duration-300">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
 </body>
 
 </html>

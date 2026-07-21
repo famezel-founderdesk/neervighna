@@ -1,17 +1,3 @@
-<title>Neervighna Ayurveda | Authentic Ayurvedic Healing & Wellness</title>
-
-<meta name="description"
-content="Neervighna Ayurveda offers authentic Ayurvedic consultation, Panchakarma, women's health, digestive care, skin care, arthritis treatment and holistic wellness.">
-
-<meta name="keywords"
-content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurveda, Natural Treatment">
-
-<meta name="robots" content="index,follow">
-
-<link rel="canonical" href="https://neervighna.com/">
-
-
-
 <header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 bg-transparent">
     <div class="container mx-auto px-6">
         <div class="flex justify-between items-center">
@@ -111,12 +97,13 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
                         <option>Other</option>
                     </select>
                 </div>
-
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Mobile Number *</label>
-                    <input type="tel" id="phone" name="entry.1227453399" placeholder="+91 11111 22222"
+                    <input type="tel" id="phone" name="entry.1227453399" placeholder="+91 98765 43210" maxlength="14"
                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-ayur-green outline-none transition-all"
-                        required>
+                        oninput="validatePhone()" required>
+                    <p id="phoneError" class="hidden text-red-500 text-xs mt-1 animate-pulse"><i
+                            class="fas fa-exclamation-circle mr-1"></i>Mobile number must be exactly 10 digits</p>
                 </div>
             </div>
 
@@ -234,7 +221,7 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
                     <label class="inline-flex items-center text-sm text-gray-600 cursor-pointer">
                         <input type="checkbox" id="privacy-checkbox" class="mr-3 h-4 w-4 border-gray-300 rounded"
                             required>
-                        <span>BY SUBMITTING, YOU AGREE TO OUR <a href="terms.html" target="_blank"
+                        <span>BY SUBMITTING, YOU AGREE TO OUR <a href="privacy-policy.html" target="_blank"
                                 class="underline font-semibold text-gray-800">PRIVACY POLICY</a></span>
                     </label>
                 </div>
@@ -290,18 +277,25 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
         border-bottom: none !important;
         box-shadow: none !important;
     }
+
     body.is-dark-section .nav-link {
-        color: #1b5e20 !important; /* ayur-darkGreen */
-        font-weight: 600; /* slightly bolder for readability on transparent bg */
+        color: #fff !important;
+        /* ayur-darkGreen */
+        font-weight: 600;
+        /* slightly bolder for readability on transparent bg */
     }
+
     body.is-dark-section .nav-link:hover {
-        color: #2e7d32 !important; /* ayur-green */
+        color: #2e7d32 !important;
+        /* ayur-green */
     }
+
     body.is-dark-section .nav-link::after {
-        background-color: #2e7d32 !important; 
+        background-color: #2e7d32 !important;
     }
+
     body.is-dark-section #mobile-menu-btn {
-        color: #1b5e20 !important; 
+        color: #1b5e20 !important;
     }
 </style>
 
@@ -397,20 +391,60 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
     });
 
 
+    // Validate Phone strictly to 10 digits
+    function validatePhone() {
+        const phoneInput = document.getElementById('phone');
+        const errorMsg = document.getElementById('phoneError');
+        let phoneValue = phoneInput.value.replace(/\D/g, ''); // only digits
+
+        if (phoneValue.startsWith('91') && phoneValue.length > 10) {
+            phoneValue = phoneValue.slice(-10);
+        }
+
+        if (phoneValue.length !== 10 && phoneInput.value.length > 0) {
+            errorMsg.classList.remove('hidden');
+            phoneInput.classList.add('border-red-500', 'focus:ring-red-500');
+            phoneInput.classList.remove('border-gray-300', 'focus:ring-ayur-green');
+            return false;
+        } else {
+            errorMsg.classList.add('hidden');
+            phoneInput.classList.remove('border-red-500', 'focus:ring-red-500');
+            phoneInput.classList.add('border-gray-300', 'focus:ring-ayur-green');
+            return phoneValue.length === 10;
+        }
+    }
+
     // 1. SUBMIT TO GOOGLE FORM
     async function submitToGoogle() {
         const form = document.getElementById('ayurvedaForm');
         const btn = document.getElementById('googleBtn');
+        const phoneInput = document.getElementById('phone');
 
         if (!form.checkValidity()) {
             form.reportValidity();
             return;
         }
 
+        if (!validatePhone()) {
+            const errorMsg = document.getElementById('phoneError');
+            errorMsg.classList.remove('hidden');
+            phoneInput.focus();
+            return;
+        }
+
+        let phoneValue = phoneInput.value.replace(/\D/g, '');
+        if (phoneValue.startsWith('91') && phoneValue.length > 10) {
+            phoneValue = phoneValue.slice(-10);
+        }
+
         btn.disabled = true;
         btn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin"></i> Submitting...`;
 
         const formData = new FormData(form);
+
+        // Replace phone value with clean 10-digit number
+        formData.set("entry.1227453399", phoneValue);
+
         const googleFormUrl = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSeneHZI9Pu8dHCQojFAVKkanMbknxa0JzluN-8zlyvCflF5Ew/formResponse";
 
         try {
@@ -419,19 +453,35 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
                 mode: 'no-cors',
                 body: formData
             });
+
             closeConsultModal();
             form.reset();
+            alert("✅ Data has been sent successfully!");
+
         } catch (error) {
-            alert("Submission error. Please use WhatsApp.");
+            alert("❌ Submission error. Please use WhatsApp.");
         } finally {
             btn.disabled = false;
             btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>Submit Form</span>`;
         }
-        alert("✅ Data has been sent successfully!");
     }
-
     // 2. WHATSAPP FORMATTED CHAT
     function submitToWhatsApp() {
+        const form = document.getElementById('ayurvedaForm');
+
+        // Enforce all required fields natively
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        // Enforce 10-digit mobile number explicitly
+        if (!validatePhone()) {
+            const phoneInput = document.getElementById('phone');
+            phoneInput.focus();
+            return;
+        }
+
         const data = {
             name: document.getElementById('name').value,
             age: document.getElementById('age').value,
@@ -446,11 +496,6 @@ content="Ayurveda, Ayurvedic doctor, Panchakarma, Women's Health, Kerala Ayurved
             chronic: document.getElementById('chronic').value,
             msg: document.getElementById('message').value
         };
-
-        if (!data.name || !data.phone || !data.concern) {
-            alert("Please fill in Name, Phone and Health Concern.");
-            return;
-        }
 
         const wpNumber = "918160909801";
 
