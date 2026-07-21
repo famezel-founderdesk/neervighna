@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neervighna Ayurveda | Privacy Policy</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2e7d32, #d4af37);
+            z-index: 9999;
+            transition: width 0.2s ease;
+        }
+
+        /* Hero Redesign to match image exactly */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 140px 1.5rem 6rem;
+            background: #fbf9f4; /* creamy beige from screenshot */
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .circle-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto 3rem;
+        }
+
+        /* 1px thin rings */
+        .outer-ring {
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(46, 125, 50, 0.2);
+            border-radius: 50%;
+            animation: rotateOuter 40s infinite linear;
+        }
+
+        .middle-ring {
+            position: absolute;
+            inset: 8%;
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            animation: rotateMiddle 30s infinite linear reverse;
+        }
+
+        .inner-ring {
+            position: absolute;
+            inset: 16%;
+            border: 1px solid rgba(46, 125, 50, 0.15);
+            border-radius: 50%;
+            animation: rotateInner 20s infinite linear;
+        }
+
+        .circle-dot {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: #d4af37;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
+        }
+
+        .circle-center {
+            position: absolute;
+            inset: 28%;
+            background: #399153; /* matches the solid green in image */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(46,125,50,0.15);
+            z-index: 10;
+        }
+
+        .circle-icon {
+            width: 60px;
+            height: 60px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #1b5e20;
+        }
+
+        @keyframes rotateOuter { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes rotateMiddle { 0% { transform: rotate(0deg); } 100% { transform: rotate(-360deg); } }
+        @keyframes rotateInner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            color: #1b5e20;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            text-align: center;
+        }
+        
+        @media (min-width: 768px) {
+            .hero-title {
+                font-size: 5rem;
+            }
+        }
+
+        .hero-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #4a6741;
+            max-width: 650px;
+            margin: 0 auto;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* Content Cards & Rest of CSS */
+        .privacy-card {
+            background: white;
+            border-radius: 1.25rem;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            border: 1px solid rgba(46,125,50,0.08);
+            transition: all 0.3s ease;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .privacy-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(46,125,50,0.12); }
+        .card-icon { width: 70px; height: 70px; background: linear-gradient(135deg, #2e7d32, #27ae60); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.8rem; margin-bottom: 1.25rem; }
+        .card-title { font-family: 'Playfair Display', serif; font-size: 2.25rem; color: #1b5e20; margin-bottom: 1.25rem; }
+
+        .contact-card { background: white; border-radius: 1.25rem; padding: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: all 0.3s ease; font-family: 'Lato', sans-serif;}
+        .contact-card:hover { transform: translateY(-6px); box-shadow: 0 15px 35px rgba(46,125,50,0.12); }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('header.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                    const doc = new DOMParser().parseFromString(data, 'text/html');
+                    const scriptTag = doc.querySelector('script');
+                    if (scriptTag) {
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = scriptTag.textContent;
+                        document.head.appendChild(scriptElement);
+                    }
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('footer.html')
+                .then(res => res.text())
+                .then(data => document.body.insertAdjacentHTML('beforeend', data));
+
+            // Scroll Progress
+            const scrollProgress = document.getElementById('scrollProgress');
+            const backToTop = document.getElementById('backToTop');
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                if (scrollProgress) scrollProgress.style.width = scrolled + '%';
+
+                if (backToTop) {
+                    if (window.scrollY > 300) {
+                        backToTop.classList.add('opacity-100', 'translate-y-0');
+                        backToTop.classList.remove('opacity-0', 'translate-y-5');
+                    } else {
+                        backToTop.classList.add('opacity-0', 'translate-y-5');
+                        backToTop.classList.remove('opacity-100', 'translate-y-0');
+                    }
+                }
+            });
+
+            if (backToTop) {
+                backToTop.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        });
+    </script>
+</head>
+<body>
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <button id="backToTop" class="fixed bottom-10 right-10 w-14 h-14 bg-ayur-green text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-300 opacity-0 translate-y-5 z-[1000]">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <main>
+        <!-- Custom Hero Section Matching Design -->
+        <section class="hero-section">
+            <div class="circle-container">
+                <div class="outer-ring">
+                    <div class="circle-dot"></div>
+                </div>
+                <div class="middle-ring"></div>
+                <div class="inner-ring"></div>
+                
+                <div class="circle-center">
+                    <div class="circle-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="hero-title">Privacy Policy</h1>
+            <p class="hero-subtitle">
+                Your trust is sacred to us. We protect your information with the same care we provide in healing.
+            </p>
+        </section>
+
+        <!-- Content Sections -->
+        <section class="py-20 px-6 bg-[#fcfbf7]">
+            <div class="max-w-4xl mx-auto space-y-10">
+                
+                <div class="privacy-card">
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="card-icon"><i class="fas fa-database"></i></div>
+                        <h2 class="card-title">Information We Collect</h2>
+                    </div>
+                    <div class="text-gray-700 text-lg leading-relaxed space-y-4">
+                        <p>In the tradition of Ayurveda, understanding the individual is essential for healing. We collect information with care and purpose:</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li><strong>Personal Details:</strong> Name, contact information, and demographic details</li>
+                            <li><strong>Medical History:</strong> Health records including past treatments</li>
+                            <li><strong>Lifestyle Information:</strong> Diet, sleep patterns, routines, stress levels</li>
+                            <li><strong>Treatment Progress:</strong> Ongoing records of your healing journey</li>
+                        </ul>
+                        <p class="font-medium text-ayur-darkGreen mt-4">All data is collected with explicit consent and stored securely.</p>
+                    </div>
+                </div>
+
+                <div class="privacy-card">
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="card-icon"><i class="fas fa-heartbeat"></i></div>
+                        <h2 class="card-title">How We Use Your Data</h2>
+                    </div>
+                    <div class="text-gray-700 text-lg leading-relaxed space-y-4">
+                        <p>Your information is used only for your healing journey:</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Creating personalized Ayurvedic treatment plans</li>
+                            <li>Maintaining accurate medical records</li>
+                            <li>Scheduling consultations and therapies</li>
+                            <li>Improving our services based on feedback</li>
+                            <li>Meeting legal and ethical standards</li>
+                        </ul>
+                        <p class="font-medium text-ayur-darkGreen mt-4">We never sell or share your data for marketing.</p>
+                    </div>
+                </div>
+
+                <div class="privacy-card">
+                    <div class="flex items-center gap-6 mb-8">
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h2 class="card-title">Data Protection & Security</h2>
+                    </div>
+                    <div class="text-gray-700 text-lg leading-relaxed space-y-4">
+                        <p>We protect your data with strong security measures:</p>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>256-bit end-to-end encryption for digital records</li>
+                            <li>Secure, certified data storage environments</li>
+                            <li>Strict access control (only authorized practitioners)</li>
+                            <li>Continuous staff privacy training</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-20 bg-gradient-to-b from-[#fcfbf7] to-[#f5f0e6]">
+            <div class="max-w-5xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-heading text-ayur-darkGreen mb-10">Contact Our Privacy Team</h2>
+                <p class="text-xl text-gray-700 mb-12 max-w-3xl mx-auto font-body">
+                    Questions about your privacy? Our team is here to assist you with care and clarity.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="contact-card">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-ayur-green rounded-full flex items-center justify-center text-white text-3xl">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3 class="text-xl font-heading text-ayur-darkGreen mb-2">Email</h3>
+                        <p class="text-gray-700">privacy@neervighnaayurveda.com</p>
+                        <p class="text-sm text-gray-500 mt-2">Response within 24-48 hours</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-ayur-green rounded-full flex items-center justify-center text-white text-3xl">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-heading text-ayur-darkGreen mb-2">Phone</h3>
+                        <p class="text-gray-700">+91 98765 43210</p>
+                        <p class="text-sm text-gray-500 mt-2">Mon–Sat: 9 AM – 7 PM</p>
+                    </div>
+
+                    <div class="contact-card">
+                        <div class="w-16 h-16 mx-auto mb-6 bg-ayur-green rounded-full flex items-center justify-center text-white text-3xl">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-heading text-ayur-darkGreen mb-2">Visit Us</h3>
+                        <p class="text-gray-700">Gandhinagar, Gujarat</p>
+                        <p class="text-sm text-gray-500 mt-2">India</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Floating Icon -->
+    <a href="https://wa.me/918780417797" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-[32px] shadow-lg hover:scale-110 transition-transform duration-300">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+</body>
+</html>

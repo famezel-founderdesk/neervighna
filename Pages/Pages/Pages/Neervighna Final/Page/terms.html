@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | Neervighna Ayurveda</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Lato"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+        }
+
+        /* Glassmorphism Navbar */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(to right, #2e7d32, #e67e22);
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #2e7d32;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            border: 2px solid #fcfbf7;
+            box-shadow: 0 5px 20px rgba(46, 125, 50, 0.3);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: #1b5e20;
+            transform: translateY(-5px) scale(1.1);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 220px 20px 140px;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            color: #1b5e20;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: #2e7d32;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            color: #2e7d32;
+            font-size: 1.1rem;
+        }
+
+        .scroll-indicator i {
+            margin-top: 10px;
+            font-size: 1.8rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #2e7d32, #e67e22, #2e7d32, transparent);
+            opacity: 0.6;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 55%;
+            padding-left: 80px;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 55%;
+            padding-right: 80px;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 70px;
+            background: #fcfbf7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #1b5e20;
+            font-size: 1.7rem;
+            z-index: 2;
+            border: 3px solid #2e7d32;
+            box-shadow: 0 0 20px rgba(46, 125, 50, 0.2);
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 12px;
+            padding: 50px;
+            border: 1px solid rgba(46, 125, 50, 0.3);
+            box-shadow: 0 15px 40px rgba(46, 125, 50, 0.15);
+            transition: all 0.4s ease;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(46, 125, 50, 0.2);
+            border-color: #2e7d32;
+        }
+
+        .term-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1b5e20;
+            background: rgba(46, 125, 50, 0.12);
+            display: inline-block;
+            padding: 10px 25px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+        }
+
+        .term-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            color: #1b5e20;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .term-content {
+            font-size: 1.35rem;
+            color: #1a1a1a;
+            line-height: 1.9;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+
+            .timeline::before {
+                left: 40px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 100px;
+                padding-right: 20px;
+            }
+
+            .timeline-icon {
+                left: 40px;
+            }
+
+            .timeline-content {
+                padding: 35px;
+                min-height: auto;
+            }
+
+            .term-title {
+                font-size: 2rem;
+            }
+
+            .term-content {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2.4rem;
+            }
+
+            .timeline-content {
+                padding: 30px 25px;
+            }
+
+            .term-title {
+                font-size: 1.8rem;
+            }
+
+            .term-content {
+                font-size: 1.15rem;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('header.html')
+                .then(res => res.text())
+                .then(data => {
+                    // 1. Inject the HTML
+                    document.body.insertAdjacentHTML('afterbegin', data);
+
+                    // 2. Extract and run the <script> from header.html
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const scriptContent = doc.querySelector('script').textContent;
+                    const scriptElement = document.createElement('script');
+                    scriptElement.textContent = scriptContent;
+                    document.head.appendChild(scriptElement);
+
+                    // 3. Start the navbar logic
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('footer.html')
+                .then(res => res.text())
+                .then(data => document.body.insertAdjacentHTML('beforeend', data));
+        });
+    </script>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span,
+        div,
+        li,
+        button,
+        input {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        .hero-section h1,
+        #hero h1,
+        .gsap-hero h1,
+        h1.gsap-hero,
+        .hero-title {
+            font-size: 72px !important;
+            line-height: 1.1 !important;
+        }
+
+        .hero-section p,
+        #hero p,
+        .gsap-hero p,
+        p.gsap-hero,
+        .hero-subtitle {
+            font-size: 20px !important;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="font-body overflow-x-hidden">
+
+
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 class="hero-title">Terms & Conditions</h1>
+            <p class="hero-subtitle">A Sacred Covenant for Holistic Healing & Well-being</p>
+            <div class="scroll-indicator">
+                <span>Scroll to Explore Our Principles</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <!-- Vertical Timeline -->
+        <div class="timeline" id="timeline">
+            <!-- Term 1 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">01</div>
+                    <h2 class="term-title">Use of Website</h2>
+                    <div class="term-content">
+                        <p>The Neervighna Ayurveda website provides information related to Ayurvedic principles,
+                            wellness, preventive healthcare, treatments, and professional consultations. All content is
+                            intended for educational purposes and should not replace professional medical advice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 2 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">02</div>
+                    <h2 class="term-title">Medical Disclaimer</h2>
+                    <div class="term-content">
+                        <p>Information provided does not constitute modern medical advice. Ayurvedic diagnosis is based
+                            on traditional principles and individualized assessment. Always consult with qualified
+                            healthcare professionals for medical concerns.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 3 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">03</div>
+                    <h2 class="term-title">Consultations</h2>
+                    <div class="term-content">
+                        <p>Consultations are conducted by qualified practitioners based on information provided by you.
+                            Accurate and truthful information is essential for proper guidance. Consultation fees are
+                            non-refundable once the session has commenced.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 4 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-spa"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">04</div>
+                    <h2 class="term-title">Treatments & Therapies</h2>
+                    <div class="term-content">
+                        <p>All therapies follow classical Ayurvedic texts and professional judgment. Individual response
+                            may vary, and follow-up visits may be required for optimal results. Treatment plans are
+                            personalized based on individual constitution (Prakriti).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 5 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-mortar-pestle"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">05</div>
+                    <h2 class="term-title">Medicines & Preparations</h2>
+                    <div class="term-content">
+                        <p>Ayurvedic medicines are prepared following traditional standards. Strict adherence to
+                            prescribed usage is essential for safety and effectiveness. Store medicines as directed and
+                            discontinue use if adverse reactions occur.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 6 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-copyright"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">06</div>
+                    <h2 class="term-title">Intellectual Property</h2>
+                    <div class="term-content">
+                        <p>All content on this website is the intellectual property of Neervighna Ayurveda. Unauthorized
+                            reproduction or commercial use is prohibited. Traditional knowledge is shared with respect
+                            to its origins and cultural significance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 7 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">07</div>
+                    <h2 class="term-title">User Obligations</h2>
+                    <div class="term-content">
+                        <p>You agree to use our website lawfully, respect intellectual property rights, and not
+                            interfere with website security or functionality. Provide accurate information and maintain
+                            confidentiality of login credentials.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 8 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">08</div>
+                    <h2 class="term-title">Limitation of Liability</h2>
+                    <div class="term-content">
+                        <p>Neervighna Ayurveda shall not be liable for health outcomes resulting from reliance on
+                            website content or personal interpretation of information. We are not responsible for
+                            third-party actions or content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 9 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-external-link-alt"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">09</div>
+                    <h2 class="term-title">Third-Party Links</h2>
+                    <div class="term-content">
+                        <p>This website may contain links to third-party websites for reference. We do not endorse
+                            content, policies, or practices of third-party sites. Access external links at your own
+                            discretion.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 10 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">10</div>
+                    <h2 class="term-title">Privacy & Confidentiality</h2>
+                    <div class="term-content">
+                        <p>Personal information shared during consultations is handled with professional confidentiality
+                            in accordance with applicable privacy laws. We implement security measures but cannot
+                            guarantee absolute data security.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 11 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">11</div>
+                    <h2 class="term-title">Modifications to Terms</h2>
+                    <div class="term-content">
+                        <p>We reserve the right to modify or update these Terms at any time. Continued use of the
+                            website indicates acceptance of revised Terms. Significant changes will be notified via
+                            website announcements.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Term 12 -->
+            <div class="timeline-item">
+                <div class="timeline-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <div class="timeline-content">
+                    <div class="term-number">12</div>
+                    <h2 class="term-title">Governing Law</h2>
+                    <div class="term-content">
+                        <p>These Terms are governed by the laws of India. Courts located in Gujarat, India shall have
+                            exclusive jurisdiction. Disputes will be resolved through mediation before legal
+                            proceedings.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- JavaScript -->
+    <script>
+
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'shadow-sm', 'py-2');
+                navbar.classList.remove('py-4');
+            } else {
+                navbar.classList.remove('glass-nav', 'shadow-sm', 'py-2');
+                navbar.classList.add('py-4');
+            }
+        });
+
+        // Scroll progress indicator
+        const scrollProgress = document.getElementById('scrollProgress');
+        window.addEventListener('scroll', () => {
+            const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (window.scrollY / windowHeight) * 100;
+            scrollProgress.style.width = `${scrolled}%`;
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Timeline item animation on scroll
+        const timelineItems = document.querySelectorAll('.timeline-item');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.3 });
+
+        timelineItems.forEach(item => observer.observe(item));
+    </script>
+</body>
+
+</html>

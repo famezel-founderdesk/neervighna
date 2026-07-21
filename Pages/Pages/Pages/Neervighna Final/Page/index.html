@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neervighna Ayurveda | Home</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            teal: '#2c7873',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37'
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', '"Nirmala UI"', 'serif'],
+                        body: ['"Playfair Display"', '"Nirmala UI"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Removed scroll-behavior: smooth to prevent conflict with Lenis */
+
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        section {
+            position: relative;
+        }
+
+        /* Parallax Container */
+        .parallax-section {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .section-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Hero Sec */
+        #hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: 0;
+            transform: translateX(-50%) translateY(-50%);
+            object-fit: cover;
+        }
+
+        /* Welcome Sec */
+        .welcome-bg {
+            background-color: #fcfbf7;
+        }
+
+        /* Removed Why Choose background-image to make it beige */
+
+        .cta-btn {
+            background: linear-gradient(135deg, #e67e22, #d35400);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.4);
+        }
+    </style>
+
+
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span,
+        div,
+        li,
+        button,
+        input {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        /* Responsive Font Sizes */
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+            line-height: 1.1 !important;
+            transform-origin: center;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem) !important;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 6vw, 4rem) !important;
+        }
+
+        /* Custom Parallax Effect Classes */
+        .parallax-bg {
+            will-change: transform;
+        }
+
+        /* Section Spacing Refinement */
+        /* Handled via GSAP */
+        .parallax-slow,
+        .parallax-medium,
+        .parallax-fast {
+            will-change: transform;
+        }
+
+        .our-philosophy-container {
+            max-width: 1400px !important;
+            padding-left: clamp(1.5rem, 5vw, 6rem) !important;
+            padding-right: clamp(1.5rem, 5vw, 6rem) !important;
+        }
+
+        /* ============================
+           ELEMENTAL CARD ANIMATIONS
+        ============================ */
+
+        #philosophy,
+        #philosophy * {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        /* Vata - Wind: sweeps in from far left with slight rotation */
+        @keyframes vata-wind {
+            0% {
+                opacity: 0;
+                transform: translateX(-120px) rotate(-6deg) skewX(-4deg);
+                filter: blur(4px);
+            }
+
+            60% {
+                opacity: 1;
+                transform: translateX(8px) rotate(1deg) skewX(0deg);
+                filter: blur(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        /* Pitta - Fire: surges up from below with a scale burst */
+        @keyframes pitta-fire {
+            0% {
+                opacity: 0;
+                transform: translateY(80px) scale(0.88);
+                filter: blur(3px);
+            }
+
+            55% {
+                opacity: 1;
+                transform: translateY(-10px) scale(1.04);
+                filter: blur(0);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Kapha - Earth/Water: flows in from right, heavy and grounded */
+        @keyframes kapha-earth {
+            0% {
+                opacity: 0;
+                transform: translateX(100px) translateY(12px) scale(0.95);
+                filter: blur(3px);
+            }
+
+            65% {
+                opacity: 1;
+                transform: translateX(-6px) translateY(-3px) scale(1.01);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0) translateY(0) scale(1);
+            }
+        }
+
+        /* Animation classes applied by GSAP on scroll */
+        .vata-animate {
+            animation: vata-wind 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .pitta-animate {
+            animation: pitta-fire 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+        }
+
+        .kapha-animate {
+            animation: kapha-earth 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.28s both;
+        }
+
+        /* Cards start hidden before animation triggers */
+        .dosha-card-wrapper {
+            opacity: 0;
+        }
+
+        .dosha-card-wrapper.animated {
+            opacity: 1;
+        }
+
+        /* Fire Hover Effect for Pitta */
+        @keyframes fire-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(239, 68, 68, 0.4), 0 0 40px rgba(239, 68, 68, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(239, 68, 68, 0.6), 0 0 70px rgba(239, 68, 68, 0.3);
+            }
+        }
+
+        @keyframes ember-rise {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-100px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        .pitta-card-hover:hover {
+            animation: fire-glow 2s infinite alternate ease-in-out;
+        }
+
+        /* Vata (Air) Hover */
+        @keyframes wind-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), 0 0 40px rgba(59, 130, 246, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(59, 130, 246, 0.6), 0 0 70px rgba(59, 130, 246, 0.3);
+            }
+        }
+
+        @keyframes wind-drift {
+            0% {
+                transform: translateX(0) translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: translateX(100px) translateY(-50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .vata-card-hover:hover {
+            animation: wind-glow 2.5s infinite alternate ease-in-out;
+        }
+
+        /* Kapha (Earth/Water) Hover */
+        @keyframes water-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(34, 197, 94, 0.4), 0 0 40px rgba(34, 197, 94, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 0 35px rgba(34, 197, 94, 0.6), 0 0 70px rgba(34, 197, 94, 0.3);
+            }
+        }
+
+        @keyframes water-ripple {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.6;
+            }
+
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .kapha-card-hover:hover {
+            animation: water-glow 3s infinite alternate ease-in-out;
+        }
+
+        /* ===============================
+   🌌 BACKGROUND CINEMATIC EFFECT
+================================ */
+        #philosophy::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1526401485004-2aa7c2e5c7c9?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            z-index: 0;
+            transition: all 0.8s ease;
+            opacity: 0.9;
+        }
+
+        /* Dark overlay */
+        #philosophy::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 0;
+        }
+
+        /* Background reacts on hover */
+        #philosophy:hover::before {
+            transform: scale(1.08);
+            filter: blur(6px);
+        }
+
+        /* Keep your content above */
+        #philosophy .container {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* ===============================
+   🎯 CARD SPOTLIGHT SYSTEM
+================================ */
+
+        /* Default: soften cards slightly */
+        #philosophy .dosha-card-wrapper {
+            transition: all 0.5s ease;
+        }
+
+        /* When hovering section → blur all cards */
+        #philosophy:hover .dosha-card-wrapper {
+            opacity: 0.4;
+            transform: scale(0.95);
+            filter: blur(3px);
+        }
+
+        /* Active card */
+        #philosophy .dosha-card-wrapper:hover {
+            opacity: 1 !important;
+            transform: scale(1.08) translateY(-12px);
+            filter: blur(0) !important;
+            z-index: 50;
+        }
+
+        /* ===============================
+   ✨ CARD PREMIUM EFFECT
+================================ */
+
+        #philosophy .dosha-card-wrapper .group {
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        /* Glow on hover */
+        #philosophy .dosha-card-wrapper:hover .group {
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(16px);
+        }
+
+        /* ===============================
+   🎯 ICON FOCUS EFFECT
+================================ */
+
+        /* Smooth icon animation */
+        #philosophy .dosha-card-wrapper .group i {
+            transition: all 0.5s ease;
+        }
+
+        /* Icon becomes focal point */
+        #philosophy .dosha-card-wrapper:hover i {
+            transform: scale(1.2);
+        }
+
+        /* ===============================
+   🌟 OPTIONAL: CENTER LIGHT (luxury feel)
+================================ */
+
+        #philosophy {
+            --x: 50%;
+            --y: 50%;
+        }
+
+        #philosophy::marker {
+            display: none;
+        }
+
+        #philosophy:hover::after {
+            background: radial-gradient(circle at var(--x) var(--y),
+                    rgba(255, 255, 255, 0.15),
+                    rgba(0, 0, 0, 0.5));
+        }
+    </style>
+</head>
+
+<body class="font-body overflow-hidden">
+    <script>
+        // Use exact logic to dynamically load header & footer
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('header.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.body.insertAdjacentHTML('afterbegin', data);
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const scriptTag = doc.querySelector('script');
+                    if (scriptTag) {
+                        const scriptElement = document.createElement('script');
+                        scriptElement.textContent = scriptTag.textContent;
+                        document.head.appendChild(scriptElement);
+                    }
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('footer.html')
+                .then(res => res.text())
+                .then(data => document.body.insertAdjacentHTML('beforeend', data));
+        });
+    </script>
+
+
+
+    <!-- Progress Bar -->
+    <div id="scroll-progress"
+        class="fixed top-0 left-0 w-0 h-1 bg-ayur-orange z-[10001] transition-all duration-100 ease-out"></div>
+
+
+    <!-- PRELOADER -->
+    <div id="preloader" class="fixed inset-0 z-[9999] bg-[#fdfbf7] flex items-center justify-center flex-col">
+        <h1 id="shlok-text"
+            class="text-2xl md:text-5xl lg:text-6xl font-heading text-ayur-darkGreen font-bold text-center px-6 leading-[1.8] md:leading-[2] max-w-5xl">
+            <!-- GSAP will inject characters here -->
+        </h1>
+        <div class="absolute bottom-24 md:bottom-32 left-1/2 transform -translate-x-1/2 text-ayur-orange text-2xl md:text-3xl font-medium tracking-[0.5em] uppercase opacity-100 flex gap-2 w-max"
+            id="shlok-translate">
+            <!-- GSAP will inject English characters here dynamically -->
+        </div>
+    </div>
+
+    <section id="hero" class="flex items-center justify-center text-center relative overflow-hidden">
+        <video autoplay muted loop playsinline id="hero-video">
+            <!-- Using a serene, nature/spa related stock video. You can replace the src with your local video file path later (e.g. src="assets/videos/ayurveda.mp4") -->
+            <source src="Flow_delpmaspu_.mp4" type="video/mp4">
+        </video>
+        <div class="section-overlay bg-gradient-to-b from-white/30 to-white/70 "></div>
+        <div class="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-20 mt-10">
+            <h1 class="font-heading font-extrabold mb-4 drop-shadow-sm text-ayur-darkGreen gsap-hero hero-title">
+                Restoring Balance,
+                Reviving Life.</h1>
+            <h2 class="text-2xl md:text-3xl mb-4 font-bold text-[#df7e29] drop-shadow-sm gsap-hero">Authentic Ayurveda.
+                Modern
+                Expertise.</h2>
+            <p class="mb-10 text-gray-800 font-medium drop-shadow-sm gsap-hero hero-subtitle">Experience
+                Gandhinagar’s Most Trusted Ayurvedic
+                Care.</p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4 gsap-hero">
+                <a href="javascript:void(0)" onclick="openConsultModal()"
+                    class="cta-btn shadow-lg text-white px-8 py-4 rounded-full font-bold text-lg inline-block">Book Your
+                    Consultation</a>
+                <a href="#services"
+                    class="border-2 border-ayur-darkGreen shadow-lg hover:bg-ayur-darkGreen hover:text-white transition-colors text-ayur-darkGreen px-8 py-4 rounded-full font-bold text-lg inline-block">Explore
+                    Our Treatments</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OUR PHILOSOPHY SECTION - INTERACTIVE MAP -->
+    <section id="philosophy"
+        class="bg-[#050505] relative w-full h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+
+        <!-- Interactive Map Styles -->
+        <style>
+            /* Override old #philosophy before/after styles */
+            #philosophy::before,
+            #philosophy::after {
+                display: none !important;
+            }
+
+            .harmony-bg {
+                position: absolute;
+                inset: 0;
+                background: url('../../1.png') center/cover no-repeat;
+                opacity: 1;
+                transition: all 1.2s ease-out;
+            }
+
+            #philosophy:hover .harmony-bg {
+                transform: scale(1.02);
+                /* Subtle zoom */
+            }
+
+            .hotspot-wrapper {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                z-index: 20;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Subtle Transparent Plus Marker */
+            .hotspot-marker {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.4);
+                background: rgba(0, 0, 0, 0.4);
+                backdrop-filter: blur(4px);
+                -webkit-backdrop-filter: blur(4px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+                position: absolute;
+                z-index: 2;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+                animation: markerPulse 2s infinite;
+            }
+
+            @keyframes markerPulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 15px rgba(255, 255, 255, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+                }
+            }
+
+            /* Animated Energy Flares for Background Elements */
+            @keyframes elementBreathe {
+                0% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                    filter: blur(20px);
+                }
+
+                50% {
+                    opacity: 0.65;
+                    transform: scale(1.05);
+                    filter: blur(30px);
+                }
+
+                100% {
+                    opacity: 0.3;
+                    transform: scale(1);
+                    filter: blur(20px);
+                }
+            }
+
+            .energy-flare {
+                position: absolute;
+                width: 400px;
+                height: 400px;
+                border-radius: 50%;
+                pointer-events: none;
+                mix-blend-mode: screen;
+                z-index: 5;
+                animation: elementBreathe 5s infinite ease-in-out;
+                margin-top: -200px;
+                margin-left: -200px;
+            }
+
+            .flare-vata {
+                background: radial-gradient(circle, rgba(160, 210, 250, 0.4) 0%, transparent 60%);
+                top: 45%;
+                left: 16%;
+                animation-delay: 0s;
+            }
+
+            .flare-pitta {
+                background: radial-gradient(circle, rgba(255, 100, 50, 0.45) 0%, transparent 60%);
+                top: 50%;
+                left: 50%;
+                animation-delay: -1.6s;
+            }
+
+            .flare-kapha {
+                background: radial-gradient(circle, rgba(100, 200, 150, 0.35) 0%, transparent 60%);
+                top: 50%;
+                left: 84%;
+                animation-delay: -3.3s;
+            }
+
+            .hotspot-wrapper:hover .hotspot-marker {
+                transform: scale(1.15);
+                background: rgba(223, 126, 41, 0.6);
+                border-color: rgba(223, 126, 41, 0.8);
+            }
+
+            /* Thin CSS Plus */
+            .hotspot-marker::before,
+            .hotspot-marker::after {
+                content: '';
+                position: absolute;
+                background-color: rgba(255, 255, 255, 0.85);
+                transition: transform 0.4s ease;
+            }
+
+            .hotspot-marker::before {
+                width: 12px;
+                height: 1px;
+            }
+
+            .hotspot-marker::after {
+                width: 1px;
+                height: 12px;
+            }
+
+            .hotspot-wrapper:hover .hotspot-marker::before,
+            .hotspot-wrapper:hover .hotspot-marker::after {
+                transform: rotate(180deg);
+                opacity: 1;
+            }
+
+            /* Hotspot Modal Styles */
+            #element-modal {
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+            }
+
+            .modal-active {
+                opacity: 1 !important;
+                pointer-events: auto !important;
+            }
+
+            .modal-active-inner {
+                transform: scale(1) !important;
+            }
+
+            .benefit-list {
+                margin-top: 15px;
+                color: #4b5563;
+                font-size: 1.15rem;
+                padding-left: 24px;
+                list-style-type: disc;
+            }
+
+            .benefit-list li {
+                margin-bottom: 8px;
+                line-height: 1.6;
+            }
+
+            .benefit-list li::marker {
+                color: #df7e29;
+            }
+
+            /* Removed connecting lines and active DOSHA specific coloring for minimalist AP look */
+
+            /* Title Positioning */
+            .harmony-title-overlay {
+                position: absolute;
+                top: max(15%, 120px);
+                left: 0;
+                width: 100%;
+                text-align: center;
+                z-index: 10;
+                pointer-events: none;
+            }
+        </style>
+
+        <div class="harmony-bg"></div>
+
+        <div class="relative w-full h-full max-w-7xl mx-auto z-10">
+
+            <!-- Section Title -->
+            <div class="harmony-title-overlay">
+                <span class="text-white font-bold tracking-[0.3em] uppercase text-sm md:text-base mb-2 block">
+                    Our Philosophy
+                </span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-wide text-[#df7e29]">
+                    Harmony of Elements
+                </h2>
+            </div>
+
+            <!-- Animated Overlays for Background Elements -->
+            <div class="energy-flare flare-vata"></div>
+            <div class="energy-flare flare-pitta"></div>
+            <div class="energy-flare flare-kapha"></div>
+
+            <!-- VATA (AIR / SPACE) -->
+            <!-- Positioned freely in top left quadrant -->
+            <a href="javascript:void(0)" class="hotspot-wrapper map-vata" style="top: 45%; left: 22%;"
+                onclick="openElementModal('vata')">
+                <div class="hotspot-marker"></div>
+            </a>
+
+            <!-- PITTA (FIRE / WATER) -->
+            <!-- Positioned centrally but lower -->
+            <a href="javascript:void(0)" class="hotspot-wrapper map-pitta" style="top: 75%; left: 50%;"
+                onclick="openElementModal('pitta')">
+                <div class="hotspot-marker"></div>
+            </a>
+
+            <!-- KAPHA (EARTH / WATER) -->
+            <!-- Positioned freely in top right quadrant -->
+            <a href="javascript:void(0)" class="hotspot-wrapper map-kapha" style="top: 50%; left: 75%;"
+                onclick="openElementModal('kapha')">
+                <div class="hotspot-marker"></div>
+            </a>
+
+            <!-- Element Modal -->
+            <div id="element-modal"
+                class="fixed inset-0 z-[100] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 bg-black/80">
+                <div id="element-modal-inner"
+                    class="bg-[#fdfbf7] border border-gray-200 rounded-2xl w-[95%] max-w-6xl h-auto md:h-[650px] flex flex-col md:flex-row shadow-[0_40px_80px_rgba(0,0,0,0.4)] transform scale-95 transition-transform duration-500 overflow-hidden relative">
+                    <!-- Close Button -->
+                    <button onclick="closeElementModal()"
+                        class="absolute top-6 right-6 text-gray-500 hover:text-[#111] z-50 transition-colors bg-white/60 hover:bg-white/90 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <!-- Left: Image -->
+                    <div class="w-full md:w-1/2 h-64 md:h-full relative overflow-hidden">
+                        <img id="modal-img" src="" alt="Element Image" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Right: Content -->
+                    <div
+                        class="w-full md:w-1/2 p-10 md:p-14 lg:p-16 flex flex-col justify-center relative bg-[#fdfbf7]">
+                        <h3 id="modal-title"
+                            class="font-heading text-5xl md:text-7xl lg:text-8xl text-[#df7e29] font-bold tracking-wide uppercase">
+                        </h3>
+                        <span id="modal-subtitle"
+                            class="text-gray-500 text-lg md:text-xl font-medium tracking-[0.25em] uppercase mt-4"></span>
+                        <p id="modal-desc" class="text-gray-700 mt-8 leading-[1.8] text-lg md:text-xl"></p>
+                        <span
+                            class="text-gray-900 font-bold text-lg md:text-xl mt-10 uppercase tracking-widest block">Benefits:</span>
+                        <ul id="modal-benefits" class="benefit-list font-body mt-5">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                const elementsData = {
+                    vata: {
+                        img: 'Gemini_Generated_Image_6tmevs6tmevs6tme.png',
+                        title: 'VATA',
+                        subtitle: 'Air & Space',
+                        desc: 'Vata governs movement, breathing, and the nervous system. Balanced, it brings creativity and vitality.',
+                        benefits: ['Mental clarity and alertness', 'Healthy digestion', 'Strong immunity']
+                    },
+                    pitta: {
+                        img: 'Gemini_Generated_Image_sr0byusr0byusr0b.png',
+                        title: 'PITTA',
+                        subtitle: 'Fire & Water',
+                        desc: 'Pitta controls metabolism and energy production. It drives intellect, digestion, and ambition.',
+                        benefits: ['Optimized metabolism', 'Sharp focus and intellect', 'Healthy internal heat']
+                    },
+                    kapha: {
+                        img: 'Gemini_Generated_Image_utvfsqutvfsqutvf.png',
+                        title: 'KAPHA',
+                        subtitle: 'Earth & Water',
+                        desc: 'Kapha provides structure, strength, and immunity. It forms the body\'s tissues and lubrication.',
+                        benefits: ['Steady endurance', 'Strong, healthy joints', 'Emotional calmness']
+                    }
+                };
+
+                function openElementModal(el) {
+                    const data = elementsData[el];
+                    document.getElementById('modal-img').src = data.img;
+                    document.getElementById('modal-title').textContent = data.title;
+                    document.getElementById('modal-subtitle').textContent = data.subtitle;
+                    document.getElementById('modal-desc').textContent = data.desc;
+
+                    const benefitsList = document.getElementById('modal-benefits');
+                    benefitsList.innerHTML = '';
+                    data.benefits.forEach(b => {
+                        const li = document.createElement('li');
+                        li.textContent = b;
+                        benefitsList.appendChild(li);
+                    });
+
+                    document.getElementById('element-modal').classList.add('modal-active');
+                    document.getElementById('element-modal-inner').classList.add('modal-active-inner');
+                }
+
+                function closeElementModal() {
+                    document.getElementById('element-modal').classList.remove('modal-active');
+                    document.getElementById('element-modal-inner').classList.remove('modal-active-inner');
+                }
+            </script>
+
+        </div>
+    </section>
+
+    <!-- 2. WELCOME MESSAGE -->
+    <section id="welcome"
+        class="welcome-bg relative overflow-hidden flex flex-col justify-center min-h-screen py-16 lg:py-20">
+        <div
+            class="container max-w-[1400px] mx-auto px-6 xl:px-16 items-center flex flex-col lg:flex-row justify-between gap-16 lg:gap-24 xl:gap-32">
+            <!-- Left Side: Content -->
+            <div class="w-full lg:w-[42%] text-left">
+                <span
+                    class="text-ayur-orange font-bold tracking-widest uppercase text-[15px] md:text-[18px] gsap-welcome block mb-4">Welcome
+                    to Neervighna</span>
+                <h2 class="font-heading font-bold text-[#111] mt-2 mb-8 gsap-welcome leading-[1.1] section-title">
+                    A Life Free From<br>Obstacles
+                </h2>
+                <div class="w-24 h-[3px] bg-ayur-orange mb-12 gsap-welcome"></div>
+
+                <div
+                    class="text-[18px] md:text-[20px] lg:text-[22px] text-gray-500 space-y-8 leading-[1.8] gsap-welcome font-light">
+                    <p>At Neervighna Ayurveda, we believe true wellness is a state of <strong
+                            class="text-gray-800 font-medium">nirvighna</strong> — a life free from obstacles.</p>
+                    <p>Located in the heart of Gandhinagar, our clinic blends centuries-old Ayurvedic wisdom with modern
+                        clinical insight to offer personalized, holistic healing.</p>
+                    <p>Under the guidance of <strong class="text-gray-800 font-medium">Dr. Niharsinh Zankat
+                            (BAMS)</strong>, each treatment restores balance, removes blockages, and rejuvenates your
+                        mind, body, and spirit.</p>
+                </div>
+            </div>
+
+            <!-- Right Side: DR. Image -->
+            <div class="w-full lg:w-[48%] relative gsap-welcome py-10 flex justify-center lg:justify-end">
+                <!-- Decorative elements -->
+                <div
+                    class="absolute -top-16 right-10 w-32 md:w-40 h-32 md:h-40 rounded-full border-[1.5px] border-[#8cb369]/40 z-0 pointer-events-none">
+                </div>
+                <div
+                    class="absolute -bottom-8 left-10 w-24 md:w-32 h-24 md:h-32 rounded-full bg-[#8cb369]/10 z-0 pointer-events-none">
+                </div>
+
+                <!-- Doctor Image Frame -->
+                <div class="relative z-10 w-full max-w-[400px] md:max-w-md xl:max-w-[500px]">
+                    <!-- The Arch shape -->
+                    <div
+                        class="rounded-t-full rounded-b-[48px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] ring-[16px] ring-white bg-white group cursor-pointer relative">
+                        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2000&auto=format&fit=crop"
+                            alt="Dr. Niharsinh Zankat"
+                            class="w-full aspect-[4/5] object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-[#8cb369]/20 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        </div>
+                    </div>
+
+                    <!-- Floating Expert Badge -->
+                    <div
+                        class="absolute -bottom-6 -left-8 md:-left-16 bg-white py-4 px-6 md:px-8 rounded-2xl shadow-[0_15px_30px_rgba(0,0,0,0.08)] flex items-center gap-4 z-20 transform transition-transform hover:-translate-y-2 cursor-pointer border border-gray-100">
+                        <div
+                            class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#8cb369]/10 flex items-center justify-center text-[#8cb369] text-xl md:text-2xl">
+                            <i class="fa-solid fa-stethoscope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm md:text-base tracking-tight">Expert Care</h4>
+                            <span class="text-[11px] md:text-xs text-gray-400 font-medium tracking-wide">BAMS
+                                Certified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+    </section>
+    <!-- 3. SIGNATURE SERVICES PREVIEW -->
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signature Services</title>
+
+        <!-- Font Awesome -->
+        <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap');
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: 'Inter', system-ui, sans-serif;
+            }
+
+            #services {
+                background: url('https://images.unsplash.com/photo-1543881518-a6bc2bd0716c?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+                position: relative;
+                padding: 120px 0 100px;
+                overflow: hidden;
+            }
+
+            #services::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: rgba(253, 251, 247, 0.92);
+                backdrop-filter: blur(4px);
+                z-index: 1;
+            }
+
+            .container {
+                max-width: 1280px;
+                margin: 0 auto;
+                padding: 0 2rem;
+                position: relative;
+                z-index: 2;
+            }
+
+            .text-center {
+                text-align: center;
+            }
+
+            .badge {
+                color: #8cb369;
+                font-weight: 700;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 3.2rem;
+                font-weight: 700;
+                color: #1a202c;
+                margin-top: 12px;
+            }
+
+            .service-card {
+                background: #fdfbf7;
+                padding: 2.8rem 2rem;
+                border-radius: 1.75rem;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+                border: 1px solid rgba(140, 179, 105, 0.12);
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                height: 100%;
+                text-align: center;
+            }
+
+            .service-card:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 25px 60px rgba(140, 179, 105, 0.22);
+                border-color: rgba(140, 179, 105, 0.4);
+            }
+
+            .flip-container {
+                perspective: 1200px;
+                height: 165px;
+                margin-bottom: 1.8rem;
+            }
+
+            .flip-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                transition: transform 0.85s cubic-bezier(0.23, 1, 0.32, 1);
+                transform-style: preserve-3d;
+            }
+
+            .service-card:hover .flip-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-front,
+            .flip-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 1.25rem;
+                overflow: hidden;
+            }
+
+            .flip-front {
+                background: #f8f4eb;
+                font-size: 5.2rem;
+                color: #8cb369;
+            }
+
+            @keyframes iconFloat {
+                0% {
+                    transform: translateY(0px);
+                }
+
+                50% {
+                    transform: translateY(-10px);
+                }
+
+                100% {
+                    transform: translateY(0px);
+                }
+            }
+
+            .flip-front i {
+                animation: iconFloat 4s ease-in-out infinite;
+                display: inline-block;
+            }
+
+            .flip-back {
+                transform: rotateY(180deg);
+            }
+
+            .service-image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s ease;
+            }
+
+            .service-card:hover .service-image {
+                transform: scale(1.08);
+            }
+
+            .service-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 1.65rem;
+                font-weight: 700;
+                color: #1a202c;
+                margin-bottom: 1rem;
+            }
+
+            .service-desc {
+                color: #64748b;
+                line-height: 1.7;
+                font-size: 1.02rem;
+            }
+
+            .cta-button {
+                display: inline-flex;
+                align-items: center;
+                gap: 12px;
+                background: #8cb369;
+                color: white;
+                padding: 16px 32px;
+                border-radius: 9999px;
+                font-weight: 700;
+                font-size: 1.15rem;
+                text-decoration: none;
+                transition: all 0.4s ease;
+                box-shadow: 0 10px 25px rgba(140, 179, 105, 0.3);
+                margin-top: 3rem;
+            }
+
+            .cta-button:hover {
+                background: #729454;
+                transform: translateY(-4px);
+                box-shadow: 0 15px 35px rgba(140, 179, 105, 0.4);
+            }
+
+            @media (max-width: 768px) {
+                .section-title {
+                    font-size: 2.6rem;
+                }
+
+                .flip-container {
+                    height: 145px;
+                }
+
+                .flip-front {
+                    font-size: 4.5rem;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <section id="services">
+            <div class="container">
+
+                <div class="text-center mb-16">
+                    <span class="badge">Healing Pathways</span>
+                    <h2 class="section-title">Signature Services</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                    <!-- Card 1: Dosha Analysis -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop"
+                                        alt="Dosha Analysis" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Dosha Analysis</h3>
+                        <p class="service-desc">
+                            Detailed mind-body constitution assessment. Discover your unique nature and find the perfect
+                            path to balance.
+                        </p>
+                    </div>
+
+                    <!-- Card 2: Panchakarma Detox -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-droplet"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop"
+                                        alt="Panchakarma Detox" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Panchakarma Detox</h3>
+                        <p class="service-desc">
+                            Traditional five-fold purification process to eliminate toxins and deeply rejuvenate your
+                            entire system.
+                        </p>
+                    </div>
+
+                    <!-- Card 3: Herbal Prescriptions -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-mortar-pestle"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1617897903246-719242758050?q=80&w=800&auto=format&fit=crop"
+                                        alt="Herbal Prescriptions" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Herbal Prescriptions</h3>
+                        <p class="service-desc">
+                            Custom-formulated classical Ayurvedic medicines to target specific health concerns
+                            naturally.
+                        </p>
+                    </div>
+
+                    <!-- Card 4: Diet & Lifestyle -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-apple-whole"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=800&auto=format&fit=crop"
+                                        alt="Diet & Lifestyle" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Diet & Lifestyle</h3>
+                        <p class="service-desc">
+                            Personalized nutritional guidance and daily routines tailored specifically for your body
+                            type.
+                        </p>
+                    </div>
+
+                    <!-- Card 5: Stress Management -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-brain"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=800&auto=format&fit=crop"
+                                        alt="Stress Management" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Stress Management</h3>
+                        <p class="service-desc">
+                            Calming therapies and natural supplements designed to restore peace and mental clarity.
+                        </p>
+                    </div>
+
+                    <!-- Card 6: Shirodhara Flow -->
+                    <div class="service-card">
+                        <div class="flip-container">
+                            <div class="flip-inner">
+                                <div class="flip-front">
+                                    <i class="fa-solid fa-oil-can"></i>
+                                </div>
+                                <div class="flip-back">
+                                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop"
+                                        alt="Shirodhara Flow" class="service-image">
+                                </div>
+                            </div>
+                        </div>
+                        <h3 class="service-title">Shirodhara Flow</h3>
+                        <p class="service-desc">
+                            Soothing continuous warm oil flow on the forehead to calm the mind and soothe the nervous
+                            system.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="text-center">
+                    <a href="service.html" class="cta-button">
+                        View More Services
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Fixed WhatsApp Icon -->
+        <a href="https://wa.me/918780417797" target="_blank"
+            class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-[32px] shadow-lg hover:scale-110 transition-transform duration-300">
+            <i class="fa-brands fa-whatsapp"></i>
+        </a>
+    </body>
+
+    </html>
+
+    <!-- 4. WHY CHOOSE NEERVIGHNA? -->
+    <section id="why-choose" class="bg-[#FFF8F0] relative flex flex-col justify-center py-24 lg:py-32">
+        <div class="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-10 text-gray-800">
+            <div class="text-center mb-16">
+                <h2 class="font-heading text-4xl md:text-5xl font-bold mb-6">Why Choose Neervighna?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Experience authenticity, expertise, and personalized care
+                    like never before.</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                <!-- Left Side: Image Frame -->
+                <div class="w-full lg:w-1/2 flex justify-center lg:justify-start xl:pl-8">
+                    <div
+                        class="relative w-full max-w-[650px] bg-white rounded-tl-[72px] rounded-br-[72px] rounded-tr-[20px] rounded-bl-[20px] shadow-[0_20px_50px_rgba(0,0,0,0.08)] p-[12px] gsap-why">
+
+                        <!-- Inner beige border line overlay -->
+                        <div
+                            class="absolute inset-[10px] border border-[#c1af9c] rounded-tl-[64px] rounded-br-[64px] rounded-tr-[14px] rounded-bl-[14px] z-20 pointer-events-none">
+                        </div>
+
+                        <!-- The Image itself -->
+                        <div
+                            class="relative w-full h-[400px] md:h-[500px] lg:h-[550px] rounded-tl-[62px] rounded-br-[62px] rounded-tr-[12px] rounded-bl-[12px] overflow-hidden z-10">
+                            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop"
+                                alt="Why Choose Neervighna" class="w-full h-full object-cover" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side: Content Points -->
+                <div class="w-full lg:w-1/2 flex flex-col gap-6">
+                    <!-- Point 1 -->
+                    <div
+                        class="group bg-white/60 hover:bg-white backdrop-blur-sm px-6 py-6 md:px-8 rounded-[32px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(223,126,41,0.1)] flex items-center gap-6 md:gap-8 border border-white/80 transition-all duration-400 hover:-translate-y-1 cursor-pointer">
+                        <div
+                            class="w-[76px] h-[76px] rounded-full bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] group-hover:shadow-[0_10px_30px_rgba(223,126,41,0.15)] flex items-center justify-center text-[#df7e29] text-[28px] flex-shrink-0 transition-transform duration-400 group-hover:scale-110">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3
+                                class="font-heading text-[20px] md:text-[22px] font-extrabold text-[#1a202c] mb-1 tracking-wide group-hover:text-[#df7e29] transition-colors duration-300">
+                                Authentic & Classical Ayurveda</h3>
+                            <p class="text-gray-500 font-medium text-[15px] leading-[1.6]">Genuine ancient treatments
+                                perfectly aligned with timeless traditions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 2 -->
+                    <div
+                        class="group bg-white/60 hover:bg-white backdrop-blur-sm px-6 py-6 md:px-8 rounded-[32px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(223,126,41,0.1)] flex items-center gap-6 md:gap-8 border border-white/80 transition-all duration-400 hover:-translate-y-1 cursor-pointer">
+                        <div
+                            class="w-[76px] h-[76px] rounded-full bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] group-hover:shadow-[0_10px_30px_rgba(223,126,41,0.15)] flex items-center justify-center text-[#df7e29] text-[28px] flex-shrink-0 transition-transform duration-400 group-hover:scale-110">
+                            <i class="fa-solid fa-user-doctor"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3
+                                class="font-heading text-[20px] md:text-[22px] font-extrabold text-[#1a202c] mb-1 tracking-wide group-hover:text-[#df7e29] transition-colors duration-300">
+                                Expert-Led Care</h3>
+                            <p class="text-gray-500 font-medium text-[15px] leading-[1.6]">Guided completely by
+                                experienced, certified BAMS Ayurvedic physicians.</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 3 -->
+                    <div
+                        class="group bg-white/60 hover:bg-white backdrop-blur-sm px-6 py-6 md:px-8 rounded-[32px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(223,126,41,0.1)] flex items-center gap-6 md:gap-8 border border-white/80 transition-all duration-400 hover:-translate-y-1 cursor-pointer">
+                        <div
+                            class="w-[76px] h-[76px] rounded-full bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] group-hover:shadow-[0_10px_30px_rgba(223,126,41,0.15)] flex items-center justify-center text-[#df7e29] text-[28px] flex-shrink-0 transition-transform duration-400 group-hover:scale-110">
+                            <i class="fa-solid fa-hands-holding-circle"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3
+                                class="font-heading text-[20px] md:text-[22px] font-extrabold text-[#1a202c] mb-1 tracking-wide group-hover:text-[#df7e29] transition-colors duration-300">
+                                Personalized Healing</h3>
+                            <p class="text-gray-500 font-medium text-[15px] leading-[1.6]">Holistic plans uniquely
+                                crafted for your specific body and lifestyle.</p>
+                        </div>
+                    </div>
+
+                    <!-- Point 4 -->
+                    <div
+                        class="group bg-white/60 hover:bg-white backdrop-blur-sm px-6 py-6 md:px-8 rounded-[32px] shadow-[0_8px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(223,126,41,0.1)] flex items-center gap-6 md:gap-8 border border-white/80 transition-all duration-400 hover:-translate-y-1 cursor-pointer">
+                        <div
+                            class="w-[76px] h-[76px] rounded-full bg-white shadow-[0_10px_30px_rgba(0,0,0,0.06)] group-hover:shadow-[0_10px_30px_rgba(223,126,41,0.15)] flex items-center justify-center text-[#df7e29] text-[28px] flex-shrink-0 transition-transform duration-400 group-hover:scale-110">
+                            <i class="fa-solid fa-bowl-food"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3
+                                class="font-heading text-[20px] md:text-[22px] font-extrabold text-[#1a202c] mb-1 tracking-wide group-hover:text-[#df7e29] transition-colors duration-300">
+                                Holistic & Natural</h3>
+                            <p class="text-gray-500 font-medium text-[15px] leading-[1.6]">Using pure, organic herbs to
+                                heal you naturally from the inside out.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- 5. PATIENT TESTIMONIALS -->
+    <style>
+        @keyframes float-up-down {
+
+            0%,
+            100% {
+                transform: translateY(25px);
+            }
+
+            50% {
+                transform: translateY(-25px);
+            }
+        }
+
+        @keyframes float-down-up {
+
+            0%,
+            100% {
+                transform: translateY(-25px);
+            }
+
+            50% {
+                transform: translateY(25px);
+            }
+        }
+
+        @keyframes blob {
+            0% {
+                transform: translate(0px, 0px) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -50px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+
+            100% {
+                transform: translate(0px, 0px) scale(1);
+            }
+        }
+
+        .anim-wrapper-1 {
+            animation: float-up-down 15s ease-in-out infinite;
+        }
+
+        .anim-wrapper-2 {
+            animation: float-down-up 15s ease-in-out infinite;
+        }
+
+        .animate-blob {
+            animation: blob 7s infinite;
+        }
+
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
+        }
+
+        /* Hide scrollbar for the horizontal scroll area */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Pause the float animation on hover and bring it to the very front */
+        .anim-wrapper-1:hover,
+        .anim-wrapper-2:hover {
+            animation-play-state: paused;
+            z-index: 50;
+        }
+
+        .active-dot {
+            background-color: #df7e29 !important;
+            transform: scale(1.4);
+            box-shadow: 0 0 10px rgba(223, 126, 41, 0.4);
+        }
+
+        .testimonial-dot.active {
+            background-color: #df7e29 !important;
+            transform: scale(1.4);
+        }
+    </style>
+    <section id="testimonials"
+        class="bg-[#fdfbf7] relative overflow-hidden flex flex-col justify-center py-12 lg:py-16">
+        <div class="container mx-auto px-8 md:px-16 lg:px-24 xl:px-32 relative z-10">
+            <!-- Header area -->
+            <div class="mb-4 md:mb-6 text-center">
+                <span class="text-[#df7e29] font-medium text-sm block mb-2 tracking-[0.2em] uppercase">Rating &
+                    Reviews</span>
+                <h2 class="font-heading text-4xl md:text-5xl lg:text-5xl font-extrabold text-gray-900 tracking-tight">
+                    Trusted by people</h2>
+            </div>
+        </div>
+
+        <!-- 5 Cards Layout perfectly bleeding securely to allow horizontal scrolling -->
+        <div class="relative w-full z-10 px-4 md:px-8 max-w-[1900px] mx-auto">
+            <div id="testimonials-scroll"
+                class="flex overflow-x-auto hide-scrollbar snap-x snap-mandatory justify-start items-stretch gap-6 md:gap-8 pb-8 pt-8 w-full">
+
+
+                <!-- Card 1 -->
+                <div class="snap-center shrink-0 anim-wrapper-1 relative z-10 group">
+                    <div
+                        class="testimonial-card relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 w-[320px] lg:w-[380px] xl:w-[420px] text-left shadow-[0_8px_32px_rgba(31,38,135,0.07)] flex flex-col justify-between min-h-[380px] h-full transition-all duration-[400ms] group-hover:scale-[1.12] group-hover:bg-white/70 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] cursor-pointer">
+                        <div>
+                            <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
+                            <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
+                                Within minutes the friendly sales assistant had secured me a spectacular rate of £150 at
+                                The Pullman Hotel which was right slap bang next to the M&S Bank Arena literally a 30
+                                second walk !!!
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[16px] md:text-[17px] text-gray-900 tracking-wide">Stephen A.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="snap-center shrink-0 anim-wrapper-2 relative z-10 group">
+                    <div
+                        class="testimonial-card relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 w-[320px] lg:w-[380px] xl:w-[420px] text-left shadow-[0_8px_32px_rgba(31,38,135,0.07)] flex flex-col justify-between min-h-[380px] h-full transition-all duration-[400ms] group-hover:scale-[1.12] group-hover:bg-white/70 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] cursor-pointer">
+                        <div>
+                            <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
+                            <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
+                                Super professional, organised and great to work with. These guys were invaluable on our
+                                last major project. Can't recommend enough.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[16px] md:text-[17px] text-gray-900 tracking-wide">Matt.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="snap-center shrink-0 anim-wrapper-1 relative z-10 group">
+                    <div
+                        class="testimonial-card relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 w-[320px] lg:w-[380px] xl:w-[420px] text-left shadow-[0_8px_32px_rgba(31,38,135,0.07)] flex flex-col justify-between min-h-[380px] h-full transition-all duration-[400ms] group-hover:scale-[1.12] group-hover:bg-white/70 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] cursor-pointer">
+                        <div>
+                            <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
+                            <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
+                                I recently used these guys for our company conference. They were so good and super
+                                professional. Will definitely use again.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[16px] md:text-[17px] text-gray-900 tracking-wide">Emma H.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="snap-center shrink-0 anim-wrapper-2 relative z-10 group">
+                    <div
+                        class="testimonial-card relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 w-[320px] lg:w-[380px] xl:w-[420px] text-left shadow-[0_8px_32px_rgba(31,38,135,0.07)] flex flex-col justify-between min-h-[380px] h-full transition-all duration-[400ms] group-hover:scale-[1.12] group-hover:bg-white/70 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] cursor-pointer">
+                        <div>
+                            <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
+                            <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
+                                Really useful system. We got an amazing service for our company hotel bookings for our
+                                up and coming events.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[16px] md:text-[17px] text-gray-900 tracking-wide">Barry W.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="snap-center shrink-0 anim-wrapper-1 relative z-10 group">
+                    <div
+                        class="testimonial-card relative bg-white/40 backdrop-blur-xl border border-white/60 rounded-[32px] p-8 md:p-10 w-[320px] lg:w-[380px] xl:w-[420px] text-left shadow-[0_8px_32px_rgba(31,38,135,0.07)] flex flex-col justify-between min-h-[380px] h-full transition-all duration-[400ms] group-hover:scale-[1.12] group-hover:bg-white/70 group-hover:shadow-[0_30px_60px_rgba(0,0,0,0.1)] cursor-pointer">
+                        <div>
+                            <div class="text-[#df7e29] text-[56px] leading-[0.6] font-serif mb-6 mt-2">“</div>
+                            <p class="text-[15px] md:text-[16px] leading-[1.8] mb-12 font-medium text-gray-700">
+                                Sorted accommodation in Scotland for me and were very timely and professional. Excellent
+                                rates and more discounted than anywhere else :.
+                                <b></b>
+                            </p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-[16px] md:text-[17px] text-gray-900 tracking-wide">Simon F.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- pagination dots -->
+            <div class="flex justify-center gap-3 mt-6" id="testimonial-dots">
+                <div class="testimonial-dot w-2.5 h-2.5 rounded-full bg-[#df7e29]/20 cursor-pointer transition-all duration-300 active"
+                    data-index="0"></div>
+                <div class="testimonial-dot w-2.5 h-2.5 rounded-full bg-[#df7e29]/20 cursor-pointer transition-all duration-300"
+                    data-index="1"></div>
+                <div class="testimonial-dot w-2.5 h-2.5 rounded-full bg-[#df7e29]/20 cursor-pointer transition-all duration-300"
+                    data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CLINIC HIGHLIGHTS -->
+    <section id="highlights"
+        class="bg-[#fcfbf7] relative border-t border-gray-100 overflow-hidden flex flex-col justify-center py-24 lg:py-32">
+        <!-- Optional subtle pattern background -->
+        <div class="absolute inset-0 opacity-[0.03]"
+            style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%238d765a\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
+        </div>
+
+        <div class="w-full px-4 lg:px-10 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-[#8cb369] font-bold tracking-widest uppercase text-sm">The Sanctuary</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-800 mt-4 tracking-wide">Clinic
+                    Highlights</h2>
+                <div class="w-24 h-1 bg-[#8cb369] mx-auto rounded-full mt-6"></div>
+            </div>
+
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 auto-rows-[220px] md:auto-rows-[260px] lg:auto-rows-[300px]">
+
+                <!-- Image 1: Tall (Spans 2 rows) -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 lg:col-span-1 lg:row-span-2 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Healing Environment">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl md:text-3xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Healing Environment</h3>
+                    </div>
+                </div>
+
+                <!-- Image 2: Wide (Spans 2 columns) -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 md:col-span-2 lg:col-span-2 lg:row-span-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=1200&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Classical Treatments">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl md:text-3xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Classical Treatments</h3>
+                    </div>
+                </div>
+
+                <!-- Image 3: Square -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 lg:col-span-1 lg:row-span-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1564277732-ddb5641753ce?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Pure & Chemical-Free">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Pure &<br>Chemical-Free</h3>
+                    </div>
+                </div>
+
+                <!-- Image 4: Square -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 lg:col-span-1 lg:row-span-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Expert Care">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Expert<br>Care</h3>
+                    </div>
+                </div>
+
+                <!-- Image 5: Square -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 lg:col-span-1 lg:row-span-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Personalized Plans">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Personalized Plans</h3>
+                    </div>
+                </div>
+
+                <!-- Image 6: Square -->
+                <div
+                    class="relative group rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-500 lg:col-span-1 lg:row-span-1 cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1498837167922-41c14390fb29?q=80&w=800&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-[800ms] group-hover:scale-110"
+                        alt="Consistent Follow-ups">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center p-6 backdrop-blur-[2px]">
+                        <h3
+                            class="text-white text-2xl font-bold font-heading transform translate-y-8  transition-transform duration-500 text-center tracking-wide">
+                            Consistent Follow-ups</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. FAQ SECTION -->
+    <section id="faq" class="bg-white relative overflow-hidden flex flex-col justify-center py-24 lg:py-32">
+        <!-- Subtle Pattern / Gradient -->
+        <div
+            class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-[#fff8f3] to-transparent rounded-bl-full opacity-60 pointer-events-none">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gradient-to-tr from-[#f3f9f4] to-transparent rounded-tr-full opacity-60 pointer-events-none">
+        </div>
+
+        <div class="container max-w-4xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-16">
+                <span class="text-ayur-orange font-bold tracking-widest uppercase text-sm block mb-4 gsap-faq">Got
+                    Questions?</span>
+                <h2 class="font-heading text-4xl md:text-5xl font-bold text-gray-800 tracking-wide gsap-faq">Frequently
+                    Asked Questions</h2>
+                <div class="w-24 h-1 bg-[#8cb369] mx-auto rounded-full mt-6 gsap-faq"></div>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="gsap-faq">
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>What should I expect during my first Ayurvedic consultation?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Your first consultation involves a comprehensive assessment of your physical, mental, and
+                            emotional health. Our Ayurvedic practitioners will evaluate your current lifestyle, diet,
+                            and
+                            any specific ailments to determine your unique body constitution (Prakriti) and the balance
+                            of
+                            your Doshas.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="gsap-faq">
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>Are Ayurvedic treatments safe?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Yes, when prescribed and guided by experienced practitioners, Ayurvedic treatments are
+                            highly
+                            safe. We use pure, chemical-free herbal medicines and traditional therapies that work
+                            harmoniously with your body to promote natural healing without harsh side effects.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="gsap-faq">
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>How long does it take to see results?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            Ayurveda focuses on addressing the root cause rather than just masking symptoms, which means
+                            results can vary. Some patients experience relief within a few days, while chronic
+                            conditions
+                            might take several weeks or months of consistent adherence to the prescribed diet and
+                            therapies.
+                        </div>
+                    </details>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="gsap-faq">
+                    <details
+                        class="group bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 [&_summary::-webkit-details-marker]:hidden">
+                        <summary
+                            class="flex items-center justify-between cursor-pointer p-6 font-bold text-lg text-gray-800 transition-colors group-hover:text-ayur-darkGreen">
+                            <span>Do I need to change my entire diet?</span>
+                            <span
+                                class="relative ml-4 shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-orange-50 transition-transform duration-300 group-open:rotate-180 group-open:bg-[#8cb369]">
+                                <i
+                                    class="fa-solid fa-chevron-down text-ayur-orange group-open:text-white transition-colors"></i>
+                            </span>
+                        </summary>
+                        <div
+                            class="px-6 pb-6 text-gray-600 leading-relaxed text-base border-t border-gray-50 pt-4 mt-2">
+                            We believe in gradual, sustainable changes. While diet plays a crucial role in Ayurveda, our
+                            experts will provide personalized, practical dietary advice that aligns with your lifestyle.
+                            The
+                            goal is balance, not restriction!
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Final CTA -->
+
+    <script id="spotlight-js">
+        const section = document.getElementById("philosophy");
+
+        section.addEventListener("mousemove", (e) => {
+            const rect = section.getBoundingClientRect();
+            section.style.setProperty("--x", `${e.clientX - rect.left}px`);
+            section.style.setProperty("--y", `${e.clientY - rect.top}px`);
+        });
+    </script>
+    <!-- Animations Setup -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ── 0. Lenis Smooth Scroll Initialization ──
+        window.lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1,
+            smoothTouch: false, // Better for native mobile feel
+            touchMultiplier: 2,
+            infinite: false,
+        });
+
+        // Sync Lenis with ScrollTrigger
+        window.lenis.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => {
+            window.lenis.raf(time * 1000);
+        });
+        gsap.ticker.lagSmoothing(0);
+
+        // Preloader Shloka Animation
+        const shlokChars = ["स्व", "स्थ", "स्य", " ", "स्वा", "स्थ्य", " ", "र", "क्ष", "णं", ",", "<br>", "आ", "तु", "र", "स्य", " ", "वि", "का", "र", " ", "प्र", "श", "म", "नं", " ", "च", "।"];
+        const shlokContainer = document.getElementById("shlok-text");
+
+        // Wrap each character (including spaces) in a span
+        shlokContainer.innerHTML = shlokChars.map(char => {
+            if (char === " ") return `<span class="inline-block opacity-0 translate-y-4">&nbsp;</span>`;
+            if (char === "<br>") return `<br>`;
+            return `<span class="inline-block opacity-0 translate-y-4">${char}</span>`;
+        }).join("");
+
+        // Setup English Translate text dynamically
+        const englishString = "Neervighna Ayurveda";
+        const translateContainer = document.getElementById("shlok-translate");
+
+        translateContainer.innerHTML = englishString.split("").map(char => {
+            if (char === " ") return `<span class="inline-block opacity-0 translate-y-2">&nbsp;</span>`;
+            // Applying a dramatic blur and scale to start with for an elegant revealing effect
+            return `<span class="inline-block opacity-0 translate-y-3 scale-[1.2] blur-[8px]">${char}</span>`;
+        }).join("");
+
+        // Set initial state of hero so it's hidden and blurry during preloader
+        gsap.set(".gsap-hero", { y: 50, opacity: 0, filter: "blur(15px)" });
+
+        // Check if preloader has already been shown in this session
+        const preloaderShown = sessionStorage.getItem('preloaderShown');
+
+        if (preloaderShown) {
+            // Already shown: Skip preloader and reveal content instantly
+            document.getElementById("preloader").style.display = "none";
+            document.body.classList.remove("overflow-hidden");
+            gsap.set(".gsap-hero", { y: 0, opacity: 1, filter: "blur(0px)" });
+        } else {
+            // Run preloader animation (First visit only)
+            gsap.to("#shlok-text span", {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                stagger: 0.12,
+                delay: 0.4,
+                ease: "power2.out",
+                onComplete: () => {
+                    gsap.to("#shlok-translate span", {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        filter: "blur(0px)",
+                        duration: 1.2,
+                        stagger: 0.06,
+                        ease: "power3.out",
+                        onComplete: () => {
+                            gsap.to("#preloader", {
+                                opacity: 0,
+                                filter: "blur(25px)",
+                                scale: 1.05,
+                                duration: 1.5,
+                                delay: 0.8,
+                                ease: "power2.inOut",
+                                onComplete: () => {
+                                    document.getElementById("preloader").style.display = "none";
+                                    document.body.classList.remove("overflow-hidden");
+                                    sessionStorage.setItem('preloaderShown', 'true'); // Set flag
+
+                                    gsap.to(".gsap-hero", {
+                                        y: 0,
+                                        opacity: 1,
+                                        filter: "blur(0px)",
+                                        duration: 1.2,
+                                        stagger: 0.2,
+                                        ease: "power3.out"
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Disable heavy parallax on mobile for better performance
+        const isMobile = window.innerWidth < 768;
+
+        // ── 1. HERO: content gently drifts upward as you scroll away ──
+        gsap.to('.gsap-hero', {
+            y: isMobile ? -40 : -100,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1.8
+            }
+        });
+
+        // ── 2. DOSHA CARDS: elemental entrance animations ──
+        const doshaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    if (el.id === 'vata-card') el.classList.add('animated', 'vata-animate');
+                    if (el.id === 'pitta-card') el.classList.add('animated', 'pitta-animate');
+                    if (el.id === 'kapha-card') el.classList.add('animated', 'kapha-animate');
+                    doshaObserver.unobserve(el);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        ['vata-card', 'pitta-card', 'kapha-card'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) doshaObserver.observe(el);
+        });
+
+        // ── 3. PHILOSOPHY heading: fade + rise on enter ──
+        gsap.from('.gsap-philosophy', {
+            opacity: 0, y: 35,
+            duration: 0.9, stagger: 0.12, ease: 'power2.out',
+            scrollTrigger: { trigger: '#philosophy', start: 'top 82%' }
+        });
+
+        // ── 4. Why Choose image: removed parallax ──
+
+
+        // ── 5. Section content reveal: fade + rise ──
+        const revealTargets = [
+            { sel: '.gsap-welcome', trig: '#welcome' },
+            { sel: '.gsap-why', trig: '#why-choose' },
+            { sel: '.gsap-faq', trig: '#faq' }
+        ];
+        revealTargets.forEach(({ sel, trig }) => {
+            gsap.from(sel, {
+                opacity: 0, y: 40,
+                duration: 0.8, stagger: 0.12, ease: 'power2.out',
+                scrollTrigger: { trigger: trig, start: 'top 80%' }
+            });
+        });
+
+        // ── 6. Services cards: staggered pop-in ──
+        // ── 6. Services cards: entrance animations removed ──
+
+
+        // ── 7. Philosophy blobs: subtle drift (desktop only) ──
+        if (!isMobile) {
+            document.querySelectorAll('#philosophy .absolute.rounded-full').forEach((blob, i) => {
+                gsap.to(blob, {
+                    y: i % 2 === 0 ? 100 : -100,
+                    x: i % 2 === 0 ? 50 : -50,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: '#philosophy',
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 2
+                    }
+                });
+            });
+        }
+
+        // ── 8. Advanced Layered Parallax (Audemars Piguet inspired) ──
+        if (!isMobile) {
+            // Container Parallax (removed)
+
+
+            // Services background parallax
+            gsap.to('#services', {
+                backgroundPosition: "50% 100%",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#services",
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
+
+            // Smoothly update Lenis on click (if you add anchor links later)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    window.lenis.scrollTo(this.getAttribute('href'));
+                });
+            });
+
+            // Text drift removed
+
+
+            // Page skew on fast scroll (The "Elastic" feel)
+            let proxy = { skew: 0 },
+                skewSetter = gsap.quickSetter(".dosha-card-wrapper", "skewY", "deg"),
+                clamp = gsap.utils.clamp(-5, 5);
+
+            ScrollTrigger.create({
+                onUpdate: (self) => {
+                    let skew = clamp(self.getVelocity() / -300);
+                    if (Math.abs(skew) > Math.abs(proxy.skew)) {
+                        proxy.skew = skew;
+                        gsap.to(proxy, {
+                            skew: 0,
+                            duration: 0.8,
+                            ease: "power3",
+                            overwrite: true,
+                            onUpdate: () => skewSetter(proxy.skew)
+                        });
+                    }
+                }
+            });
+        }
+
+        // ── 9. Scroll Progress Indicator ──
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById("scroll-progress");
+            if (progressBar) progressBar.style.width = scrolled + "%";
+        });
+
+        // ── 10. Testimonials Scroll Dots ──
+        const testimonialsScroll = document.getElementById('testimonials-scroll');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+        if (testimonialsScroll && testimonialDots.length > 0) {
+            const updateDots = () => {
+                const scrollLeft = testimonialsScroll.scrollLeft;
+                const maxScroll = testimonialsScroll.scrollWidth - testimonialsScroll.clientWidth;
+                if (maxScroll <= 0) return;
+
+                const percent = scrollLeft / maxScroll;
+                let activeIndex = 0;
+                if (percent > 0.33) activeIndex = 1;
+                if (percent > 0.66) activeIndex = 2;
+
+                testimonialDots.forEach((dot, idx) => {
+                    if (idx === activeIndex) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            };
+
+            testimonialsScroll.addEventListener('scroll', updateDots);
+
+            // Click to scroll
+            testimonialDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const index = parseInt(dot.getAttribute('data-index'));
+                    const maxScroll = testimonialsScroll.scrollWidth - testimonialsScroll.clientWidth;
+                    const targetScroll = (maxScroll / 2) * index;
+                    testimonialsScroll.scrollTo({
+                        left: targetScroll,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        }
+    </script>
+
+
+
+    <!-- Fixed WhatsApp Icon -->
+    <a href="https://wa.me/918780417797" target="_blank"
+        class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center text-[32px] shadow-lg hover:scale-110 transition-transform duration-300">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+</body>
+
+</html>

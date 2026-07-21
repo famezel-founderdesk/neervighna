@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services | Neervighna Ayurveda</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ayur: {
+                            orange: '#e67e22',
+                            green: '#2e7d32',
+                            darkGreen: '#1b5e20',
+                            cream: '#fcfbf7',
+                            beige: '#f5f0e6',
+                            gold: '#d4af37',
+                            softGreen: '#e8f5e9',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'serif'],
+                        body: ['"Lato"', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 20px 40px -15px rgba(46, 125, 50, 0.1)',
+                        'glow': '0 0 20px rgba(230, 126, 34, 0.15)',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 60s linear infinite',
+                        'float-slow': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fcfbf7;
+            color: #1a1a1a;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2e7d32;
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #e67e22;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* --- PARALLAX BACKGROUND ELEMENTS --- */
+        .parallax-bg-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .floating-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.4;
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+
+        /* HERO Specific Styles */
+        .hero-arch-image {
+            border-radius: 260px 260px 40px 40px;
+            overflow: hidden;
+            position: relative;
+            will-change: transform;
+        }
+
+        /* --- NEW HERO IMAGE EFFECTS --- */
+
+        /* 1. Ken Burns Effect (Slow Zoom) */
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hero-img-animate {
+            animation: kenBurns 20s ease-in-out infinite;
+            will-change: transform;
+        }
+
+        /* 2. Shimmer/Gloss Effect */
+        .hero-shimmer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: skewX(-25deg);
+            animation: shimmer 6s infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -150%;
+            }
+
+            15% {
+                left: 150%;
+            }
+
+            /* Fast pass */
+            100% {
+                left: 150%;
+            }
+
+            /* Wait */
+        }
+
+        .mandala-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 C22.4 0 0 22.4 0 50 C0 77.6 22.4 100 50 100 C77.6 100 100 77.6 100 50 C100 22.4 77.6 0 50 0 Z M50 90 C27.9 90 10 72.1 10 50 C10 27.9 27.9 10 50 10 C72.1 10 90 27.9 90 50 C90 72.1 72.1 90 50 90 Z' fill='%232e7d32' fill-opacity='0.05'/%3E%3C/svg%3E");
+            mask-image: radial-gradient(circle, black 40%, transparent 80%);
+            will-change: transform;
+        }
+
+        /* SERVICE SECTION LAYOUT - STACKED EFFECT */
+        #services-list {
+            position: relative;
+            padding-top: 0;
+            padding-bottom: 0;
+            background-color: transparent;
+        }
+
+        .service-row {
+            position: sticky;
+            top: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #fcfbf7;
+            /* Opaque background to cover previous cards */
+            gap: 2rem;
+            margin-bottom: 0;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 -30px 60px rgba(0, 0, 0, 0.04);
+            border-top: 1px solid rgba(46, 125, 50, 0.05);
+            overflow: hidden;
+            will-change: transform, opacity;
+        }
+
+        /* Incremental z-index for stacked covering effect */
+        .service-row:nth-child(1) {
+            z-index: 10;
+        }
+
+        .service-row:nth-child(2) {
+            z-index: 20;
+        }
+
+        .service-row:nth-child(3) {
+            z-index: 30;
+        }
+
+        .service-row:nth-child(4) {
+            z-index: 40;
+        }
+
+        .service-row:nth-child(5) {
+            z-index: 50;
+        }
+
+        .service-row:nth-child(6) {
+            z-index: 60;
+        }
+
+        @media (min-width: 1024px) {
+            .service-row {
+                flex-direction: row;
+                align-items: center;
+                gap: 5rem;
+                padding-left: 10vw;
+                padding-right: 10vw;
+            }
+
+            .service-row:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            .service-image-container {
+                flex: 1;
+                width: 50%;
+                perspective: 2000px;
+            }
+
+            .service-content-container {
+                flex: 1;
+                width: 50%;
+            }
+        }
+
+        /* Image Styling with Parallax Hook */
+        .service-image-wrapper {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.18);
+            height: 500px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .service-row:nth-child(even) .service-image-wrapper {
+            border-radius: 24px 24px 24px 0;
+        }
+
+        .service-image-wrapper img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transform: translateY(-10%);
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* Category Badge */
+        .category-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #2E7D32;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        /* Typography & Tags */
+        .service-number {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4rem;
+            color: rgba(230, 126, 34, 0.15);
+            line-height: 1;
+            margin-bottom: -20px;
+            margin-left: -10px;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #1b5e20;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .service-title:hover {
+            color: #e67e22;
+        }
+
+        .service-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 2rem;
+        }
+
+        .service-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .service-pill {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: #2d3748;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+        }
+
+        .service-pill:hover {
+            background: #2E7D32;
+            color: white;
+            border-color: #2E7D32;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 125, 50, 0.2);
+        }
+
+        .service-pill:hover i {
+            color: white;
+        }
+
+        .service-pill i {
+            color: #e67e22;
+        }
+
+        /* Buttons */
+        .action-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-learn-more {
+            background: #2E7D32;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 100px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-learn-more:hover {
+            background: #1b5e20;
+            transform: translateX(5px);
+            box-shadow: 0 10px 20px rgba(46, 125, 50, 0.2);
+        }
+
+        .duration-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #718096;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        /* MODAL Styles */
+        .service-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .service-modal-content {
+            background: #fcfbf7;
+            width: 95%;
+            max-width: 1100px;
+            max-height: 90vh;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .service-modal.active .service-modal-content {
+            transform: scale(1);
+        }
+
+        .service-image-side {
+            flex: 1;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .service-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+            padding: 40px;
+            color: white;
+        }
+
+        .service-details-side {
+            flex: 1.2;
+            padding: 50px;
+            overflow-y: auto;
+        }
+
+        .service-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            border: none;
+            color: #1b5e20;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .service-close-btn:hover {
+            transform: rotate(90deg);
+            background: #e67e22;
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-3px);
+            border-color: #2E7D32;
+        }
+
+        /* --- EMOJI ANIMATION CSS --- */
+        @keyframes floatEmoji {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            animation: floatEmoji 3s ease-in-out infinite;
+        }
+
+        @media (max-width: 768px) {
+            .service-modal-content {
+                flex-direction: column;
+                width: 100%;
+                height: 100%;
+                border-radius: 0;
+                max-height: 100vh;
+            }
+
+            .service-image-side {
+                flex: none;
+                height: 250px;
+            }
+
+            .service-details-side {
+                padding: 25px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ---------- NEW REVEAL ANIMATION ---------- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(100px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Ensure service rows don't have conflicting transitions */
+        .service-row.reveal {
+            /* Keep visibility reveal but don't interfere with sticky scroll position */
+            transition: opacity 1s ease-out, transform 1s cubic-bezier(0.33, 1, 0.68, 1);
+        }
+
+        /* Animated Pill Interaction */
+        .service-pill {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(46, 125, 50, 0.1);
+        }
+
+        .service-pill:hover {
+            background-color: #2E7D32;
+            color: white;
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 10px 20px rgba(46, 125, 50, 0.15);
+            border-color: #2E7D32;
+        }
+
+        .service-pill i {
+            transition: transform 0.3s ease;
+        }
+
+        .service-pill:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: #e67e22;
+            /* Ayur Orange */
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('header.html')
+                .then(res => res.text())
+                .then(data => {
+                    // 1. Inject the HTML
+                    document.body.insertAdjacentHTML('afterbegin', data);
+
+                    // 2. Extract and run the <script> from header.html
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const scriptContent = doc.querySelector('script').textContent;
+                    const scriptElement = document.createElement('script');
+                    scriptElement.textContent = scriptContent;
+                    document.head.appendChild(scriptElement);
+
+                    // 3. Start the navbar logic
+                    if (window.initHeader) window.initHeader();
+                });
+
+            fetch('footer.html')
+                .then(res => res.text())
+                .then(data => {
+                    const footerPlaceholder = document.querySelector('footer');
+                    if (footerPlaceholder) footerPlaceholder.outerHTML = data;
+                    else document.body.insertAdjacentHTML('beforeend', data);
+                });
+        });
+    </script>
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span,
+        div,
+        li,
+        button,
+        input {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 8vw, 4.5rem) !important;
+            line-height: 1.1 !important;
+            transform-origin: center;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 3vw, 1.25rem) !important;
+        }
+    </style>
+</head>
+
+<body class="font-body">
+
+    <div class="parallax-bg-container" id="parallaxBg">
+        <div class="floating-orb w-96 h-96 bg-ayur-green/10 top-0 -left-20" data-speed="0.2"></div>
+        <div class="floating-orb w-64 h-64 bg-ayur-orange/10 bottom-1/2 right-0" data-speed="0.15"></div>
+        <div class="floating-orb w-80 h-80 bg-ayur-gold/10 bottom-0 left-1/3" data-speed="0.1"></div>
+    </div>
+
+
+    <!-- HERO SECTION - SYNCHRONIZED WITH INDEX.HTML -->
+    <section class="relative min-h-[90vh] flex items-center pt-32 pb-20 overflow-hidden bg-pattern">
+        <!-- Floating Design Elements (Right Side) -->
+        <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block pointer-events-none">
+            <!-- Mandala Decorations -->
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] border border-ayur-green/10 rounded-full animate-spin-slow">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] h-[550px] border border-ayur-gold/20 rounded-full animate-[spin_25s_linear_infinite_reverse]">
+            </div>
+
+            <!-- Hero Image Wrapper - Arched Layout (Now with Video) -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-[45%] -translate-y-1/2 w-[520px] h-[680px]">
+                <div
+                    class="w-full h-full hero-arch-image shadow-2xl animate-float-slow border-[10px] border-white/50 backdrop-blur-sm relative bg-ayur-beige">
+                    <video autoplay muted loop playsinline
+                        class="w-full h-full object-cover rounded-[250px_250px_35px_35px]">
+                        <source src="https://cdn.pixabay.com/video/2026/01/10/326914_medium.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-ayur-darkGreen/40 via-transparent to-transparent pointer-events-none">
+                    </div>
+                </div>
+
+                <!-- 100% Natural Badge Overlay -->
+                <div
+                    class="absolute bottom-8 right-8 bg-white/95 backdrop-blur p-4 rounded-2xl shadow-lg border border-white/20 max-w-[200px] z-20">
+                    <div class="flex items-start gap-3">
+                        <div class="w-8 h-8 bg-ayur-orange/10 rounded-full flex items-center justify-center shrink-0">
+                            <i class="fas fa-leaf text-ayur-orange text-sm"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">100% Natural</h4>
+                            <p class="text-[10px] text-gray-500 leading-tight">Authentic herbal preparations &
+                                therapies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="container mx-auto px-8 md:px-12 lg:px-24 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Text Content Column -->
+                <div class="lg:col-span-7 xl:col-span-6 text-center lg:text-left">
+                    <div
+                        class="inline-flex items-center gap-2 bg-ayur-green/10 text-ayur-darkGreen px-4 py-1.5 rounded-full mb-8 border border-ayur-green/20">
+                        <i class="fa-solid fa-om text-ayur-orange"></i>
+                        <span class="text-xs font-bold tracking-[0.2em] uppercase">Ancient Wisdom, Modern Healing</span>
+                    </div>
+
+                    <h1 class="font-heading text-5xl md:text-7xl text-ayur-darkGreen leading-[1.1] mb-8 font-bold">
+                        Holistic Healing <br />
+                        <span class="text-ayur-green relative">& Restoring Balance
+                            <svg class="absolute -bottom-2 left-0 w-full h-3 text-ayur-orange" viewBox="0 0 100 10"
+                                preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                    </h1>
+
+                    <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-12 max-w-xl mx-auto lg:mx-0">
+                        Experience the ancient wisdom of Ayurveda through our specialized treatments designed to restore
+                        balance to your body, mind, and soul.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                        <a href="#services-list"
+                            class="bg-ayur-darkGreen text-white px-10 py-4 rounded-full font-bold hover:bg-ayur-green transition-all shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center gap-3 group">
+                            Explore Services <i
+                                class="fas fa-chevron-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <button onclick="openConsultModal()"
+                            class="px-10 py-4 rounded-full font-bold text-ayur-darkGreen border-2 border-ayur-darkGreen hover:bg-ayur-darkGreen hover:text-white transition-all flex items-center gap-3 backdrop-blur-sm">
+                            <i class="far fa-calendar-alt"></i> Book Consultation
+                        </button>
+                    </div>
+
+                    <div class="mt-20 flex items-center justify-center lg:justify-start gap-8 opacity-90">
+                        <div class="flex -space-x-3">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
+                                alt="User">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover"
+                                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&q=80"
+                                alt="User">
+                            <img class="w-12 h-12 rounded-full border-2 border-white object-cover"
+                                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
+                                alt="User">
+                            <div
+                                class="w-12 h-12 rounded-full border-2 border-white bg-ayur-green text-white flex items-center justify-center text-sm font-bold shadow-md">
+                                +2k</div>
+                        </div>
+                        <div class="text-sm font-medium text-gray-700">
+                            Trusted by <br> <span class="text-ayur-darkGreen font-bold">2,000+ Patients</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacer column -->
+                <div class="lg:col-span-5 xl:col-span-6"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce hidden lg:block">
+        <a href="#services-list" class="text-gray-400 hover:text-ayur-green transition-colors">
+            <i class="fas fa-chevron-down text-xl"></i>
+        </a>
+    </div>
+    </div>
+    </section>
+
+    <div id="services-list" class="w-full">
+
+        <div class="service-row reveal" data-category="consultation">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Diagnosis</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Ayurvedic Consultation">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">01</div>
+                <h2 class="service-title trigger-modal">Consultation & Diagnosis</h2>
+                <p class="service-desc">
+                    Understanding your body constitution and health condition through traditional Ayurvedic assessment
+                    methods including pulse diagnosis and prakriti analysis. We identify the root cause of ailments
+                    rather than just treating symptoms.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Ayurvedic Consultation">
+                        <i class="fas fa-stethoscope"></i> Ayurvedic Consultation
+                    </div>
+                    <div class="service-pill" data-service="Prakriti Prakishan Analysis">
+                        <i class="fas fa-clipboard-check"></i> Prakriti Analysis
+                    </div>
+                    <div class="service-pill" data-service="Personalized Health Assessment">
+                        <i class="fas fa-user-md"></i> Health Assessment
+                    </div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> 60-90 mins</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row reveal" data-category="yoga">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Wellness</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Yoga & Pranayama">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">02</div>
+                <h2 class="service-title trigger-modal">Yoga & Pranayama</h2>
+                <p class="service-desc">
+                    Achieve mind-body balance through ancient yogic practices and breath control techniques. Our
+                    personalized sessions focus on aligning your physical posture with mental clarity, reducing stress
+                    and enhancing vitality.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Yoga Asanas Practice">
+                        <i class="fas fa-spa"></i> Yoga Asanas
+                    </div>
+                    <div class="service-pill" data-service="Pranayama Breathing">
+                        <i class="fas fa-wind"></i> Pranayama
+                    </div>
+                    <div class="service-pill" data-service="Guided Meditation Sessions">
+                        <i class="fas fa-brain"></i> Meditation
+                    </div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> 45-90 mins</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row reveal" data-category="panchakarma">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Purification</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Panchakarma Therapies">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">03</div>
+                <h2 class="service-title trigger-modal">Panchakarma & Detox</h2>
+                <p class="service-desc">
+                    The crown jewel of Ayurveda. Classical purification treatments designed to eliminate deep-seated
+                    toxins and restore the body's natural equilibrium through five specialized cleansing actions.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Vaman Therapy"><i class="fas fa-leaf"></i> Vaman</div>
+                    <div class="service-pill" data-service="Virechan Therapy"><i class="fas fa-heartbeat"></i> Virechan
+                    </div>
+                    <div class="service-pill" data-service="Basti Treatment"><i class="fas fa-hand-holding-water"></i>
+                        Basti</div>
+                    <div class="service-pill" data-service="Nasya Therapy"><i class="fas fa-head-side-virus"></i> Nasya
+                    </div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> Custom Duration</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row reveal" data-category="external">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Rejuvenation</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="External Ayurvedic Therapies">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">04</div>
+                <h2 class="service-title trigger-modal">External Therapies</h2>
+                <p class="service-desc">
+                    Rejuvenation, pain relief and relaxation through specialized external treatments using medicated
+                    herbal oils. These therapies promote deep healing and relaxation.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Abhyang Massage"><i class="fas fa-spa"></i> Abhyang</div>
+                    <div class="service-pill" data-service="Svedan Steam Therapy"><i class="fas fa-smog"></i> Svedan
+                    </div>
+                    <div class="service-pill" data-service="Shirodhara Treatment"><i class="fas fa-head-side-mask"></i>
+                        Shirodhara</div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> 30-75 mins</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row reveal" data-category="basti">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Pain Relief</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Basti Therapies">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">05</div>
+                <h2 class="service-title trigger-modal">Basti Therapies</h2>
+                <p class="service-desc">
+                    Targeted treatments for joint, spine and muscle care using medicated oils retained in specialized
+                    dough compartments. Highly effective for chronic pain, stiffness, and inflammation.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Kati Basti"><i class="fas fa-bone"></i> Kati Basti
+                    </div>
+                    <div class="service-pill" data-service="Greeva Basti"><i class="fas fa-user-injured"></i>
+                        Greeva Basti</div>
+                    <div class="service-pill" data-service="Janu Basti"><i class="fas fa-walking"></i> Janu Basti
+                    </div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> 30-45 mins</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="service-row reveal" data-category="specialized">
+            <div class="service-image-container">
+                <div class="service-image-wrapper cursor-pointer trigger-modal">
+                    <span class="category-badge">Advanced</span>
+                    <img class="parallax-img"
+                        src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                        alt="Specialized Therapies">
+                </div>
+            </div>
+            <div class="service-content-container">
+                <div class="service-number">06</div>
+                <h2 class="service-title trigger-modal">Specialized Therapies</h2>
+                <p class="service-desc">
+                    Focused therapeutic procedures for specific conditions and enhanced healing through advanced
+                    techniques. These specialized treatments address unique health concerns.
+                </p>
+                <div class="service-tags-container">
+                    <div class="service-pill" data-service="Agni Karma"><i class="fas fa-fire"></i> Agni Karma</div>
+                    <div class="service-pill" data-service="Cupping"><i class="fas fa-burn"></i> Cupping</div>
+                    <div class="service-pill" data-service="Suvarnaprash"><i class="fas fa-shield-virus"></i>
+                        Suvarnaprash</div>
+                </div>
+                <div class="action-row">
+                    <button class="btn-learn-more trigger-modal">
+                        View Details <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <div class="duration-badge"><i class="fas fa-clock text-ayur-orange"></i> 30-60 mins</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="service-modal" id="serviceModal">
+        <div class="service-modal-content">
+            <div class="service-image-side">
+                <img src="" alt="Service Image" class="service-main-image" id="serviceMainImage">
+                <div class="service-image-overlay">
+                    <h2 class="text-3xl font-heading mb-2 flex items-center gap-4" id="serviceModalTitle">
+                        <i class="fas fa-spa"></i>
+                        <span id="serviceName"></span>
+                    </h2>
+                    <div class="flex items-center gap-3 text-lg opacity-90" id="serviceDuration">
+                        <i class="fas fa-clock"></i>
+                        <span></span>
+                    </div>
+                </div>
+                <button class="service-close-btn" id="serviceCloseBtn"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="service-details-side">
+                <p class="text-lg leading-relaxed text-gray-600 mb-8" id="serviceDescription"></p>
+                <div class="service-benefits-section">
+                    <h3 class="text-xl font-bold text-ayur-green mb-4 flex items-center gap-2"><i
+                            class="fas fa-heart"></i> Key Benefits</h3>
+                    <div class="benefits-grid" id="benefitsGrid"></div>
+                </div>
+                <div class="flex flex-col md:flex-row gap-4 mt-8 pt-6 border-t border-gray-100">
+                    <button onclick="openBookingForm()"
+                        class="flex-1 bg-ayur-green text-white py-4 rounded-xl font-bold hover:bg-ayur-darkGreen transition-colors flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1 transform transition-transform">
+                        <i class="fas fa-calendar-check"></i> Book This Service
+                    </button>
+                    <button onclick="submitToWhatsApp()"
+                        class="flex-1 bg-ayur-softGreen text-ayur-darkGreen border border-ayur-green py-4 rounded-xl font-bold hover:bg-white transition-colors flex items-center justify-center gap-2">
+                        <i class="fas fa-phone-alt"></i> Contact Consultant
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        // Data Object (Preserved)
+        const categoryDetails = {
+            "consultation": {
+                name: "Consultation & Diagnosis",
+                image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Understanding your body constitution and health condition through traditional Ayurvedic assessment methods. Our comprehensive diagnostic approach helps identify imbalances and create personalized treatment plans.",
+                services: [
+                    { name: "Ayurvedic Consultation", image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Deep dive into your health history and current concerns.", benefits: ["Personalized assessment", "Pulse & tongue diagnosis", "Customized wellness plan"], duration: "60 mins", emojiIcons: ["👨‍⚕️", "💓", "📋"] },
+                    { name: "Prakriti Analysis", image: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Learn about your unique body-mind constitution (Vata, Pitta, Kapha).", benefits: ["Dosha mapping", "Lifestyle optimization", "Diet recommendations"], duration: "45 mins", emojiIcons: ["🧬", "🏃‍♂️", "🥗"] },
+                    { name: "Health Assessment", image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Periodic monitoring of your progress and adjustments.", benefits: ["Progress tracking", "Adjusted goals", "Preventive care"], duration: "30 mins", emojiIcons: ["📈", "🎯", "🛡️"] }
+                ]
+            },
+            "yoga": {
+                name: "Yoga & Pranayama",
+                image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Achieve mind-body balance and preventive care through ancient yogic practices and breath control techniques.",
+                services: [
+                    { name: "Yoga Asanas", image: "https://images.unsplash.com/photo-1545205597-3d9d02c29597?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Tailored physical postures to build strength and flexibility.", benefits: ["Physical strength", "Greater flexibility", "Better posture"], duration: "60 mins", emojiIcons: ["🧘‍♀️", "💪", "🦴"] },
+                    { name: "Pranayama", image: "https://images.unsplash.com/photo-1518611012118-696072aa579a?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Breathwork to enhance vital energy and focus.", benefits: ["Calm mind", "Better breathing", "Reduced stress"], duration: "45 mins", emojiIcons: ["🌬️", "🧠", "✨"] },
+                    { name: "Meditation", image: "https://images.unsplash.com/photo-1545389336-cfebe1c3c5e9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Guided techniques for mental peace and clarity.", benefits: ["Inner peace", "Better sleep", "Emotional balance"], duration: "30 mins", emojiIcons: ["☁️", "🛌", "😊"] }
+                ]
+            },
+            "panchakarma": {
+                name: "Panchakarma & Detox",
+                image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Classical Ayurvedic purification treatments to eliminate toxins and restore the body's natural equilibrium.",
+                services: [
+                    { name: "Vaman", image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Removal of excess toxins from the respiratory system.", benefits: ["Clear breathing", "Better digestion", "Immunity boost"], duration: "90 mins", emojiIcons: ["🫁", "🔥", "🛡️"] },
+                    { name: "Virechan", image: "https://images.unsplash.com/photo-1554734867-bf3c00a49371?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Purification of the liver and gall bladder.", benefits: ["Glowing skin", "Liver health", "Digestive balance"], duration: "60 mins", emojiIcons: ["✨", "🌿", "🍽️"] },
+                    { name: "Basti", image: "https://images.unsplash.com/photo-1594736797933-d0c6e4d6d6c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Powerful detoxification of the colon and lower body.", benefits: ["Vata balance", "Joint health", "Internal cleansing"], duration: "45 mins", emojiIcons: ["🌱", "🦴", "🚿"] },
+                    { name: "Nasya", image: "https://images.unsplash.com/photo-1629909615184-74f495363b67?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Cleansing of the sinuses and upper respiratory tract.", benefits: ["Clear sinuses", "Better vision", "Mental clarity"], duration: "30 mins", emojiIcons: ["👂", "👁️", "💡"] }
+                ]
+            },
+            "external": {
+                name: "External Therapies",
+                image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Rejuvenation, pain relief and relaxation through specialized external treatments using herbal oils.",
+                services: [
+                    { name: "Abhyang", image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Relaxing full-body warm oil massage.", benefits: ["Relaxation", "Circulation", "Skin health"], duration: "60 mins", emojiIcons: ["💆‍♂️", "🔄", "🌟"] },
+                    { name: "Svedan", image: "https://images.unsplash.com/photo-1585435557343-3b092031c6e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Stiffness-relieving herbal steam therapy.", benefits: ["Toxin removal", "Muscle relief", "Joint health"], duration: "30 mins", emojiIcons: ["🌬️", "🏃‍♂️", "🦴"] },
+                    { name: "Shirodhara", image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Deeply calming oil flow to the forehead.", benefits: ["Insomnia relief", "Stress reduction", "Mental peace"], duration: "45 mins", emojiIcons: ["🧠", "🛌", "✨"] }
+                ]
+            },
+            "basti": {
+                name: "Basti Therapies",
+                image: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Targeted treatments for joint, spine and muscle care using medicated oils in specialized compartments.",
+                services: [
+                    { name: "Kati Basti", image: "https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Targeted oil treatment for lower back pain.", benefits: ["Pain relief", "Spinal health", "Muscle strength"], duration: "45 mins", emojiIcons: ["🛌", "🦴", "💪"] },
+                    { name: "Greeva Basti", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Specialized care for neck stiffness and pain.", benefits: ["Neck relief", "Better mobility", "Nerve health"], duration: "45 mins", emojiIcons: ["🤕", "🔄", "🛡️"] },
+                    { name: "Janu Basti", image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Deep lubrication for knee joint issues.", benefits: ["Joint comfort", "Easy movement", "Ligament care"], duration: "45 mins", emojiIcons: ["🦵", "🚶", "🛢️"] }
+                ]
+            },
+            "specialized": {
+                name: "Specialized Therapies",
+                image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                description: "Focused therapeutic procedures for specific conditions and enhanced healing through advanced techniques.",
+                services: [
+                    { name: "Agni Karma", image: "https://images.unsplash.com/photo-1585435557343-3b092031c6e6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Effective thermal therapy for chronic pain.", benefits: ["Rapid healing", "Pain removal", "Reduced edema"], duration: "30 mins", emojiIcons: ["🔥", "⚡", "🚶"] },
+                    { name: "Cupping", image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Suction therapy to improve blood flow.", benefits: ["Detoxification", "Muscle release", "Energy flow"], duration: "30 mins", emojiIcons: ["🔴", "🔄", "✨"] },
+                    { name: "Suvarnaprash", image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80", description: "Immunity drops for pediatric protection.", benefits: ["Stronger immunity", "Memory boost", "Vital growth"], duration: "10 mins", emojiIcons: ["🛡️", "🧠", "🔋"] }
+                ]
+            }
+        };
+
+        // --- GLOBAL PARALLAX LOGIC ---
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. OVERLAPPING SCROLL REVEAL (Intersection Observer)
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        // Optional: unobserve after reveal to save performance
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.2,              // trigger when 20% visible
+                rootMargin: "0px 0px 200px 0px"  // positive bottom margin = trigger earlier (200px below viewport)
+            });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // 2. Parallax Controller (RequestAnimationFrame for Performance)
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            const floatingOrbs = document.querySelectorAll('.floating-orb');
+            const heroMandala = document.getElementById('heroMandala');
+            const heroImage = document.getElementById('heroImage');
+            const heroBadge = document.getElementById('heroBadge');
+            const serviceImages = document.querySelectorAll('.parallax-img');
+
+            function updateParallax() {
+                const scrollY = window.scrollY;
+                const windowHeight = window.innerHeight;
+
+                // A. Hero Parallax
+                if (scrollY < windowHeight) {
+                    // Mandala spins and moves up slightly
+                    if (heroMandala) heroMandala.style.transform = `translateY(${scrollY * 0.2}px) rotate(${scrollY * 0.05}deg)`;
+                    // Hero Image moves slower than scroll
+                    if (heroImage) heroImage.style.transform = `translateY(${scrollY * 0.15}px)`;
+                    // Badge moves faster
+                    if (heroBadge) heroBadge.style.transform = `translateY(${scrollY * -0.1}px)`;
+                }
+
+                // B. Global Background Orbs (Depth Layer)
+                floatingOrbs.forEach(orb => {
+                    const speed = parseFloat(orb.dataset.speed || 0.1);
+                    orb.style.transform = `translateY(${scrollY * speed}px)`;
+                });
+
+                // C. Service Section Image Parallax (Slide Effect)
+                serviceImages.forEach(img => {
+                    const rect = img.parentElement.getBoundingClientRect();
+                    // If image is in viewport
+                    if (rect.top < windowHeight && rect.bottom > 0) {
+                        // Calculate relative position (-1 to 1)
+                        const relativePos = (rect.top + rect.height / 2 - windowHeight / 2) / windowHeight;
+                        // Move image inside container based on scroll
+                        img.style.transform = `translateY(${relativePos * -40}px)`; // -40px movement range
+                    }
+                });
+
+                lastScrollY = scrollY;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                lastScrollY = window.scrollY;
+                if (!ticking) {
+                    window.requestAnimationFrame(updateParallax);
+                    ticking = true;
+                }
+            });
+
+            // Initial trigger
+            updateParallax();
+
+            // --- Modal Logic (Existing) ---
+            const modal = document.getElementById('serviceModal');
+            const closeBtn = document.getElementById('serviceCloseBtn');
+            const serviceImage = document.getElementById('serviceMainImage');
+            const serviceNameLabel = document.getElementById('serviceName');
+            const serviceDescription = document.getElementById('serviceDescription');
+            const serviceDuration = document.getElementById('serviceDuration').querySelector('span');
+            const benefitsGrid = document.getElementById('benefitsGrid');
+
+            window.openBookingForm = function () {
+                const serviceName = serviceNameLabel.textContent;
+                closeServiceModal();
+                if (window.openConsultModal) {
+                    window.openConsultModal();
+                    // Fill the service in the consultation form
+                    setTimeout(() => {
+                        const serviceSelect = document.getElementById('service');
+                        if (serviceSelect) {
+                            // Find the option that matches the service name or contains it
+                            for (let i = 0; i < serviceSelect.options.length; i++) {
+                                if (serviceName.includes(serviceSelect.options[i].text) || serviceSelect.options[i].text.includes(serviceName)) {
+                                    serviceSelect.selectedIndex = i;
+                                    serviceSelect.dispatchEvent(new Event('change'));
+                                    break;
+                                }
+                            }
+                        }
+                    }, 100);
+                }
+            }
+
+            // Removed redundant openModal overwrite to avoid collision with header.html
+            // window.openModal = function () { openServiceModal(categoryDetails['consultation'].services[0]); }
+
+            function openServiceModal(serviceData) {
+                serviceImage.src = serviceData.image;
+                serviceNameLabel.textContent = serviceData.name;
+                serviceDescription.textContent = serviceData.description;
+                serviceDuration.textContent = serviceData.duration;
+                benefitsGrid.innerHTML = '';
+                serviceData.benefits.forEach((benefit, index) => {
+                    const emoji = serviceData.emojiIcons?.[index] || '✅';
+                    benefitsGrid.innerHTML += `<div class="benefit-card"><div class="benefit-icon">${emoji}</div><div class="text-sm font-medium text-gray-700">${benefit}</div></div>`;
+                });
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeServiceModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+
+            closeBtn.addEventListener('click', closeServiceModal);
+            modal.addEventListener('click', (e) => { if (e.target === modal) closeServiceModal(); });
+            document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeServiceModal(); });
+
+            // --- Navigation Logic (Updated for dedicated pages) ---
+            const navigateToDetail = (serviceName) => {
+                if (!serviceName) return;
+                // Encode the service name for the URL
+                window.location.href = `service-detail.html?s=${encodeURIComponent(serviceName.trim())}`;
+            };
+
+            document.querySelectorAll('.service-pill').forEach(pill => {
+                pill.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const serviceName = pill.getAttribute('data-service');
+                    navigateToDetail(serviceName);
+                });
+            });
+
+            document.querySelectorAll('.trigger-modal').forEach(trigger => {
+                trigger.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const row = this.closest('.service-row');
+                    const title = row.querySelector('.service-title').textContent;
+                    // For rows, we navigate based on the main category title or the first sub-service name
+                    // Here we'll use the main title text
+                    const firstPill = row.querySelector('.service-pill');
+                    const targetName = firstPill ? firstPill.getAttribute('data-service') : title;
+                    navigateToDetail(targetName);
+                });
+            });
+        });
+    </script>
+
+</body>
+
+</html>
