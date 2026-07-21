@@ -302,17 +302,17 @@
 
     <!-- BLOG HERO SECTION -->
     <section
-        class="relative min-h-[70vh] flex items-center pt-24 overflow-hidden bg-gradient-to-br from-ayur-cream via-white to-ayur-beige"
+        class="relative min-h-[90vh] flex items-center pt-24 overflow-hidden bg-gradient-to-br from-ayur-cream via-white to-ayur-beige"
         style="opacity: 1 !important;">
-        <div class="absolute top-0 right-0 w-1/3 h-full hidden lg:block pointer-events-none">
+        <div class="absolute top-0 right-0 w-1/2 h-full hidden lg:block pointer-events-none">
             <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-ayur-green/10 rounded-full animate-spin-slow">
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-ayur-green/10 rounded-full animate-spin-slow">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] border border-ayur-gold/20 rounded-full animate-[spin_25s_linear_infinite_reverse]">
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] border border-ayur-gold/20 rounded-full animate-[spin_25s_linear_infinite_reverse]">
             </div>
             <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full overflow-hidden shadow-2xl animate-float opacity-70">
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] rounded-full overflow-hidden shadow-2xl animate-float opacity-70">
                 <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80"
                     alt="Meditation" class="w-full h-full object-cover rounded-full" style="opacity: 1 !important;">
                 <div class="absolute inset-0 bg-gradient-to-t from-ayur-darkGreen/40 to-transparent rounded-full"></div>
@@ -944,7 +944,7 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('../header.html')
+            fetch('header.html')
                 .then(res => res.text())
                 .then(data => {
                     document.body.insertAdjacentHTML('afterbegin', data);
@@ -959,7 +959,7 @@
                     if (window.initHeader) window.initHeader();
                 });
 
-            fetch('../footer.html')
+            fetch('footer.html')
                 .then(res => res.text())
                 .then(data => {
                     const existingFooter = document.querySelector('footer');
