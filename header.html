@@ -1,14 +1,14 @@
-<header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 bg-transparent">
-    <div class="container mx-auto px-6">
+<header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-4 bg-transparent">
+    <div class="container mx-auto max-w-7xl px-5 md:px-8">
         <div class="flex justify-between items-center">
-            <a href="index.html" class="flex items-center group">
+            <a href="index.html" class="flex items-center group" aria-label="Neervighna Ayurveda home">
                 <img src="../images/logo1.png" alt="Neervighna Ayurveda Logo"
-                    class="h-16 md:h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-110 relative z-10">
+                    class="h-14 md:h-[72px] w-auto object-contain transition-transform duration-500 group-hover:scale-[1.04] relative z-10">
                 <!-- <img src="../images/name.png" alt="नीર્વિઘ્ન"
                     class="h-10 md:h-14 w-auto object-contain -ml-4 md:-ml-18 relative z-10"> -->
             </a>
 
-            <nav class="hidden md:flex items-center gap-8 ml-auto mr-12">
+            <nav class="hidden md:flex items-center gap-7 lg:gap-9 ml-auto mr-8 lg:mr-10" aria-label="Primary navigation">
                 <a href="index.html"
                     class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Home</a>
                 <a href="about.html"
@@ -23,23 +23,23 @@
 
             <div class="hidden md:block">
                 <button onclick="openConsultModal()"
-                    class="bg-ayur-green hover:bg-ayur-darkGreen text-white px-6 py-2.5 rounded-full font-medium transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl flex items-center gap-2 group">
+                    class="header-consult bg-ayur-green hover:bg-ayur-darkGreen text-white px-5 lg:px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:-translate-y-0.5 hover:shadow-xl flex items-center gap-2 group">
                     <span>Book Consultation</span>
                     <i
                         class="fa-solid fa-arrow-right text-sm transition-transform duration-300 group-hover:translate-x-1"></i>
                 </button>
             </div>
 
-            <button id="mobile-menu-btn" class="md:hidden text-ayur-darkGreen text-3xl focus:outline-none">
+            <button id="mobile-menu-btn" class="md:hidden text-ayur-darkGreen text-2xl focus:outline-none" aria-label="Open navigation menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
     </div>
 
     <div id="mobile-menu"
-        class="fixed inset-0 bg-ayur-cream z-40 transform translate-x-full transition-transform duration-500 md:hidden flex flex-col justify-center items-center gap-10">
+        class="fixed inset-0 bg-[#faf7ef] z-40 transform translate-x-full transition-transform duration-500 md:hidden flex flex-col justify-center items-center gap-8">
         <button id="close-menu-btn"
-            class="absolute top-8 right-8 text-4xl text-ayur-darkGreen hover:text-ayur-orange transition-colors">
+            class="absolute top-7 right-6 text-3xl text-ayur-darkGreen hover:text-ayur-orange transition-colors" aria-label="Close navigation menu">
             <i class="fa-solid fa-times"></i>
         </button>
         <a href="index.html"
@@ -245,13 +245,21 @@
 </div>
 
 <style>
+    #navbar {
+        border-bottom: 1px solid transparent;
+    }
+
     /* Glass Effect Styling */
     .glass-nav {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(16px) !important;
-        -webkit-backdrop-filter: blur(16px) !important;
-        border-bottom: 1px solid rgba(46, 125, 50, 0.15);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 253, 247, 0.94) !important;
+        backdrop-filter: blur(18px) saturate(130%) !important;
+        -webkit-backdrop-filter: blur(18px) saturate(130%) !important;
+        border-bottom: 1px solid rgba(36, 84, 47, 0.12) !important;
+        box-shadow: 0 10px 32px rgba(26, 54, 35, 0.10);
+    }
+
+    .glass-nav .header-consult {
+        box-shadow: 0 8px 18px rgba(46, 125, 50, 0.22);
     }
 
     .nav-link::after {
@@ -266,6 +274,15 @@
     }
 
     .nav-link:hover::after {
+        width: 100%;
+    }
+
+    .nav-link.is-active {
+        color: #1b5e20 !important;
+        font-weight: 700;
+    }
+
+    .nav-link.is-active::after {
         width: 100%;
     }
 
@@ -303,10 +320,10 @@
 
             if (window.scrollY > 50) {
                 navbar.classList.add('glass-nav', 'shadow-lg', 'py-3');
-                navbar.classList.remove('bg-transparent', 'py-6');
+                navbar.classList.remove('bg-transparent', 'py-4');
             } else {
                 navbar.classList.remove('glass-nav', 'shadow-lg', 'py-3');
-                navbar.classList.add('bg-transparent', 'py-6');
+                navbar.classList.add('bg-transparent', 'py-4');
             }
 
             // Keep navigation legible over the dark video/image hero at page load.
@@ -315,6 +332,11 @@
 
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Run immediately in case page is already scrolled
+
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        navbar.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.toggle('is-active', link.getAttribute('href') === currentPage);
+        });
 
         // Mobile Menu Logic
         if (mobileMenuBtn && mobileMenu) {
