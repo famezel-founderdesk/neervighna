@@ -292,7 +292,18 @@
     justify-content: center;
     background: linear-gradient(135deg, #F9F7F2 0%, #E6E8DD 100%);
 }
-    
+  /* SMALL MOBILE PHONES (Max Width 480px) */
+    @media (max-width: 480px) {
+        .section-title, .page-hero h1 { font-size: 2rem; }
+        .hero-text h1, .about-content h1, .contact-info h1 { font-size: 2.5rem; }
+        .hero-art, .about-art { height: 250px; }
+        .dosha-info h2 { font-size: 2rem; }
+        .nav-logo { font-size: 1.5rem; }
+        .nav-links { gap: 1rem; font-size: 0.85rem; }
+    }
+
+
+        
     </style>
 </head>
 <body class="doshas-page">
