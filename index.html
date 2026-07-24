@@ -191,6 +191,89 @@
             .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
+
+
+<!-- ==========================================
+     GLOBAL RESPONSIVE STYLES (TABLET & MOBILE)
+     ========================================== -->
+<style>
+    /* TABLETS (Max Width 1024px) */
+    @media (max-width: 1024px) {
+        nav { padding: 1.5rem 2rem; }
+        #hero, #doshas, #treatments, #about, #philosophy, #timeline, #contact-main, #panchakarma, #treatments-grid { padding: 5rem 2rem; }
+        .hero-content, .about-container, .contact-grid, .hero-container { gap: 3rem; }
+        .section-title { font-size: 3rem; }
+        .hero-text h1, .about-content h1, .contact-info h1, .page-hero h1 { font-size: 3.5rem; }
+        .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    }
+
+    /* MOBILE PHONES (Max Width 768px) */
+    @media (max-width: 768px) {
+        /* Navigation */
+        nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; }
+        .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+        
+        /* Layouts & Grids */
+        .hero-content, .about-container, .contact-grid, .hero-container { grid-template-columns: 1fr; }
+        .hero-art, .about-art { height: 350px; max-width: 100%; margin: 0; }
+        .hero-image-frame, .about-art::before { display: none; } /* Hide decorative frames on mobile */
+        .hero-floating-badge { right: 10px; bottom: -20px; padding: 1rem 1.5rem; }
+        
+        /* Sections & Typography */
+        #hero, #doshas, #treatments, #about, #philosophy, #timeline, #contact-main, #panchakarma, #treatments-grid { padding: 4rem 1.5rem; }
+        .section-title, .page-hero h1 { font-size: 2.5rem; }
+        .hero-text h1, .about-content h1, .contact-info h1 { font-size: 3rem; margin-bottom: 1rem; }
+        .t-name { font-size: 1.5rem; }
+        .marquee-track span { font-size: 2.5rem; }
+        .marquee-strip .marquee-track span { font-size: 1.2rem; }
+        
+        /* Convert Multi-Column Grids to Single Column */
+        .doshas-grid, .treatment-grid, .t-grid, .phil-grid, .pancha-grid, .process-grid, .dosha-block { grid-template-columns: 1fr; gap: 2rem; }
+        .dosha-block:nth-child(even) .dosha-image { order: 0; } /* Reset alternating layout on mobile */
+        .dosha-image { height: 250px; }
+        
+        /* Treatments List */
+        .treatment-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
+        .t-desc { display: none; } /* Hide description to save space, show only title */
+        
+        /* Timeline Adjustments */
+        .timeline-track { margin: 2rem auto; }
+        .timeline-item, .timeline-item.right { width: 100%; padding-left: 3rem; padding-right: 0; margin-left: 0; justify-content: flex-start; }
+        .timeline-svg { left: 0; transform: translateX(0); }
+        .timeline-item::before, .timeline-item.right::before { left: -6px; right: auto; }
+        
+        /* Footer Adjustments */
+        #main-footer { padding: 3rem 1.5rem 1.5rem; }
+        .footer-cta { margin-bottom: 3rem; padding-bottom: 3rem; }
+        .cta-headline { font-size: 2rem; }
+        .cta-btn { padding: 0.8rem 2rem; width: 100%; }
+        .footer-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; text-align: center; }
+        .footer-col a:hover { transform: none; }
+        .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+        
+        /* UI Elements & Forms */
+        .cursor { display: none; } /* Hide custom cursor on touch devices */
+        body.js-enabled { cursor: auto; }
+        .btn-primary { width: 100%; text-align: center; }
+        .hero-cta { flex-direction: column; align-items: stretch; gap: 1rem; }
+        .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
+        .whatsapp-float svg { width: 26px; height: 26px; }
+        .form-row { flex-direction: column; gap: 0; }
+    }
+
+    /* SMALL MOBILE PHONES (Max Width 480px) */
+    @media (max-width: 480px) {
+        .section-title, .page-hero h1 { font-size: 2rem; }
+        .hero-text h1, .about-content h1, .contact-info h1 { font-size: 2.5rem; }
+        .hero-art, .about-art { height: 250px; }
+        .dosha-info h2 { font-size: 2rem; }
+        .nav-logo { font-size: 1.5rem; }
+        .nav-links { gap: 1rem; font-size: 0.85rem; }
+    }
+</style>
+    
+
+    
 </head>
 <body class="index-page">
 
