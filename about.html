@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Nihar Zankat | Neervighna Ayurveda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color:#F9F7F2; --text-main:#2C3E2D; --text-muted:#5F6F50; --accent-1:#C9A66B; --accent-2:#E6E8DD; --accent-3:#8B5E3C; --font-display:'Cormorant Garamond',serif; --font-body:'Jost',sans-serif; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { background-color:var(--bg-color); color:var(--text-main); font-family:var(--font-body); overflow-x:hidden; font-weight:300; }
+        body.js-enabled { cursor:none; }
+        .cursor { width:40px; height:40px; position:fixed; pointer-events:none; z-index:9999; opacity:0; transition:transform 0.2s ease; top:0; left:0; }
+        body.js-enabled .cursor { opacity:1; }
+        .cursor.hover { transform:scale(1.5) rotate(10deg); }
+        .cursor svg { width:100%; height:100%; drop-shadow:0 2px 4px rgba(0,0,0,0.1); }
+        nav { position:fixed; top:0; width:100%; padding:1.5rem 4rem; display:flex; justify-content:space-between; align-items:center; z-index:100; backdrop-filter:blur(10px); background:rgba(249,247,242,0.85); transition:all 0.4s ease; border-bottom:1px solid transparent; }
+        nav.scrolled { border-bottom:1px solid rgba(201,166,107,0.2); }
+        .nav-logo { display:flex; align-items:center; gap:0.75rem; font-family:var(--font-display); font-weight:500; font-size:1.8rem; color:var(--text-main); }
+        .nav-logo a { text-decoration:none; color:var(--text-main); }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+        .nav-links a { text-decoration:none; color:var(--text-main); font-weight:300; font-size:0.95rem; text-transform:uppercase; letter-spacing:1px; transition:color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--accent-1); }
+        .nav-links a.nav-cta { background:var(--text-main); color:var(--bg-color); padding:0.6rem 1.2rem; border-radius:2px; }
+        h1, h2, h3, h4 { font-family:var(--font-display); font-weight:400; line-height:1.1; }
+        .section-title { font-size:4rem; margin-bottom:1rem; color:var(--text-main); }
+        .section-title span { font-style:italic; color:var(--accent-1); }
+        .section-header { text-align:center; margin-bottom:4rem; max-width:800px; margin-left:auto; margin-right:auto; padding:0 2rem; }
+        .section-header p { color:var(--text-muted); font-size:1.1rem; margin-top:1rem; }
+        .divider { width:60px; height:2px; background:var(--accent-1); margin:1.5rem auto; }
+        .tagline { text-transform:uppercase; letter-spacing:3px; font-size:0.85rem; color:var(--accent-1); display:block; margin-bottom:1.5rem; }
+
+        /* Hero with Image */
+        #about-hero { padding:10rem 4rem 6rem; }
+        .hero-container { display:grid; grid-template-columns:1fr 1.5fr; gap:6rem; align-items:center; max-width:1200px; margin:0 auto; }
+        .about-art { position:relative; height:550px; }
+        .about-art img { width:100%; height:100%; object-fit:cover; border-radius:4px; box-shadow:0 20px 50px rgba(44,62,45,0.15); filter:sepia(10%); }
+        .about-art::before { content:''; position:absolute; top:30px; left:-30px; width:100%; height:100%; border:1px solid var(--accent-1); z-index:-1; border-radius:4px; }
+        .about-content h1 { font-size:4.5rem; margin-bottom:1.5rem; }
+        .about-content h1 span { font-style:italic; color:var(--accent-3); }
+        .about-content p { margin-bottom:1.5rem; font-size:1.1rem; line-height:1.8; color:var(--text-muted); }
+        .cred-item { display:flex; align-items:center; gap:0.5rem; font-size:0.9rem; color:var(--text-main); margin-bottom:0.5rem; }
+        .cred-item svg { width:16px; height:16px; color:var(--accent-3); }
+
+        /* Philosophy */
+        #philosophy { padding:6rem 4rem; background:var(--accent-2); }
+        .phil-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; max-width:1200px; margin:0 auto; }
+        .phil-card { background:#fff; padding:2.5rem; border:1px solid transparent; transition:all 0.3s; }
+        .phil-card:hover { border-color:var(--accent-1); transform:translateY(-5px); }
+        .phil-icon { width:50px; height:50px; margin-bottom:1.5rem; color:var(--accent-1); }
+        .phil-card h4 { font-size:1.8rem; margin-bottom:0.8rem; }
+        .phil-card p { color:var(--text-muted); font-size:0.95rem; line-height:1.6; }
+
+        /* Timeline */
+        #timeline { padding:8rem 4rem; background:var(--text-main); color:var(--bg-color); position:relative; overflow:hidden; }
+        #timeline::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background-image:url('https://images.unsplash.com/photo-1615485290382-441e4d049cb5?q=80&w=2070&auto=format&fit=crop'); background-size:cover; background-position:center; opacity:0.1; }
+        #timeline .section-title { color:var(--bg-color); }
+        .timeline-track { position:relative; max-width:800px; margin:4rem auto 0; }
+        .timeline-svg { position:absolute; left:50%; top:0; width:2px; height:100%; transform:translateX(-50%); }
+        .timeline-path { stroke-dasharray:1000; stroke-dashoffset:1000; }
+        .timeline-item { display:flex; justify-content:flex-end; margin-bottom:4rem; width:50%; padding-right:3rem; position:relative; }
+        .timeline-item.right { align-self:flex-end; justify-content:flex-start; margin-left:50%; padding-right:0; padding-left:3rem; }
+        .timeline-item::before { content:''; position:absolute; top:5px; right:-6px; width:12px; height:12px; background:var(--accent-1); border-radius:50%; }
+        .timeline-item.right::before { left:-6px; right:auto; }
+        .t-content { background:rgba(255,255,255,0.05); padding:1.5rem; border:1px solid rgba(201,166,107,0.2); backdrop-filter:blur(10px); }
+        .t-content .step-num { color:var(--accent-1); font-family:var(--font-display); display:block; font-size:1.5rem; margin-bottom:0.5rem; font-style:italic; }
+        .t-content h4 { font-size:1.5rem; margin-bottom:0.5rem; color:var(--bg-color); }
+        .t-content p { color:var(--accent-2); font-size:0.95rem; opacity:0.8; }
+
+        /* Footer */
+        #main-footer { background:var(--text-main); color:var(--accent-2); padding:6rem 4rem 2rem; position:relative; overflow:hidden; border-top:1px solid rgba(201,166,107,0.1); }
+        .footer-cta { text-align:center; max-width:800px; margin:0 auto 6rem; padding-bottom:5rem; border-bottom:1px solid rgba(201,166,107,0.2); }
+        .cta-headline { font-size:3.5rem; color:var(--bg-color); margin-bottom:1.5rem; }
+        .cta-headline span { font-style:italic; color:var(--accent-1); }
+        .footer-cta p { color:var(--accent-2); font-size:1.1rem; margin-bottom:2.5rem; opacity:0.8; }
+        .cta-btn { display: inline-block; background: var(--accent-3); color: var(--bg-color); padding: 1.2rem 3rem; text-decoration: none; border-radius: 50px; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 10px 20px rgba(224, 122, 95, 0.3); }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(224, 122, 95, 0.4); }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:4rem; max-width:1200px; margin:0 auto 5rem; }
+        .footer-col h3 { font-family:var(--font-display); font-size:2.5rem; color:var(--bg-color); margin-bottom:1rem; }
+        .footer-col h4 { font-size:1rem; color:var(--accent-1); margin-bottom:1.5rem; text-transform:uppercase; letter-spacing:2px; font-weight:500; }
+        .footer-col p, .footer-col a { margin-bottom:0.8rem; opacity:0.7; font-size:0.95rem; color:var(--accent-2); text-decoration:none; display:block; transition:all 0.3s; }
+        .footer-col a:hover { color:var(--accent-1); opacity:1; transform:translateX(5px); }
+        .footer-col ul { list-style:none; }
+        #live-time { font-family:var(--font-display); font-size:1.8rem; color:var(--bg-color); margin-bottom:0.5rem; font-style:italic; }
+        .footer-marquee { border-top:1px solid rgba(201,166,107,0.2); border-bottom:1px solid rgba(201,166,107,0.2); padding:1.5rem 0; overflow:hidden; margin-bottom:2rem; }
+        .marquee-track { display:flex; align-items:center; gap:4rem; white-space:nowrap; will-change:transform; }
+        .marquee-track span { font-family:var(--font-display); font-size:4rem; font-style:italic; color:transparent; -webkit-text-stroke:1px var(--accent-1); }
+        .marquee-track .dot { color:var(--accent-1); -webkit-text-stroke:0; font-size:2rem; }
+        .footer-bottom { display:flex; justify-content:space-between; max-width:1200px; margin:0 auto; font-size:0.85rem; opacity:0.5; align-items:center; }
+        .footer-bottom a { color:var(--accent-1); text-decoration:none; font-weight:500; }
+        body.js-enabled .reveal-text { opacity:0; }
+        @media (max-width:768px) { nav{padding:1rem 1.5rem;} .nav-links{display:none;} .cursor{display:none;} body.js-enabled{cursor:auto;} #about-hero{padding:6rem 1.5rem;} .hero-container{grid-template-columns:1fr;gap:3rem;} .about-art{height:400px;} .about-content h1{font-size:3rem;} #philosophy,#timeline{padding:5rem 1.5rem;} .phil-grid{grid-template-columns:1fr;} .timeline-item{width:100%;padding-right:0;padding-left:3rem;} .timeline-item.right{margin-left:0;} .timeline-svg{left:0;transform:translateX(0);} .timeline-item::before{left:-6px;right:auto;} #main-footer{padding:4rem 1.5rem 2rem;} .footer-cta{margin-bottom:4rem;padding-bottom:4rem;} .cta-headline{font-size:2rem;} .footer-grid{grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem;} .marquee-track span{font-size:2.5rem;} .footer-bottom{flex-direction:column;gap:1rem;text-align:center;} }
+    </style>
+</head>
+<body class="about-page">
+    <div class="cursor" id="cursor"><svg viewBox="0 0 32 32"><path d="M16 2 C 22 10, 28 14, 28 22 C 28 28, 22 30, 16 30 C 10 30, 4 28, 4 22 C 4 14, 10 10, 16 2 Z" fill="#556B2F" stroke="#3D4F23" stroke-width="1.5"/><path d="M16 4 L 16 30" stroke="#8FA067" stroke-width="1" fill="none"/></svg></div>
+    
+    <nav id="navbar">
+        <div class="nav-logo"><svg width="32" height="32" viewBox="0 0 40 40"><path d="M20 5 C 25 15, 35 15, 20 35 C 5 15, 15 15, 20 5 Z" stroke="#2C3E2D" stroke-width="2" fill="#8FA067"/></svg><a href="index.html">Neervighna</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doshas.html">Doshas</a></li>
+            <li><a href="treatments.html">Treatments</a></li>
+            <li><a href="about.html" class="active">About</a></li>
+            <li><a href="contact.html" class="nav-cta">Book Consultation</a></li>
+        </ul>
+    </nav>
+
+    <section id="about-hero">
+        <div class="hero-container">
+            <div class="about-art reveal-text">
+                <!-- Real Image of Doctor / Practitioner -->
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a51016?q=80&w=1000&auto=format&fit=crop" alt="Dr. Nihar Zankat">
+            </div>
+            <div class="about-content">
+                <span class="tagline reveal-text">Meet the Founder</span>
+                <div class="divider" style="margin: 1.5rem 0;"></div>
+                <h1 class="reveal-text">Dr. Nihar <span>Zankat</span></h1>
+                <p>Dr. Zankat believes that true health is not merely the absence of disease, but a state of vibrant physical, mental, and spiritual wellbeing. With over a decade of clinical experience, he has dedicated his life to making the profound wisdom of Ayurveda accessible to the modern world.</p>
+                <p>Through Neervighna, he provides personalized care that goes beyond symptom management, addressing the root cause of imbalance. "Neervighna" translates to the remover of obstacles—just as water finds its way around any impediment, his treatments restore the natural flow of energy within your body.</p>
+                
+                <div style="margin-top:2rem;">
+                    <div class="cred-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg> BAMS (Ayurvedacharya)</div>
+                    <div class="cred-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> 10+ Years of Clinical Experience</div>
+                    <div class="cred-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6M12 22v-6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24M2 12h6M22 12h-6M4.93 19.07l4.24-4.24M14.83 9.17l4.24-4.24"/></svg> Panchakarma & Nadi Pariksha Specialist</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="philosophy">
+        <div class="section-header">
+            <span class="tagline reveal-text">My Approach</span>
+            <div class="divider"></div>
+            <h2 class="section-title reveal-text">Healing <span>Philosophy</span></h2>
+        </div>
+        <div class="phil-grid">
+            <div class="phil-card">
+                <div class="phil-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><circle cx="50" cy="50" r="40"/><path d="M50 10 L50 90 M10 50 L90 50"/></svg></div>
+                <h4>Root Cause Analysis</h4>
+                <p>Rather than suppressing symptoms, Dr. Zankat uses Nadi Pariksha (pulse diagnosis) to identify and treat the underlying imbalance causing disease.</p>
+            </div>
+            <div class="phil-card">
+                <div class="phil-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><path d="M50 10 C 30 30 40 50 50 60 C 60 50 70 30 50 10 Z M 50 60 L 50 90"/></svg></div>
+                <h4>Personalized Medicine</h4>
+                <p>Every individual is unique. Treatments, herbal formulations, and diet plans are customized specifically to your Prakriti (constitution).</p>
+            </div>
+            <div class="phil-card">
+                <div class="phil-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 50 Q 50 20 80 50 Q 50 80 20 50 Z M 50 30 L 50 70"/></svg></div>
+                <h4>Mind-Body Harmony</h4>
+                <p>True healing requires balancing the mind, body, and consciousness. Therapies are designed to detoxify the physical body while calming the mental state.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="timeline">
+        <div class="section-header">
+            <span class="tagline reveal-text">The Journey</span>
+            <div class="divider"></div>
+            <h2 class="section-title reveal-text">Years of <span>Dedication</span></h2>
+        </div>
+        <div class="timeline-track">
+            <svg class="timeline-svg" viewBox="0 0 10 1000" preserveAspectRatio="none">
+                <path class="timeline-path" d="M5 0 L 5 1000" stroke="#C9A66B" stroke-width="2" fill="none"/>
+            </svg>
+            
+            <div class="timeline-item left">
+                <div class="t-content">
+                    <span class="step-num">2012</span>
+                    <h4>Graduation</h4>
+                    <p>Completed Bachelor of Ayurvedic Medicine and Surgery (BAMS) with top honors.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="t-content">
+                    <span class="step-num">2015</span>
+                    <h4>Specialization</h4>
+                    <p>Advanced training in Panchakarma and detoxification therapies under renowned gurus in Kerala.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="t-content">
+                    <span class="step-num">2018</span>
+                    <h4>Neervighna Founded</h4>
+                    <p>Established the clinic with a vision to integrate traditional Ayurvedic healing with modern diagnostics.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="t-content">
+                    <span class="step-num">Present</span>
+                    <h4>10,000+ Patients</h4>
+                    <p>Continuing to serve the community with dedicated, holistic, and root-cause Ayurvedic care.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="footer-cta"><h2 class="cta-headline">Ready to Restore <span>Your Balance?</span></h2><p>Take the first step towards holistic wellbeing. Book a personalized consultation today.</p><a href="contact.html" class="cta-btn">Book Consultation</a></div>
+        <div class="footer-grid">
+            <div class="footer-col"><h3>Neervighna</h3><p>Ancient Ayurvedic wisdom tailored for modern lifestyles. Removing obstacles to your holistic wellbeing.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="doshas.html">Doshas</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="about.html">About Dr. Zankat</a></li></ul></div>
+            <div class="footer-col"><h4>Contact</h4><p>Plot 12, Wellness Street,<br>Pune, India</p><a href="tel:+919876543210">+91 98765 43210</a><a href="mailto:care@neervighna.com">care@neervighna.com</a></div>
+            <div class="footer-col"><h4>Local Time</h4><div id="live-time">00:00:00</div><p>Mon - Sat: 9AM - 7PM</p></div>
+        </div>
+        <div class="footer-marquee"><div class="marquee-track"><span>Neervighna Ayurveda</span><span class="dot">✦</span><span>Harmonize Nature & Body</span><span class="dot">✦</span><span>Neervighna Ayurveda</span><span class="dot">✦</span></div></div>
+        <div class="footer-bottom"><p>© 2024 Neervighna Ayurveda. All Rights Reserved.</p><p>Designed by @ <a href="https://wa.me/918849820131">Famezel</a> | For Freedom</p></div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script>
+        document.body.classList.add('js-enabled');
+        if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+            lenis.on('scroll', ScrollTrigger.update);
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.15 }); });
+            document.querySelectorAll('a, button, .phil-card, .t-content').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+            gsap.utils.toArray('.reveal-text').forEach(el => { gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%' } }); });
+            const path = document.querySelector('.timeline-path');
+            if (path) {
+                const length = path.getTotalLength();
+                path.style.strokeDasharray = length; path.style.strokeDashoffset = length;
+                gsap.to(path, { strokeDashoffset: 0, scrollTrigger: { trigger: '#timeline', start: 'top 50%', end: 'bottom 50%', scrub: 1 } });
+            }
+            gsap.utils.toArray('.timeline-item').forEach(item => { gsap.from(item, { y: 50, opacity: 0, duration: 1, ease: 'expo.out', scrollTrigger: { trigger: item, start: 'top 85%' } }); });
+            gsap.from(".phil-card", { y: 50, opacity: 0, duration: 1, stagger: 0.15, ease: "expo.out", scrollTrigger: { trigger: ".phil-grid", start: "top 80%" } });
+            function updateTime() { const t = document.getElementById('live-time'); if(t) t.textContent = new Date().toLocaleTimeString('en-US', { hour12: false }); }
+            setInterval(updateTime, 1000); updateTime();
+            gsap.to(".footer-marquee .marquee-track", { xPercent: -50, repeat: -1, duration: 30, ease: "linear" });
+            gsap.from(".footer-cta > *", { y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: "expo.out", scrollTrigger: { trigger: ".footer-cta", start: "top 85%" } });
+            gsap.from(".footer-col", { y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "expo.out", scrollTrigger: { trigger: ".footer-grid", start: "top 85%" } });
+        } else { document.querySelectorAll('.reveal-text').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); }
+    </script>
+</body>
+</html>

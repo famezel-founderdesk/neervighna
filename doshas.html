@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doshas | Neervighna Ayurveda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg-color:#F9F7F2; --text-main:#2C3E2D; --text-muted:#5F6F50; --accent-1:#C9A66B; --accent-2:#E6E8DD; --accent-3:#8B5E3C; --font-display:'Cormorant Garamond',serif; --font-body:'Jost',sans-serif; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html, body { background-color:var(--bg-color); color:var(--text-main); font-family:var(--font-body); overflow-x:hidden; font-weight:300; }
+        body.js-enabled { cursor:none; }
+        .cursor { width:40px; height:40px; position:fixed; pointer-events:none; z-index:9999; opacity:0; transition:transform 0.2s ease; top:0; left:0; }
+        body.js-enabled .cursor { opacity:1; }
+        .cursor.hover { transform:scale(1.5) rotate(10deg); }
+        .cursor svg { width:100%; height:100%; drop-shadow:0 2px 4px rgba(0,0,0,0.1); }
+        nav { position:fixed; top:0; width:100%; padding:1.5rem 4rem; display:flex; justify-content:space-between; align-items:center; z-index:100; backdrop-filter:blur(10px); background:rgba(249,247,242,0.85); transition:all 0.4s ease; border-bottom:1px solid transparent; }
+        nav.scrolled { border-bottom:1px solid rgba(201,166,107,0.2); }
+        .nav-logo { display:flex; align-items:center; gap:0.75rem; font-family:var(--font-display); font-weight:500; font-size:1.8rem; color:var(--text-main); }
+        .nav-logo a { text-decoration:none; color:var(--text-main); }
+        .nav-links { display:flex; gap:2.5rem; list-style:none; align-items:center; }
+        .nav-links a { text-decoration:none; color:var(--text-main); font-weight:300; font-size:0.95rem; text-transform:uppercase; letter-spacing:1px; transition:color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--accent-1); }
+        .nav-links a.nav-cta { background:var(--text-main); color:var(--bg-color); padding:0.6rem 1.2rem; border-radius:2px; }
+        h1, h2, h3, h4 { font-family:var(--font-display); font-weight:400; line-height:1.1; }
+        .section-title { font-size:4rem; margin-bottom:1rem; color:var(--text-main); }
+        .section-title span { font-style:italic; color:var(--accent-1); }
+        .section-header { text-align:center; margin-bottom:4rem; max-width:800px; margin-left:auto; margin-right:auto; padding:0 2rem; }
+        .section-header p { color:var(--text-muted); font-size:1.1rem; margin-top:1rem; }
+        .divider { width:60px; height:2px; background:var(--accent-1); margin:1.5rem auto; }
+        .tagline { text-transform:uppercase; letter-spacing:3px; font-size:0.85rem; color:var(--accent-1); display:block; margin-bottom:1.5rem; }
+        .page-hero { min-height:60vh; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:10rem 4rem 4rem; }
+        .page-hero h1 { font-size:5rem; }
+        .page-subtitle { font-size:1.2rem; color:var(--text-muted); max-width:600px; margin-top:1rem; }
+
+        /* Doshas Alternating Layout */
+        #doshas-explained { padding:6rem 4rem; }
+        .dosha-block { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; max-width:1200px; margin:0 auto 8rem; }
+        .dosha-block:last-child { margin-bottom:0; }
+        .dosha-block:nth-child(even) .dosha-image { order:2; }
+        .dosha-image { position:relative; height:450px; overflow:hidden; border-radius:4px; box-shadow:0 20px 50px rgba(44,62,45,0.15); }
+        .dosha-image img { width:100%; height:100%; object-fit:cover; transition:transform 0.8s ease; filter:sepia(15%); }
+        .dosha-image:hover img { transform:scale(1.05); filter:sepia(0%); }
+        .dosha-image::after { content:''; position:absolute; inset:0; background:linear-gradient(to bottom right, rgba(44,62,45,0.2), transparent); }
+        .dosha-info .icon-box { width:60px; height:60px; margin-bottom:1.5rem; display:flex; align-items:center; justify-content:center; }
+        .dosha-info h2 { font-size:3.5rem; margin-bottom:0.5rem; }
+        .dosha-info .element { text-transform:uppercase; font-size:0.85rem; letter-spacing:2px; color:var(--accent-3); margin-bottom:1.5rem; display:block; }
+        .dosha-info p { color:var(--text-muted); font-size:1.1rem; line-height:1.8; margin-bottom:1.5rem; }
+        .dosha-info ul { list-style:none; border-top:1px solid var(--accent-2); padding-top:1.5rem; }
+        .dosha-info ul li { display:flex; align-items:center; gap:0.5rem; font-size:0.95rem; color:var(--text-main); margin-bottom:0.5rem; }
+        .dosha-info ul li::before { content:'✦'; color:var(--accent-1); }
+
+        /* CSS Animations for Icons */
+        @keyframes windMove { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(8px); } }
+        .vata-icon path { animation: windMove 1.5s ease-in-out infinite; transform-origin: left; }
+        @keyframes flameFlicker { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.15); } }
+        .pitta-icon path { animation: flameFlicker 0.8s ease-in-out infinite; transform-origin: bottom; }
+        @keyframes waterDrop { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
+        .kapha-icon path { animation: waterDrop 2s ease-in-out infinite; }
+        #imbalance { padding:8rem 4rem; }
+        .imbalance-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; max-width:1200px; margin:0 auto; }
+        .imbalance-card { background:#fff; padding:3rem 2rem; transition:transform 0.4s, box-shadow 0.4s; border:1px solid transparent; }
+        .imbalance-card:hover { transform:translateY(-10px); box-shadow:0 20px 40px rgba(44,62,45,0.08); border-color:var(--accent-1); }
+        .imbalance-card h3 { font-size:2rem; margin-bottom:1.5rem; }
+        .imbalance-card ul { list-style:none; }
+        .imbalance-card li { padding:0.5rem 0; border-bottom:1px solid var(--accent-2); color:var(--text-muted); }
+        #balancing { padding:8rem 4rem; background:var(--accent-2); }
+        .balancing-tabs { display:flex; justify-content:center; gap:1rem; margin-bottom:3rem; flex-wrap:wrap; }
+        .tab-btn { background:transparent; border:1px solid var(--text-main); color:var(--text-main); padding:0.8rem 1.5rem; font-family:var(--font-body); font-size:0.9rem; text-transform:uppercase; letter-spacing:1px; cursor:pointer; transition:all 0.3s; }
+        .tab-btn.active { background:var(--text-main); color:var(--bg-color); }
+        .tab-content { display:none; max-width:800px; margin:0 auto; background:#fff; padding:3rem; box-shadow:0 10px 30px rgba(0,0,0,0.05); }
+        .tab-content.active { display:block; }
+        .tab-content h3 { font-size:2.5rem; margin-bottom:1rem; color:var(--accent-3); }
+        .tab-content p { margin-bottom:1rem; line-height:1.8; color:var(--text-muted); }
+
+
+
+        #main-footer { background:var(--text-main); color:var(--accent-2); padding:6rem 4rem 2rem; position:relative; overflow:hidden; }
+        .footer-cta { text-align:center; max-width:800px; margin:0 auto 6rem; padding-bottom:5rem; border-bottom:1px solid rgba(201,166,107,0.2); }
+        .cta-headline { font-size:3.5rem; color:var(--bg-color); margin-bottom:1.5rem; }
+        .cta-headline span { font-style:italic; color:var(--accent-1); }
+        .footer-cta p { color:var(--accent-2); font-size:1.1rem; margin-bottom:2.5rem; opacity:0.8; }
+        .cta-btn { display: inline-block; background: var(--accent-3); color: var(--bg-color); padding: 1.2rem 3rem; text-decoration: none; border-radius: 50px; font-family: var(--font-body); font-weight: 500; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; box-shadow: 0 10px 20px rgba(224, 122, 95, 0.3); }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(224, 122, 95, 0.4); }
+        .footer-grid { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:4rem; max-width:1200px; margin:0 auto 5rem; }
+        .footer-col h3 { font-family:var(--font-display); font-size:2.5rem; color:var(--bg-color); margin-bottom:1rem; }
+        .footer-col h4 { font-size:1rem; color:var(--accent-1); margin-bottom:1.5rem; text-transform:uppercase; letter-spacing:2px; font-weight:500; }
+        .footer-col p, .footer-col a { margin-bottom:0.8rem; opacity:0.7; font-size:0.95rem; color:var(--accent-2); text-decoration:none; display:block; transition:all 0.3s; }
+        .footer-col a:hover { color:var(--accent-1); opacity:1; transform:translateX(5px); }
+        .footer-col ul { list-style:none; }
+        #live-time { font-family:var(--font-display); font-size:1.8rem; color:var(--bg-color); margin-bottom:0.5rem; font-style:italic; }
+        .footer-marquee { border-top:1px solid rgba(201,166,107,0.2); border-bottom:1px solid rgba(201,166,107,0.2); padding:1.5rem 0; overflow:hidden; margin-bottom:2rem; }
+        .marquee-track { display:flex; align-items:center; gap:4rem; white-space:nowrap; will-change:transform; }
+        .marquee-track span { font-family:var(--font-display); font-size:4rem; font-style:italic; color:transparent; -webkit-text-stroke:1px var(--accent-1); }
+        .marquee-track .dot { color:var(--accent-1); -webkit-text-stroke:0; font-size:2rem; }
+        .footer-bottom { display:flex; justify-content:space-between; max-width:1200px; margin:0 auto; font-size:0.85rem; opacity:0.5; align-items:center; }
+        .footer-bottom a { color:var(--accent-1); text-decoration:none; font-weight:500; }
+        body.js-enabled .reveal-text { opacity:0; }
+        @media (max-width:768px) { nav{padding:1rem 1.5rem;} .nav-links{display:none;} .cursor{display:none;} body.js-enabled{cursor:auto;} .page-hero h1{font-size:3rem;} #doshas-explained{padding:4rem 1.5rem;} .dosha-block{grid-template-columns:1fr; gap:2.5rem; margin-bottom:5rem;} .dosha-block:nth-child(even) .dosha-image{order:0;} .dosha-image{height:300px;} .dosha-info h2{font-size:2.5rem;} #main-footer{padding:4rem 1.5rem 2rem;} .footer-cta{margin-bottom:4rem;padding-bottom:4rem;} .cta-headline{font-size:2rem;} .footer-grid{grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem;} .marquee-track span{font-size:2.5rem;} .footer-bottom{flex-direction:column;gap:1rem;text-align:center;} }
+    </style>
+</head>
+<body class="doshas-page">
+    <div class="cursor" id="cursor"><svg viewBox="0 0 32 32"><path d="M16 2 C 22 10, 28 14, 28 22 C 28 28, 22 30, 16 30 C 10 30, 4 28, 4 22 C 4 14, 10 10, 16 2 Z" fill="#556B2F" stroke="#3D4F23" stroke-width="1.5"/><path d="M16 4 L 16 30" stroke="#8FA067" stroke-width="1" fill="none"/></svg></div>
+    <nav id="navbar">
+        <div class="nav-logo"><svg width="32" height="32" viewBox="0 0 40 40"><path d="M20 5 C 25 15, 35 15, 20 35 C 5 15, 15 15, 20 5 Z" stroke="#2C3E2D" stroke-width="2" fill="#8FA067"/></svg><a href="index.html">Neervighna</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="doshas.html" class="active">Doshas</a></li>
+            <li><a href="treatments.html">Treatments</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html" class="nav-cta">Book Consultation</a></li>
+        </ul>
+    </nav>
+
+    <header class="page-hero">
+        <span class="tagline reveal-text">The Tridosha Theory</span>
+        <div class="divider"></div>
+        <h1 class="reveal-text">Vata, Pitta & <span>Kapha</span></h1>
+        <p class="page-subtitle reveal-text">In Ayurveda, the universe is made of five elements. These combine to form three vital energies known as Doshas. Understanding your dominant dosha is the key to personalized health.</p>
+    </header>
+
+    <section id="doshas-explained">
+        <!-- Vata Block -->
+        <div class="dosha-block">
+            <div class="dosha-image reveal-text">
+                <img src="https://images.unsplash.com/photo-1500304018494-bb0325f9d415?q=80&w=800&auto=format&fit=crop" alt="Vata - Air and Space">
+            </div>
+            <div class="dosha-info reveal-text">
+                <div class="icon-box vata-icon">
+                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M10 30 H 60 Q 80 30 80 20 Q 80 10 70 10" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M10 50 H 80 Q 90 50 90 40 Q 90 30 80 30" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M10 70 H 50 Q 70 70 70 60 Q 70 50 60 50" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+                </div>
+                <span class="element">Air & Space</span>
+                <h2>Vata</h2>
+                <p>Vata governs movement in the body, the activities of the nervous system, and the process of elimination. When balanced, Vata promotes creativity and flexibility.</p>
+                <ul>
+                    <li>Physical: Tall or short, thin frame</li>
+                    <li>Energetic: Creative, quick-thinking</li>
+                    <li>Imbalance: Anxiety, dryness, insomnia</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Pitta Block -->
+        <div class="dosha-block">
+            <div class="dosha-image reveal-text">
+                <img src="https://images.unsplash.com/photo-1564415315949-7a0c4c73aab4?q=80&w=800&auto=format&fit=crop" alt="Pitta - Fire and Water">
+            </div>
+            <div class="dosha-info reveal-text">
+                <div class="icon-box pitta-icon">
+                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M50 10 C 30 30 40 50 50 60 C 60 50 70 30 50 10 Z" fill="#8B5E3C" stroke="#5F6F50" stroke-width="3"/><path d="M50 30 C 40 40 45 50 50 55 C 55 50 60 40 50 30 Z" fill="#C9A66B"/></svg>
+                </div>
+                <span class="element">Fire & Water</span>
+                <h2>Pitta</h2>
+                <p>Pitta governs digestion, metabolism, and energy production. When balanced, Pitta promotes intelligence, courage, and a glowing complexion.</p>
+                <ul>
+                    <li>Physical: Medium build, warm body</li>
+                    <li>Energetic: Sharp, focused, ambitious</li>
+                    <li>Imbalance: Anger, inflammation, acid reflux</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Kapha Block -->
+        <div class="dosha-block">
+            <div class="dosha-image reveal-text">
+                <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=800&auto=format&fit=crop" alt="Kapha - Earth and Water">
+            </div>
+            <div class="dosha-info reveal-text">
+                <div class="icon-box kapha-icon">
+                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M50 10 C 30 40 20 60 30 75 C 40 90 60 90 70 75 C 80 60 70 40 50 10 Z" fill="#556B2F" stroke="#2C3E2D" stroke-width="3"/></svg>
+                </div>
+                <span class="element">Earth & Water</span>
+                <h2>Kapha</h2>
+                <p>Kapha governs the structure of the body, lubrication of joints, and stability. When balanced, Kapha expresses love, calmness, and forgiveness.</p>
+                <ul>
+                    <li>Physical: Solid, heavy build, strong</li>
+                    <li>Energetic: Calm, grounded, loyal</li>
+                    <li>Imbalance: Weight gain, congestion, lethargy</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+
+<!-- added block  -->
+    
+    <section id="imbalance">
+        <div class="section-header"><span class="tagline">Signs of Imbalance</span><div class="divider"></div><h2 class="section-title reveal-text">Listen to <span>Your Body</span></h2></div>
+        <div class="imbalance-grid">
+            <div class="imbalance-card"><h3>Vata Imbalance</h3><ul><li>Anxiety & insomnia</li><li>Dry skin & hair</li><li>Constipation & bloating</li><li>Cold hands and feet</li></ul></div>
+            <div class="imbalance-card"><h3>Pitta Imbalance</h3><ul><li>Acid reflux & heartburn</li><li>Skin rashes & acne</li><li>Irritability & anger</li><li>Excessive sweating</li></ul></div>
+            <div class="imbalance-card"><h3>Kapha Imbalance</h3><ul><li>Weight gain & lethargy</li><li>Sinus congestion</li><li>Depression</li><li>Slow digestion</li></ul></div>
+        </div>
+    </section>
+
+    <section id="balancing">
+        <div class="section-header"><span class="tagline">Balancing Practices</span><div class="divider"></div><h2 class="section-title reveal-text">Restore <span>Harmony</span></h2></div>
+        <div class="balancing-tabs">
+            <button class="tab-btn active" data-tab="vata">Balance Vata</button>
+            <button class="tab-btn" data-tab="pitta">Balance Pitta</button>
+            <button class="tab-btn" data-tab="kapha">Balance Kapha</button>
+        </div>
+        <div class="tab-content active" id="tab-vata"><h3>Vata Pacifying Diet</h3><p><strong>Favor:</strong> Warm, cooked foods, root vegetables, healthy oils (ghee, sesame), warming spices (ginger, cinnamon).</p><p><strong>Lifestyle:</strong> Maintain a regular daily routine. Practice gentle yoga, meditation, and avoid cold environments.</p></div>
+        <div class="tab-content" id="tab-pitta"><h3>Pitta Pacifying Diet</h3><p><strong>Favor:</strong> Cooling, sweet, and bitter foods. Cucumber, melons, leafy greens, coconut water, and dairy.</p><p><strong>Lifestyle:</strong> Avoid excessive heat and sun exposure. Engage in calming activities like swimming or walking in nature.</p></div>
+        <div class="tab-content" id="tab-kapha"><h3>Kapha Pacifying Diet</h3><p><strong>Favor:</strong> Light, warm, and spicy foods. Legumes, honey, pungent spices (black pepper, garlic), and astringent fruits.</p><p><strong>Lifestyle:</strong> Stay active and engage in vigorous exercise daily. Try new experiences to combat lethargy.</p></div>
+    </section>
+
+
+
+
+
+    <footer id="main-footer">
+        <div class="footer-cta"><h2 class="cta-headline">Ready to Restore <span>Your Balance?</span></h2>
+            <p>Take the first step towards holistic wellbeing. Book a personalized consultation with Dr. Nihar Zankat today.</p>
+            <a href="contact.html" class="cta-btn">Book Consultation</a>
+        </div>
+
+        
+        <div class="footer-grid">
+            <div class="footer-col"><h3>Neervighna</h3><p>Ancient Ayurvedic wisdom tailored for modern lifestyles. Removing obstacles to your holistic wellbeing.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="index.html">Home</a></li><li><a href="doshas.html">Doshas</a></li><li><a href="treatments.html">Treatments</a></li><li><a href="about.html">About Dr. Zankat</a></li></ul></div>
+            <div class="footer-col"><h4>Contact</h4><p>Plot 12, Wellness Street,<br>Pune, India</p><a href="tel:+919876543210">+91 98765 43210</a><a href="mailto:care@neervighna.com">care@neervighna.com</a></div>
+            <div class="footer-col"><h4>Local Time</h4><div id="live-time">00:00:00</div><p>Mon - Sat: 9AM - 7PM</p></div>
+        </div>
+        <div class="footer-marquee"><div class="marquee-track"><span>Neervighna Ayurveda</span><span class="dot">✦</span><span>Harmonize Nature & Body</span><span class="dot">✦</span><span>Neervighna Ayurveda</span><span class="dot">✦</span></div></div>
+        <div class="footer-bottom"><p>© 2024 Neervighna Ayurveda. All Rights Reserved.</p><p>Designed by @ <a href="https://wa.me/918849820131">Famezel</a> | For Freedom</p></div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script>
+        document.body.classList.add('js-enabled');
+        if (typeof gsap !== 'undefined' && typeof Lenis !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            const lenis = new Lenis({ duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+            function raf(time) { lenis.raf(time); requestAnimationFrame(raf); } requestAnimationFrame(raf);
+            lenis.on('scroll', ScrollTrigger.update);
+            const cursor = document.getElementById('cursor');
+            document.addEventListener('mousemove', (e) => { gsap.to(cursor, { x: e.clientX - 20, y: e.clientY - 20, duration: 0.15 }); });
+            document.querySelectorAll('a, button, .dosha-image').forEach(el => { el.addEventListener('mouseenter', () => cursor.classList.add('hover')); el.addEventListener('mouseleave', () => cursor.classList.remove('hover')); });
+            gsap.utils.toArray('.reveal-text').forEach(el => { gsap.fromTo(el, { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: el, start: 'top 85%' } }); });
+            const navbar = document.getElementById('navbar');
+            ScrollTrigger.create({ start: 'top -50', onUpdate: (self) => { if (self.scroll() > 50) navbar.classList.add('scrolled'); else navbar.classList.remove('scrolled'); } });
+            function updateTime() { const t = document.getElementById('live-time'); if(t) t.textContent = new Date().toLocaleTimeString('en-US', { hour12: false }); }
+            setInterval(updateTime, 1000); updateTime();
+            gsap.to(".footer-marquee .marquee-track", { xPercent: -50, repeat: -1, duration: 30, ease: "linear" });
+            gsap.from(".footer-cta > *", { y: 40, opacity: 0, duration: 1, stagger: 0.15, ease: "expo.out", scrollTrigger: { trigger: ".footer-cta", start: "top 85%" } });
+            gsap.from(".footer-col", { y: 50, opacity: 0, duration: 1, stagger: 0.1, ease: "expo.out", scrollTrigger: { trigger: ".footer-grid", start: "top 85%" } });
+        } else { document.querySelectorAll('.reveal-text').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; }); }
+    </script>
+</body>
+</html>
