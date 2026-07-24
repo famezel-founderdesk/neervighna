@@ -1,4 +1,4 @@
-<header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 bg-transparent" text-cream-700>
+<header id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6 bg-transparent">
     <div class="container mx-auto px-6">
         <div class="flex justify-between items-center">
             <a href="index.html" class="flex items-center group">
@@ -10,15 +10,15 @@
 
             <nav class="hidden md:flex items-center gap-8 ml-auto mr-12">
                 <a href="index.html"
-                    class="nav-link relative text-cream-700 hover:text-ayur-green font-medium transition-colors">Home</a>
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Home</a>
                 <a href="about.html"
-                    class="nav-link relative text-cream-700 hover:text-ayur-green font-medium transition-colors">About</a>
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">About</a>
                 <a href="service.html"
-                    class="nav-link relative text-cream--700 hover:text-ayur-green font-medium transition-colors">Services</a>
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Services</a>
                 <a href="blog.html"
-                    class="nav-link relative text-cream-700 hover:text-ayur-green font-medium transition-colors">Blog</a>
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Blog</a>
                 <a href="contact.html"
-                    class="nav-link relative text-cream-700 hover:text-ayur-green font-medium transition-colors">Contact</a>
+                    class="nav-link relative text-gray-700 hover:text-ayur-green font-medium transition-colors">Contact</a>
             </nav>
 
             <div class="hidden md:block">
@@ -269,33 +269,22 @@
         width: 100%;
     }
 
-    /* Dark Section Overrides */
-    body.is-dark-section .glass-nav {
-        background: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border-bottom: none !important;
-        box-shadow: none !important;
-    }
-
-    body.is-dark-section .nav-link {
+    /* Use high-contrast links only while the home hero sits behind the transparent header. */
+    #navbar.navbar-on-dark-hero .nav-link {
         color: #fff !important;
-        /* ayur-darkGreen */
         font-weight: 600;
-        /* slightly bolder for readability on transparent bg */
     }
 
-    body.is-dark-section .nav-link:hover {
+    #navbar.navbar-on-dark-hero .nav-link:hover {
         color: #2e7d32 !important;
-        /* ayur-green */
     }
 
-    body.is-dark-section .nav-link::after {
+    #navbar.navbar-on-dark-hero .nav-link::after {
         background-color: #2e7d32 !important;
     }
 
-    body.is-dark-section #mobile-menu-btn {
-        color: #1b5e20 !important;
+    #navbar.navbar-on-dark-hero #mobile-menu-btn {
+        color: #fff !important;
     }
 </style>
 
@@ -309,6 +298,9 @@
 
         // Scroll Logic for Glass Effect
         const handleScroll = () => {
+            const hero = document.getElementById('hero');
+            const isAtHeroTop = hero && window.scrollY <= 50;
+
             if (window.scrollY > 50) {
                 navbar.classList.add('glass-nav', 'shadow-lg', 'py-3');
                 navbar.classList.remove('bg-transparent', 'py-6');
@@ -317,17 +309,8 @@
                 navbar.classList.add('bg-transparent', 'py-6');
             }
 
-            // Dark section detection for navbar inversion
-            const philSection = document.getElementById('philosophy');
-            if (philSection) {
-                const rect = philSection.getBoundingClientRect();
-                // When section spans beneath the navbar (0 to ~90px from top)
-                if (rect.top <= 90 && rect.bottom >= 90) {
-                    document.body.classList.add('is-dark-section');
-                } else {
-                    document.body.classList.remove('is-dark-section');
-                }
-            }
+            // Keep navigation legible over the dark video/image hero at page load.
+            navbar.classList.toggle('navbar-on-dark-hero', Boolean(isAtHeroTop));
         };
 
         window.addEventListener('scroll', handleScroll);
