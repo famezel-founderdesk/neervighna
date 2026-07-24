@@ -98,86 +98,183 @@
         .footer-bottom a { color:var(--accent-1); text-decoration:none; font-weight:500; }
         body.js-enabled .reveal-text { opacity:0; }
         @media (max-width:768px) { nav{padding:1rem 1.5rem;} .nav-links{display:none;} .cursor{display:none;} body.js-enabled{cursor:auto;} .page-hero h1{font-size:3rem;} #doshas-explained{padding:4rem 1.5rem;} .dosha-block{grid-template-columns:1fr; gap:2.5rem; margin-bottom:5rem;} .dosha-block:nth-child(even) .dosha-image{order:0;} .dosha-image{height:300px;} .dosha-info h2{font-size:2.5rem;} #main-footer{padding:4rem 1.5rem 2rem;} .footer-cta{margin-bottom:4rem;padding-bottom:4rem;} .cta-headline{font-size:2rem;} .footer-grid{grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:3rem;} .marquee-track span{font-size:2.5rem;} .footer-bottom{flex-direction:column;gap:1rem;text-align:center;} }
+        
+
+/* ==========================================
+   VATA & PITTA ANIMATIONS (Doshas Page Size)
+   ========================================== */
+
+/* Vata Animation (Air & Space) */
+.vata-animation {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+    background: radial-gradient(circle at 50% 50%, #E6E8DD 0%, #B0C4DE 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vata-svg { width: 200px; height: 200px; }
+
+/* Floating Leaves/Seeds */
+@keyframes vataDrift {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(8deg); }
+}
+.vata-leaf { animation: vataDrift 4s ease-in-out infinite; transform-origin: center; }
+
+/* Sweeping Wind Currents */
+@keyframes vataWind {
+    0% { transform: translateX(-30px); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateX(30px); opacity: 0; }
+}
+.vata-wind-1 { animation: vataWind 3s ease-in-out infinite; transform-origin: center; }
+.vata-wind-2 { animation: vataWind 4s ease-in-out infinite 1s; transform-origin: center; }
+
+/* Pitta Animation (Fire & Water) */
+.pitta-animation {
+    width: 300px;
+    height: 300px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: none;
+    box-shadow: none;
+    background: radial-gradient(circle at 50% 60%, #F2C078 0%, #D96323 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pitta-svg { width: 200px; height: 200px; }
+
+/* Flame Flicker */
+@keyframes pittaFlicker {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.05) rotate(-2deg); }
+    50% { transform: scale(0.98) rotate(2deg); }
+    75% { transform: scale(1.02) rotate(-1deg); }
+}
+.pitta-flame { animation: pittaFlicker 0.8s ease-in-out infinite; transform-origin: bottom center; }
+
+/* Radiant Glow Pulse */
+@keyframes pittaGlow {
+    0%, 100% { opacity: 0.3; transform: scale(0.9); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+.pitta-glow { animation: pittaGlow 2s ease-in-out infinite; transform-origin: center; }
+
+/* Floating Embers */
+@keyframes pittaEmber {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    30% { opacity: 1; }
+    100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+}
+.pitta-ember-1 { animation: pittaEmber 2.5s ease-out infinite; transform-origin: center; }
+.pitta-ember-2 { animation: pittaEmber 2s ease-out infinite 1s; transform-origin: center; }
+
+
+
+
+
+
+
+        /* Kapha Water & Earth Animation */
+.kapha-animation {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--accent-1);
+    box-shadow: 0 10px 20px rgba(44, 62, 45, 0.15);
+    background: radial-gradient(circle at 50% 30%, #E6E8DD 0%, #A3B18A 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s ease;
+}
+.dosha-card:hover .kapha-animation {
+    transform: scale(1.05);
+}
+
+.kapha-svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* Water Droplet Falling */
+@keyframes kaphaDrop {
+    0% { transform: translateY(-30px); opacity: 0; }
+    40% { opacity: 1; }
+    60% { transform: translateY(10px); opacity: 1; }
+    80% { transform: translateY(15px) scaleY(0.2); opacity: 0.5; }
+    100% { transform: translateY(20px) scaleY(0); opacity: 0; }
+}
+.kapha-drop {
+    animation: kaphaDrop 3s ease-in-out infinite;
+    transform-origin: bottom;
+}
+
+/* Water Ripples Expanding */
+@keyframes kaphaRipple {
+    0% { transform: scale(0); opacity: 0.8; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+.kapha-ripple-1 {
+    animation: kaphaRipple 3s ease-out infinite;
+    transform-origin: center;
+}
+.kapha-ripple-2 {
+    animation: kaphaRipple 3s ease-out infinite 1s;
+    transform-origin: center;
+}
+.kapha-ripple-3 {
+    animation: kaphaRipple 3s ease-out infinite 2s;
+    transform-origin: center;
+}
+
+/* Grounded Leaf Swaying */
+@keyframes kaphaSway {
+    0%, 100% { transform: rotate(-2deg) translateY(0); }
+    50% { transform: rotate(2deg) translateY(-2px); }
+}
+.kapha-leaf {
+    animation: kaphaSway 4s ease-in-out infinite;
+    transform-origin: bottom center;
+}
+    /* Fix Alignment & Sizing for Doshas Page */
+.dosha-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Make the Kapha animation larger for this specific page */
+.dosha-image .kapha-animation {
+    width: 300px;
+    height: 300px;
+    border: none;
+    box-shadow: none;
+    background: radial-gradient(circle at 50% 30%, #E6E8DD 0%, #A3B18A 100%);
+}
+
+/* Center the animation inside the image container */
+.dosha-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #F9F7F2 0%, #E6E8DD 100%);
+}
+    
     </style>
-
-    <!-- ==========================================
-     GLOBAL RESPONSIVE STYLES (TABLET & MOBILE)
-     ========================================== -->
-<style>
-    /* TABLETS (Max Width 1024px) */
-    @media (max-width: 1024px) {
-        nav { padding: 1.5rem 2rem; }
-        #hero, #doshas, #treatments, #about, #philosophy, #timeline, #contact-main, #panchakarma, #treatments-grid { padding: 5rem 2rem; }
-        .hero-content, .about-container, .contact-grid, .hero-container { gap: 3rem; }
-        .section-title { font-size: 3rem; }
-        .hero-text h1, .about-content h1, .contact-info h1, .page-hero h1 { font-size: 3.5rem; }
-        .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
-    }
-
-    /* MOBILE PHONES (Max Width 768px) */
-    @media (max-width: 768px) {
-        /* Navigation */
-        nav { padding: 1rem 1.5rem; flex-direction: column; gap: 1rem; }
-        .nav-links { gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-        
-        /* Layouts & Grids */
-        .hero-content, .about-container, .contact-grid, .hero-container { grid-template-columns: 1fr; }
-        .hero-art, .about-art { height: 350px; max-width: 100%; margin: 0; }
-        .hero-image-frame, .about-art::before { display: none; } /* Hide decorative frames on mobile */
-        .hero-floating-badge { right: 10px; bottom: -20px; padding: 1rem 1.5rem; }
-        
-        /* Sections & Typography */
-        #hero, #doshas, #treatments, #about, #philosophy, #timeline, #contact-main, #panchakarma, #treatments-grid { padding: 4rem 1.5rem; }
-        .section-title, .page-hero h1 { font-size: 2.5rem; }
-        .hero-text h1, .about-content h1, .contact-info h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .t-name { font-size: 1.5rem; }
-        .marquee-track span { font-size: 2.5rem; }
-        .marquee-strip .marquee-track span { font-size: 1.2rem; }
-        
-        /* Convert Multi-Column Grids to Single Column */
-        .doshas-grid, .treatment-grid, .t-grid, .phil-grid, .pancha-grid, .process-grid, .dosha-block { grid-template-columns: 1fr; gap: 2rem; }
-        .dosha-block:nth-child(even) .dosha-image { order: 0; } /* Reset alternating layout on mobile */
-        .dosha-image { height: 250px; }
-        
-        /* Treatments List */
-        .treatment-item { grid-template-columns: 50px 1fr; gap: 1rem; padding: 1.5rem 0; }
-        .t-desc { display: none; } /* Hide description to save space, show only title */
-        
-        /* Timeline Adjustments */
-        .timeline-track { margin: 2rem auto; }
-        .timeline-item, .timeline-item.right { width: 100%; padding-left: 3rem; padding-right: 0; margin-left: 0; justify-content: flex-start; }
-        .timeline-svg { left: 0; transform: translateX(0); }
-        .timeline-item::before, .timeline-item.right::before { left: -6px; right: auto; }
-        
-        /* Footer Adjustments */
-        #main-footer { padding: 3rem 1.5rem 1.5rem; }
-        .footer-cta { margin-bottom: 3rem; padding-bottom: 3rem; }
-        .cta-headline { font-size: 2rem; }
-        .cta-btn { padding: 0.8rem 2rem; width: 100%; }
-        .footer-grid { grid-template-columns: 1fr; gap: 2rem; margin-bottom: 2rem; text-align: center; }
-        .footer-col a:hover { transform: none; }
-        .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
-        
-        /* UI Elements & Forms */
-        .cursor { display: none; } /* Hide custom cursor on touch devices */
-        body.js-enabled { cursor: auto; }
-        .btn-primary { width: 100%; text-align: center; }
-        .hero-cta { flex-direction: column; align-items: stretch; gap: 1rem; }
-        .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
-        .whatsapp-float svg { width: 26px; height: 26px; }
-        .form-row { flex-direction: column; gap: 0; }
-    }
-
-    /* SMALL MOBILE PHONES (Max Width 480px) */
-    @media (max-width: 480px) {
-        .section-title, .page-hero h1 { font-size: 2rem; }
-        .hero-text h1, .about-content h1, .contact-info h1 { font-size: 2.5rem; }
-        .hero-art, .about-art { height: 250px; }
-        .dosha-info h2 { font-size: 2rem; }
-        .nav-logo { font-size: 1.5rem; }
-        .nav-links { gap: 1rem; font-size: 0.85rem; }
-    }
-</style>
 </head>
 <body class="doshas-page">
     <div class="cursor" id="cursor"><svg viewBox="0 0 32 32"><path d="M16 2 C 22 10, 28 14, 28 22 C 28 28, 22 30, 16 30 C 10 30, 4 28, 4 22 C 4 14, 10 10, 16 2 Z" fill="#556B2F" stroke="#3D4F23" stroke-width="1.5"/><path d="M16 4 L 16 30" stroke="#8FA067" stroke-width="1" fill="none"/></svg></div>
@@ -201,64 +298,142 @@
 
     <section id="doshas-explained">
         <!-- Vata Block -->
-        <div class="dosha-block">
-            <div class="dosha-image reveal-text">
-                <img src="https://images.unsplash.com/photo-1500304018494-bb0325f9d415?q=80&w=800&auto=format&fit=crop" alt="Vata - Air and Space">
-            </div>
-            <div class="dosha-info reveal-text">
-                <div class="icon-box vata-icon">
-                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M10 30 H 60 Q 80 30 80 20 Q 80 10 70 10" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M10 50 H 80 Q 90 50 90 40 Q 90 30 80 30" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M10 70 H 50 Q 70 70 70 60 Q 70 50 60 50" stroke="#5F6F50" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
-                </div>
-                <span class="element">Air & Space</span>
-                <h2>Vata</h2>
-                <p>Vata governs movement in the body, the activities of the nervous system, and the process of elimination. When balanced, Vata promotes creativity and flexibility.</p>
-                <ul>
-                    <li>Physical: Tall or short, thin frame</li>
-                    <li>Energetic: Creative, quick-thinking</li>
-                    <li>Imbalance: Anxiety, dryness, insomnia</li>
-                </ul>
-            </div>
-        </div>
+<div class="dosha-block">
+    <!-- LEFT COLUMN: Animation -->
+    <div class="dosha-image reveal-text">
+        <div class="vata-animation">
+            <svg class="vata-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="vLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#8FA067" />
+                        <stop offset="100%" stop-color="#5F6F50" />
+                    </linearGradient>
+                </defs>
 
-        <!-- Pitta Block -->
-        <div class="dosha-block">
-            <div class="dosha-image reveal-text">
-                <img src="https://images.unsplash.com/photo-1564415315949-7a0c4c73aab4?q=80&w=800&auto=format&fit=crop" alt="Pitta - Fire and Water">
-            </div>
-            <div class="dosha-info reveal-text">
-                <div class="icon-box pitta-icon">
-                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M50 10 C 30 30 40 50 50 60 C 60 50 70 30 50 10 Z" fill="#8B5E3C" stroke="#5F6F50" stroke-width="3"/><path d="M50 30 C 40 40 45 50 50 55 C 55 50 60 40 50 30 Z" fill="#C9A66B"/></svg>
-                </div>
-                <span class="element">Fire & Water</span>
-                <h2>Pitta</h2>
-                <p>Pitta governs digestion, metabolism, and energy production. When balanced, Pitta promotes intelligence, courage, and a glowing complexion.</p>
-                <ul>
-                    <li>Physical: Medium build, warm body</li>
-                    <li>Energetic: Sharp, focused, ambitious</li>
-                    <li>Imbalance: Anger, inflammation, acid reflux</li>
-                </ul>
-            </div>
+                <!-- Sweeping Wind Currents -->
+                <path class="vata-wind-1" d="M20 80 Q 60 60, 100 80 T 180 80" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+                <path class="vata-wind-2" d="M20 120 Q 70 100, 120 120 T 180 120" fill="none" stroke="#A9C3D6" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+                
+                <!-- Floating Leaves/Seeds -->
+                <g class="vata-leaf">
+                    <path d="M100 100 C 80 80, 80 60, 100 50 C 120 60, 120 80, 100 100 Z" fill="url(#vLeafGrad)"/>
+                    <path d="M100 50 L 100 100" stroke="#3A4D39" stroke-width="2"/>
+                </g>
+
+                <!-- Minimalist Birds in Flight -->
+                <path d="M130 70 Q 140 60 150 70 Q 140 65 130 70" fill="none" stroke="#5F6F50" stroke-width="2"/>
+                <path d="M140 80 Q 150 70 160 80 Q 150 75 140 80" fill="none" stroke="#5F6F50" stroke-width="2"/>
+            </svg>
         </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Text -->
+    <div class="dosha-info reveal-text">
+        <span class="element">Air & Space</span>
+        <h2>Vata</h2>
+        <p>Vata governs movement in the body, the activities of the nervous system, and the process of elimination. When balanced, Vata promotes creativity and flexibility.</p>
+        <ul>
+            <li>Physical: Tall or short, thin frame</li>
+            <li>Energetic: Creative, quick-thinking</li>
+            <li>Imbalance: Anxiety, dryness, insomnia</li>
+        </ul>
+    </div>
+</div>
+        <!-- Pitta Block -->
+<div class="dosha-block">
+    <!-- LEFT COLUMN: Animation (Order will flip automatically due to CSS) -->
+    <div class="dosha-image reveal-text">
+        <div class="pitta-animation">
+            <svg class="pitta-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="pFlameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#F2C078" />
+                        <stop offset="100%" stop-color="#D96323" />
+                    </linearGradient>
+                    <linearGradient id="pCoreGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#FFFFFF" />
+                        <stop offset="100%" stop-color="#F2C078" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Radiant Glow Pulse -->
+                <circle class="pitta-glow" cx="100" cy="100" r="40" fill="#FFFFFF" opacity="0.4"/>
+
+                <!-- Flame Flicker -->
+                <g class="pitta-flame">
+                    <path d="M100 140 C 70 110, 80 80, 100 50 C 120 80, 130 110, 100 140 Z" fill="url(#pFlameGrad)"/>
+                    <path d="M100 120 C 85 100, 90 80, 100 60 C 110 80, 115 100, 100 120 Z" fill="url(#pCoreGrad)"/>
+                </g>
+
+                <!-- Floating Embers -->
+                <circle class="pitta-ember-1" cx="90" cy="50" r="3" fill="#FFFFFF"/>
+                <circle class="pitta-ember-2" cx="110" cy="60" r="4" fill="#F2C078"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Text -->
+    <div class="dosha-info reveal-text">
+        <span class="element">Fire & Water</span>
+        <h2>Pitta</h2>
+        <p>Pitta governs digestion, metabolism, and energy production. When balanced, Pitta promotes intelligence, courage, and a glowing complexion.</p>
+        <ul>
+            <li>Physical: Medium build, warm body</li>
+            <li>Energetic: Sharp, focused, ambitious</li>
+            <li>Imbalance: Anger, inflammation, acid reflux</li>
+        </ul>
+    </div>
+</div>
 
         <!-- Kapha Block -->
-        <div class="dosha-block">
-            <div class="dosha-image reveal-text">
-                <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?q=80&w=800&auto=format&fit=crop" alt="Kapha - Earth and Water">
-            </div>
-            <div class="dosha-info reveal-text">
-                <div class="icon-box kapha-icon">
-                    <svg viewBox="0 0 100 100" width="50" height="50"><path d="M50 10 C 30 40 20 60 30 75 C 40 90 60 90 70 75 C 80 60 70 40 50 10 Z" fill="#556B2F" stroke="#2C3E2D" stroke-width="3"/></svg>
-                </div>
-                <span class="element">Earth & Water</span>
-                <h2>Kapha</h2>
-                <p>Kapha governs the structure of the body, lubrication of joints, and stability. When balanced, Kapha expresses love, calmness, and forgiveness.</p>
-                <ul>
-                    <li>Physical: Solid, heavy build, strong</li>
-                    <li>Energetic: Calm, grounded, loyal</li>
-                    <li>Imbalance: Weight gain, congestion, lethargy</li>
-                </ul>
-            </div>
+<div class="dosha-block">
+    
+    <!-- LEFT COLUMN: Animation -->
+    <div class="dosha-image reveal-text">
+        <div class="kapha-animation">
+            <svg class="kapha-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="kLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#3A4D39" />
+                        <stop offset="100%" stop-color="#6A8A6B" />
+                    </linearGradient>
+                    <linearGradient id="kWaterGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#4A6670" stop-opacity="0.8" />
+                        <stop offset="100%" stop-color="#3A4D39" stop-opacity="0.2" />
+                    </linearGradient>
+                </defs>
+
+                <!-- Water Ripples -->
+                <ellipse class="kapha-ripple-1" cx="60" cy="80" rx="15" ry="4" fill="none" stroke="#4A6670" stroke-width="1.5" opacity="0.6" />
+                <ellipse class="kapha-ripple-2" cx="60" cy="80" rx="15" ry="4" fill="none" stroke="#4A6670" stroke-width="1.5" opacity="0.6" />
+                <ellipse class="kapha-ripple-3" cx="60" cy="80" rx="15" ry="4" fill="none" stroke="#4A6670" stroke-width="1.5" opacity="0.6" />
+
+                <!-- Grounded Leaf/Root Structure -->
+                <g class="kapha-leaf">
+                    <path d="M60 80 L60 50" stroke="#3A4D39" stroke-width="3" stroke-linecap="round" />
+                    <path d="M60 65 C 45 55, 35 65, 40 75 C 50 80, 55 75, 60 65 Z" fill="url(#kLeafGrad)" />
+                    <path d="M60 65 C 75 55, 85 65, 80 75 C 70 80, 65 75, 60 65 Z" fill="url(#kLeafGrad)" />
+                    <path d="M60 50 C 50 40, 55 30, 60 35 C 65 30, 70 40, 60 50 Z" fill="url(#kLeafGrad)" />
+                </g>
+
+                <!-- Falling Water Droplet -->
+                <path class="kapha-drop" d="M60 30 C 56 36, 56 42, 60 45 C 64 42, 64 36, 60 30 Z" fill="url(#kWaterGrad)" />
+            </svg>
         </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Text (Perfectly aligned vertically) -->
+    <div class="dosha-info reveal-text">
+        <span class="element">Earth & Water</span>
+        <h2>Kapha</h2>
+        <p>Kapha governs the structure of the body, lubrication of joints, and stability. When balanced, Kapha expresses love, calmness, and forgiveness.</p>
+        <ul>
+            <li>Physical: Solid, heavy build, strong</li>
+            <li>Energetic: Calm, grounded, loyal</li>
+            <li>Imbalance: Weight gain, congestion, lethargy</li>
+        </ul>
+    </div>
+</div>
     </section>
 
 
